@@ -1,0 +1,279 @@
+﻿body 
+{
+    font: 12px Arial;
+}
+
+#dropZone 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropZone.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropZone.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropHotel 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropHotel.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropHotel.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropTransfer 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropTransfer.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropTransfer.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropCarhire 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropCarhire.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropCarhire.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropTour 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropTour.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropTour.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropTrain 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropTrain.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropTrain.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropAirparking 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropAirparking.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropAirparking.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropFerry 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropFerry.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropFerry.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropCompCard 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropCompCard.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropCompCard.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropFlashSale 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+
+#dropFlashSale.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropFlashSale.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}
+#dropJabos 
+{
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #eee;
+    width: 220px;
+    Height: 70px;
+    padding: 12px 0;
+    text-align: -moz-center;
+    font-size: 14px;
+    color: #555;
+    margin: 20px;
+}
+#dropJabos.hover 
+{
+    border-color: #aaa;
+    background-color: #ddd;
+}
+
+#dropJabos.error
+{
+    border-color: #f00;
+    background-color: #faa;
+}

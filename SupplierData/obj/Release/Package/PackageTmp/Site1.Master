@@ -1,0 +1,249 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="SupplierData.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>DATABASE</title>
+
+    
+   <%-- <script src="<%=ConfigurationManager.AppSettings["url"] %>js/NewJquery.js"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.1.11.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/notification/lobibox.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/bootstrap-multiselect.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/datatable/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/datatable/js/datatable.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/metisMenu/jquery.metisMenu.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.menu.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/jstree/js/jstree.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/iCheck/icheck.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/slimScroll/jquery.slimscroll.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/main.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.validate.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/notification.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" class="style-change color-change" />
+    <link type="text/css" rel="stylesheet" href="css/style-responsive.css" />
+    <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/multiselect.css" />--%>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/NewJquery.js"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.1.11.min.js" type="text/javascript"></script>
+    <!-- Notification JS -->
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/notification/lobibox.min.js" type="text/javascript"></script>
+    <%--<script src="../js/notification/demo.js"></script>--%>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/bootstrap-multiselect.js" type="text/javascript"></script>
+    <%--   Multi Select JS put by dharinee on dated 7th-September 2016--%>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/datatable/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/datatable/js/datatable.js" type="text/javascript"></script>
+    <!--loading bootstrap js-->
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/metisMenu/jquery.metisMenu.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.menu.js" type="text/javascript"></script>
+    <%--<script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/jstree/js/ui-treeview.js" type="text/javascript"></script>--%>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/jstree/js/jstree.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/iCheck/icheck.min.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>vendors/slimScroll/jquery.slimscroll.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/main.js" type="text/javascript"></script>
+    <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.validate.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=ConfigurationManager.AppSettings["url"] %>vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+   <%-- <link rel="shortcut icon" href="images/Trips.png" />--%>
+    <link rel="stylesheet" href="css/notification.min.css" />
+    <!-- input Icon css -->
+    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css" />
+    <!--Loading style vendors-->
+    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css" />
+    <!--Loading style-->
+    <link type="text/css" rel="stylesheet" href="css/style.css" class="style-change color-change" />
+    <link type="text/css" rel="stylesheet" href="css/style-responsive.css" />
+    <link href="css/datepicker.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/multiselect.css" />
+    <style>
+        .label-yellow {
+            background-color: #f2994b !important;
+        }
+
+        #topbar .navbar-top-links li.open > a:hover, #topbar .navbar-top-links li.open > a:focus {
+            background: none !important;
+        }
+
+        #topbar .navbar-top-links li.open > a {
+            background: none !important;
+        }
+    </style>
+
+     <script type="text/javascript">
+         function DisplayMenu() {
+             
+             debugger
+             var FormID = '<%= Session["FormID"] %>';  //Give Form Id & Form Type ID
+                var FormName = '<%= Session["FormName"] %>'; //Form Name & Form Link  alert("FormID" + FormID);alert("FormName" + FormName);     
+                var fname = FormName.split(',');
+             $("#ulMaster").empty();
+             $("#ulReport").empty();
+             $("#ulMapping").empty();
+               for (var i = 0; i < (fname.length - 2); i++) {
+                   var formtype = fname[i].split('^');
+                   var fType = formtype[1].split('$');
+                   var flink = fType[1].split('@');
+                   var FormName = formtype[0];
+                   var FormLink = fType[0];
+                   var FormType = flink[0];
+                  
+                   if (FormLink == "1") { // Master
+                   $("#ulMaster").append('<li id="NewRefrence"><a  href="<%=ConfigurationManager.AppSettings["url"] %>' + formtype[0] + '"><i class="fa fa-angle-right"></i><span class="submenu-title">' + flink[0] + '</span></a></li>');
+                    }
+                   else if (FormLink == "2") { //Report
+                       $("#ulReport").append('<li id="NewRefrence"><a  href="<%=ConfigurationManager.AppSettings["url"] %>' + formtype[0] + '"><i class="fa fa-angle-right"></i><span class="submenu-title">' + flink[0] + '</span></a></li>');
+                    }
+                    else { //Mapping
+                       $("#ulMapping").append('<li id="NewRefrence"><a  href="<%=ConfigurationManager.AppSettings["url"] %>' + formtype[0] + '"><i class="fa fa-angle-right"></i><span class="submenu-title">' + flink[0] + '</span></a></li>');
+                    }
+                }
+         }
+         var EmployeeID = '';
+         function LogoutPage(EmpID) {
+             EmployeeID = EmpID;
+             var api = '<%=ConfigurationManager.AppSettings["url"] %>';
+             window.location = api + "Login.aspx";
+         }
+        </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+       
+    </asp:ContentPlaceHolder>
+</head>
+<body class="loginbg" >
+    <form id="form1" runat="server">
+        <%--<div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>--%>
+    </form>
+      <div>
+     
+        <div id="header-topbar-option-demo" class="page-header-topbar">
+            <nav id="topbar" class="navbar navbar-default navbar-static-top">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a id="logo" href="<%=ConfigurationManager.AppSettings["url"] %>Profile.aspx" class="navbar-brand"></a>
+                <%--<a id="logo" href="<%=ConfigurationManager.AppSettings["url"] %>Profile.aspx" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text" id="MainSpan"><img style="width:220px" src='../images/logo.png'  /></span></a>--%>
+			</div>
+           <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+				<!-- Notification of user Profile -->
+                <ul class="nav navbar navbar-top-links navbar-right mbn">
+                   
+					<li class="white"><b>Welcome, <%= Session["txtUserName"] %></b></li><%--class="hvr-buzz"--%>
+                    <li><a onclick="javascript:LogoutPage('<%= Session["EmpId"] %>');"><img class="mrgl5" src="<%=ConfigurationManager.AppSettings["url"] %>images/logout.png" title="Logout" alt="" /></a></li>
+                 </ul>
+               </div>
+
+             
+
+		</nav>
+        </div>
+       
+
+
+<!-- wrapper -->
+<div id="wrapper">
+<!--BEGIN SIDEBAR MENU-->
+<nav id="sidebar" class="navbar-default navbar-static-side">
+<div class="sidebar-collapse menu-scroll">
+<ul id="side-menu" class="nav">
+<li class="user-panel"></li>
+                      
+<li id="Master">
+<a href="#">
+<i class="fa fa-search-plus">
+<div class="icon-bg bg-blue"></div>
+</i>
+<span class="menu-title" >Master</span>
+<span class="fa arrow"></span>
+</a>
+<ul class="nav nav-second-level collapse in" id="ulMaster">
+<%--<li class="active" id="BrandMaster"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/BrandMaster.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Brand</span></a>
+</li>
+<li class="active" id="Area"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/AreaMaster.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Brand Area</span></a>
+</li>
+<li class="active" id="SupplierType"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/SupplierType.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Brand Supplier Type</span></a>
+</li>
+<li class="active" id="SupplierMaster"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/SupplierMaster.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Supplier</span></a>
+</li>
+<li class="active" id="CategoryMaster"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/CategoryMaster.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Category</span></a>
+</li>
+<li class="active" id="SubCategory"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/SubCategoryMaster.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Sub Category</span></a>
+</li>                  
+<li class="active" id="Designation"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/DesignationMaster.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Designation</span></a>
+</li>
+<li class="active" id="Service"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/Service.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Service Centers</span></a>
+</li>--%>
+</ul>
+</li>
+<li id="Mapping">
+<a href="#">
+<i class="fa fa-bar-chart-o">
+<div class="icon-bg bg-blue"></div>
+</i>
+<span class="menu-title" >Mapping</span>
+<span class="fa arrow"></span>
+</a>
+<ul class="nav nav-second-level collapse in" id="ulMapping">
+<%--<li class="active" id="BrandMapping"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/BrandMapping.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Brand Mapping</span></a>
+</li>
+<li class="active" id="SubCategoryMapping"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/SubCategoryMapping.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Sub Category Mapping</span></a>
+</li>
+<li class="active" id="SupplierMapping"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/SupplierMapping.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Supplier Mapping</span></a>
+</li>
+                       
+<li class="active hidden" id="Transaction"><a href="<%=ConfigurationManager.AppSettings["url"] %>Master/TransactionData.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Transaction</span></a>
+</li>--%>
+
+                        </ul>
+                    </li>
+                     <li id="Report">
+						<a href="#">
+							<i class="fa fa-bar-chart-o">
+								<div class="icon-bg bg-blue"></div>
+							</i>
+							<span class="menu-title" >Report</span>
+							<span class="fa arrow"></span>
+						</a>
+                         <ul class="nav nav-second-level collapse in" id="ulReport">
+                            <%--<li class="active" id="reInquiry"><a href="<%=ConfigurationManager.AppSettings["url"] %>Report/DataReport.aspx"><i class="fa fa-angle-double-right"></i><span class="submenu-title" >Data Report</span></a>
+                                
+                            </li>--%>
+                        </ul>
+                    </li>
+                    	</ul>
+            </div>
+        </nav>
+            <!--END SIDEBAR MENU-->
+
+            <!--BEGIN PAGE WRAPPER-->
+            <div>
+               
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+               
+            </div>
+
+        </div>
+
+        <!--END WRAPPER-->
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            DisplayMenu();
+        });
+    </script>
+</body>
+</html>
