@@ -96,7 +96,7 @@
                 success: function (data) {
                     if (data.d == 1) {
                         Lobibox.notify('error', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data is already Inserted.'
@@ -104,7 +104,7 @@
                     }
                     else if (data.d == 0) {
                         Lobibox.notify('success', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data Inserted Succesfully.'
@@ -113,7 +113,7 @@
                     }
                     else {
                         Lobibox.notify('error', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data not Inserted Succesfully.'
