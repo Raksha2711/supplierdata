@@ -25,7 +25,36 @@ namespace SupplierData.Report
         {
 
         }
-
+        [System.Web.Services.WebMethod]
+        public static string BindAreaData()
+        {
+            string result = "";
+            try
+            {
+                //connection.con();
+                ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                {
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("BindAreaName", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    result = JsonConvert.SerializeObject(ds.Tables[0]);
+                    cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                //ErrorLog.CreateLog("FrmAdminMailData.aspx.cs", ex.Message + " " + "Line No. 45. Please contact to Administrator.", DateTime.Now, "");
+            }
+            finally
+            {
+                //connection.cn.Close();
+            }
+            return result;
+        }
         [System.Web.Services.WebMethod]
         public static string BindSupplierType()
         {
@@ -87,7 +116,7 @@ namespace SupplierData.Report
             return result;
         }
         [System.Web.Services.WebMethod]
-        public static string BindItemName(string CId)
+        public static string BindItemName()
         {
             string result = "";
             try
@@ -100,7 +129,7 @@ namespace SupplierData.Report
                     SqlCommand cmd = new SqlCommand("BindItemName", cn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
-                    cmd.Parameters.AddWithValue("@CId", CId);
+                    cmd.Parameters.AddWithValue("@CId", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Type",'B');
                     DataSet ds = new DataSet();
                     da.Fill(ds);
@@ -181,7 +210,7 @@ namespace SupplierData.Report
             return result;
         }
         [System.Web.Services.WebMethod]
-        public static string DisplayAllData(string ItemId, string BrandId, string SupplierId,string SupplierType)
+        public static string DisplayAllData(string ItemId, string BrandId, string SupplierId,string SupplierType,string AreaName)
         {
             string result = "";
             try
@@ -199,6 +228,7 @@ namespace SupplierData.Report
                     cmd.Parameters.AddWithValue("@BrandId", BrandId);
                     cmd.Parameters.AddWithValue("@SupplierId", SupplierId);
                     cmd.Parameters.AddWithValue("@SupplierType", SupplierType);
+                    cmd.Parameters.AddWithValue("@AreaName", AreaName);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
