@@ -74,7 +74,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@ContactPerson1", ContactPerson1);
                     cmd.Parameters.AddWithValue("@Mobile1", Mobile1);
                     cmd.Parameters.AddWithValue("@ContactPerson2", ContactPerson2);
-                    cmd.Parameters.AddWithValue("@Mobile2", Mobile2);
+                    cmd.Parameters.AddWithValue("@Mobile2",(Mobile2 == "") ? "0" : Mobile2);
                     cmd.Parameters.AddWithValue("@Email", Email);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;

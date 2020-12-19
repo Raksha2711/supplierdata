@@ -43,8 +43,7 @@
         function BindItemName(CId, Id) {
             debugger
             if (Id != "" && Id != null) {
-                var sel = document.getElementById('InBrand' + Id);
-                CId = sel.options[sel.selectedIndex].value;
+                 CId = $("#InBrand" + Id).val();
             }
             $.ajax({
                 type: "POST",
@@ -69,7 +68,7 @@
                         $('#InName' + Id).empty();
                         html += '<option id="optcname" value="">Select</option>';
                         $.each(obj, function (key, value) {
-                            html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+                            html += '<option id=optcname1' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
                         });
                         $('#InName' + Id).append(html);
                     }
@@ -135,7 +134,7 @@
                         $('#InBrand' + Id).empty();
                         html += '<option id="optcname" value="">Select</option>';
                         $.each(obj, function (key, value) {
-                            html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+                            html += '<option id=optcname1' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
                         });
                         $('#InBrand' + Id).append(html);
                     }
@@ -301,16 +300,20 @@
             var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
 
             var SubCategoryId = $("#SID" + Id)[0].innerText;
-            document.getElementById('Brand' + Id).childNodes[0].innerHTML = "<select id='InBrand" + Id + "'  class='form-control' onclick='BindItemName(" + this.value + "," + Id + ")'><option>" + Brand + "</option></select><span class='none' id='SPBrand'>" + Brand + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('Brand' + Id).childNodes[0].innerHTML = "<select id='InBrand" + Id + "'  class='form-control' onclick='BindItemName(null," + Id + ")'><option>" + Brand + "</option></select><span class='none' id='SPBrand'>" + Brand + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Name' + Id).childNodes[0].innerHTML = "<select id='InName" + Id + "'  class='form-control' ><option value= " + SubCategoryId + ">" + Name + "</option></select><span class='none' id='SPName'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('AreaName' + Id).childNodes[0].innerHTML = "<select id='InAreaName" + Id + "' class='form-control' ><option>" + AreaName + "</option></select> <span class='none' id='SPAreaName'>" + AreaName + "</span>";
             document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactPerson" + Id + "'   value='" + ContactPerson + "' /><span class='none' id='SPContactPerson'>" + ContactPerson + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Designation' + Id).childNodes[0].innerHTML = "<select id='InDesignation" + Id + "' class='form-control'><option>" + Designation + "</option></select> <span class='none' id='SPDesignation'>" + Designation + "</span>";
             document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('button' + Id).innerHTML = "<a href='javascript:UpdateRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Update' ><img src='../images/right.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:CancelRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Cancel'><img src='../images/cancel.png' class='CancelClick'/>&nbsp;</a>";
+            
+            
             BindBrandName(Id);
             EditBindArea(Id);
             BindDesignation(Id);
+            debugger
+        
             var ddlbrand = document.getElementById('InBrand' + Id);
             for (var j = 0; j < ddlbrand.length; j++) {
                 var strUser = ddlbrand.options[j].innerHTML;
@@ -319,7 +322,7 @@
                     break;
                 }
             }
-           
+            BindItemName(null, Id);
             var ddlarea = document.getElementById('InAreaName' + Id);
             for (var j = 0; j < ddlarea.length; j++) {
                 var strUser = ddlarea.options[j].innerHTML;
@@ -383,14 +386,14 @@
         }
         function UpdateRecord(Id) {
             var error = "";
-            var ItemName = $("#InName").val();
-            var Designation = $("#InDesignation").val();
-            var Brand = $("#InBrand").val();
-            var AreaName = $("#InAreaName").val();
-            var ContactPerson = $("#InContactPerson").val();
-            var ContactNo = $("#InContactNo").val();
+            var ItemName = $("#InName" + Id).val();
+            var Designation = $("#InDesignation" + Id).val();
+            var Brand = $("#InBrand" + Id).val();
+            var AreaName = $("#InAreaName" + Id).val();
+            var ContactPerson = $("#InContactPerson" + Id).val();
+            var ContactNo = $("#InContactNo" + Id).val();
 
-            if (ItemName == "") {
+            if (ItemName == "" ) {
                 error += "Please Enter Name.</br>";
             }
             if (Designation == "") {

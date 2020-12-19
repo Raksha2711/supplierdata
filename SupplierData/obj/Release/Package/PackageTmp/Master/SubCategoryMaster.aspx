@@ -28,7 +28,7 @@
                     '</table>');
                 var html = "";
                 $("#tblSubCategoryMaster thead").append('<tr>' +
-                    '<th><a class="white" data-toggle="tooltip" title="Sub Category Name">Sub Category Name</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Product Name">Product Name</a></th>' +
                     '<th data-orderable="false" ><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
                     '</tr>');
 
@@ -104,7 +104,7 @@
                 delay: 3000,
                 size: 'mini',
                 icon: false,
-                msg: "Enter Sub Category"
+                msg: "Enter Product Name"
             });
         }
        }
@@ -258,11 +258,11 @@
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
             <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                 <div class="page-header pull-left">
-                    <div class="page-title"><b>Sub Category Master</b></div>
+                    <div class="page-title"><b>Product Master</b></div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a href="<%=ConfigurationManager.AppSettings["url"] %>Report/DataReport.aspx">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                    <li class="active">Sub Category Master</li>
+                    <li class="active">Product Master</li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
@@ -277,7 +277,7 @@
 							
                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Name</label>
-								<input type="text" id="category" name="category"  placeholder="Sub Category" class=" form-control"  />
+								<input type="text" id="category" name="category"  placeholder="Product Name" class=" form-control"  />
 							</div>
                               
 

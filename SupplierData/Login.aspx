@@ -8,7 +8,9 @@
      <script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.1.11.min.js" type="text/javascript"></script>
      <!-- Notification JS -->
 	<script src="<%=ConfigurationManager.AppSettings["url"] %>js/notification/lobibox.min.js" type="text/javascript"></script>
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.validate.js"></script>
+	
      <!-- Notification style -->
 	<link rel="stylesheet" href="css/notification.min.css"/>
 
@@ -34,17 +36,15 @@
             }
         });
 
-
+       
         window.onload = function () {
             document.getElementById("txtUserName").focus();
         };
         function LoginClick() {
-            
             debugger
             var UserName = document.getElementById('txtUserName').value;
             var Password = document.getElementById('txtPassword').value;
-            // var year = document.getElementById('ddlYear').value;
-            //if (UserName != "" && Password != "") {
+            if (UserName != "" && Password != "") {
                 $.ajax({
                     type: "POST",
                     url: "WebService1.asmx/LoginCheck",
@@ -56,8 +56,11 @@
                     success: function (data) {
                         debugger
                         if (data.d != "") {
-                            getFormRights();
-                            window.location = "Report/DataReport.aspx";
+                            var data = InsertLoginData();
+                            if (data == 1) {
+                                getFormRights();
+                                window.location = "Profile.aspx";
+                            }
                         }
                         else {
                             Lobibox.notify('error', {
@@ -70,17 +73,42 @@
                     }
 
                 });
-           // }
+            }
+            else {
+                Lobibox.notify('error', {
+                    delay: 2000,
+                    size: 'mini',
+                    icon: false,
+                    msg: 'Enter Data.'
+                });
+            }
+        }
+        function InsertLoginData() {
+            var UserName = document.getElementById('txtUserName').value;
+            var result = 0;
+            <%--var EmpID = '<%= Session["EmpId"] %>';
+            alert(EmpID);
+             var UserName = '<%= Session["txtUserName"] %>';--%>
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/InsertLoginData",
+                data: "{UserName:'" + UserName + "'}",
+                contentType: "application/json; charset=utf-8",
+                global: false,
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    result = data.d;
+                }
+            });
+            return result;
         }
         function getFormRights() {
 
-            //  var EmpID = '<%= Session["EmpId"] %>';
-            //  var UserName = '<%= Session["txtUserName"] %>';
 
             $.ajax({
                 type: "POST",
                 url: "WebService1.asmx/FetchFormRights",
-                // data: "{EmpID:'" + EmpID + "',UserName:'" + UserName + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 global: false,
@@ -93,12 +121,7 @@
 
         </script>
 </head>
-<%--<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>--%>
+
     <body class="loginbg">
     <div class="page-form">
     <form class="form" id="userregi" name="userregi">
@@ -106,14 +129,14 @@
         <div class="body-content">
             <div class="form-group mrgt5">
                 <div class="input-icon right"><i class="fa fa-user"></i>
-					<input type="text" placeholder="USER"  class="form-control" name="user" id="txtUserName" />
+					<input type="text" placeholder="USER"  class="form-control" name="user" id="txtUserName"  value="Admin" />
 				</div>
             </div>
 			
             <div class="form-group mrgt30">
                 <div class="input-icon right"><i class="fa fa-key"></i>
           
-					<input type="password" placeholder="*********" class="form-control" name="password" id="txtPassword"  style="-webkit-text-security: square;" onkeydown="if (event.keyCode == 13) document.getElementById('btnSubmit').click()"/>
+					<input type="password" placeholder="*********" class="form-control" name="password" id="txtPassword" value="User@3211"  style="-webkit-text-security: square;" onkeydown="if (event.keyCode == 13) document.getElementById('btnSubmit').click()"/>
 				</div>
             </div>
 
@@ -156,39 +179,7 @@
 		</div>
     </form>
 </div>
-	<!-- Validation JS -->
-	<script src="<%=ConfigurationManager.AppSettings["url"] %>js/jquery.validate.js"></script>
 	
-		<!-- Validation -->
-		<script>
-		    $(document).ready(function () {
-                //$('#btnSubmit').click(function () {
-                //    LoginClick();
-                //});
-		        $("#userregi").validate({
-		            rules: {
-		                user: {
-		                    required: true
-		                },
-		                password: {
-		                    required: true
-		                }
-		            },
-		            messages: {
-		                user: {
-		                    required: "Enter Username"
-		                },
-		                password: {
-		                    required: "Enter Password"
-		                }
-		            }
-		        });
-		        $('#btnSubmit').click(function () {
-		            $("#userregi").valid();
-		        });
-		    });
-        </script>
-		<!-- End of Validation -->
 
 </body>
 </html>

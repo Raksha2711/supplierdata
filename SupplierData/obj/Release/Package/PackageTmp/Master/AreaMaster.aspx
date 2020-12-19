@@ -90,10 +90,26 @@
 
     function SaveAreaData() {
         debugger
+        var error = "";
         var Name = $("#area").val();
         var StateId = $("#SName").val();
         Name = Name.replace("&amp;", "&");
-        if (Name != "" ) {
+        if (Name == "") {
+            error += "Please Enter Name.</br>";
+        }
+        if (StateId == "") {
+            error += "Please Enter State.</br>";
+        }
+        if (error.trim() != "") {
+            Lobibox.notify('error', {
+                delay: 3000,
+                size: 'mini',
+                icon: false,
+                msg: error
+            });
+        }
+        else {
+        //if (Name != "" ) {
             $.ajax({
                 type: "POST",
                 url: "AreaMaster.aspx/AreaInsert",
@@ -103,7 +119,7 @@
                 success: function (data) {
                     if (data.d == 1) {
                         Lobibox.notify('error', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data is already Inserted.'
@@ -111,7 +127,7 @@
                     }
                     else if (data.d == 0) {
                         Lobibox.notify('success', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data Inserted Succesfully.'
@@ -120,7 +136,7 @@
                     }
                     else {
                         Lobibox.notify('error', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data is not Inserted Succesfully.'

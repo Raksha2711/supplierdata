@@ -256,11 +256,11 @@
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
             <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                 <div class="page-header pull-left">
-                    <div class="page-title"><b>Category Master</b></div>
+                    <div class="page-title"><b>Vertical Master</b></div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a href="<%=ConfigurationManager.AppSettings["url"] %>Report/DataReport.aspx">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                    <li class="active">Category Master</li>
+                    <li class="active">Vertical Master</li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
@@ -320,7 +320,5 @@
 			</div>
 			<!--END PAGE-CONTENT-->
 		</div>
-        <!--END PAGE WRAPPER-->
-
-
+     <!--END PAGE WRAPPER-->
 </asp:Content>

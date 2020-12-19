@@ -253,11 +253,11 @@
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
             <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                 <div class="page-header pull-left">
-                    <div class="page-title"><b>Supplier Master</b></div>
+                    <div class="page-title"><b>Supplier Type</b></div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a href="<%=ConfigurationManager.AppSettings["url"] %>Report/DataReport.aspx">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                    <li class="active">Supplier Master</li>
+                    <li class="active">Supplier Type</li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
