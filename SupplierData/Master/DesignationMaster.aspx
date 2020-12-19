@@ -58,8 +58,20 @@
     function SaveDesignationData() {
         debugger
         var DesignationyName = $("#designation").val();
-        
-        if (DesignationyName != "" ) {
+        var error = "";
+        if (DesignationyName == "") {
+            error += "Please Enter Name.</br>";
+        }
+
+        if (error.trim() != "") {
+            Lobibox.notify('error', {
+                delay: 3000,
+                size: 'mini',
+                icon: false,
+                msg: error
+            });
+        }
+        else {
             $.ajax({
                 type: "POST",
                 url: "DesignationMaster.aspx/DesignationInsert",
@@ -69,7 +81,7 @@
                 success: function (data) {
                     if (data.d == 1) {
                         Lobibox.notify('error', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data is already Inserted.'
@@ -78,7 +90,7 @@
                     }
                     else if (data.d == 0) {
                         Lobibox.notify('success', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data Inserted Succesfully.'
@@ -87,7 +99,7 @@
                     }
                     else {
                         Lobibox.notify('error', {
-                            delay: 1000,
+                            delay: 2000,
                             size: 'mini',
                             icon: false,
                             msg: 'Data not uploaded Succesfully.'

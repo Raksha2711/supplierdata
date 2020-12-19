@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="SupplierData.Profile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-     <script type="text/javascript">
+   <%--  <script type="text/javascript">
          function DisplayMenu1() {
              alert("display");
              debugger
@@ -28,11 +28,11 @@
              }
          }
 
-        </script>
+        </script>--%>
      <script type="text/javascript">
 
          $(document).ready(function () {
-             DisplayMenu1();
+             //DisplayMenu1();
          });
     </script>
 </asp:Content>
@@ -41,7 +41,7 @@
         <!--BEGIN TITLE & BREADCRUMB PAGE-->
         <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
             <div class="page-header pull-left">
-                <div class="page-title"><b>Master</b></div>
+                <div class="page-title"><b>Profile</b></div>
             </div>
             <ol class="breadcrumb page-breadcrumb pull-right">
                <%-- <li><i class="fa fa-home"></i>&nbsp;<a href="<%=ConfigurationManager.AppSettings["url"] %>FrmProfitProfile.aspx">Home</a></li>--%>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -138,6 +139,89 @@ namespace SupplierData
                 }
             }
             return clearText;
+        }
+
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public  int InsertLoginData(string UserName)
+        {
+            string EmpID = Session["EmpId"].ToString();
+            ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+
+            //string IP4AddressArr = String.Empty;
+            //string IP4Address = String.Empty;
+            //IP4AddressArr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            //if (!string.IsNullOrEmpty(IP4AddressArr))
+            //{
+            //    string[] ipRange = IP4AddressArr.Split(',');
+            //    IP4Address = ipRange[0].Trim();
+            //}
+            //else
+            //{
+            //    foreach (System.Net.IPAddress IPA in Dns.GetHostAddresses(HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"].ToString()))
+            //    {
+            //        if (IPA.AddressFamily.ToString() == "InterNetwork")
+            //        {
+            //            IP4Address = IPA.ToString();
+            //            break;
+            //        }
+            //    }
+
+            //}
+            string IP4Address = String.Empty;
+            foreach (System.Net.IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
+            {
+                if (IPA.AddressFamily.ToString() == "InterNetwork")
+                {
+                    IP4Address = IPA.ToString();
+                    break;
+                }
+            }
+            int result = 0;
+            if (IP4Address != String.Empty)
+            {
+                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                {
+                    cn.Open();
+
+                    SqlCommand cmd1 = new SqlCommand("SL_LoginData", cn); // Procedure Call
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.Parameters.AddWithValue("@IPAddress", IP4Address.Trim());
+                    cmd1.Parameters.AddWithValue("@UserName", UserName.Trim());
+                    cmd1.Parameters.AddWithValue("@UserId", EmpID.Trim());
+                    cmd1.Parameters.AddWithValue("@Type",'I');
+                    result = cmd1.ExecuteNonQuery();
+                }
+                
+            }
+            return result;
+        }
+        [WebMethod(EnableSession = true)]
+        public string CheckFormRight(string EmpId, string FormName, string UserName)
+        {
+            string result = "";
+            try
+            {
+                ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                {
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("SL_CheckFormRights", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmpId", EmpId);
+                    cmd.Parameters.AddWithValue("@FormName", FormName);
+                    SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
+                    parm3.Size = 50;
+                    parm3.Direction = ParameterDirection.Output;
+                    var result1 = cmd.ExecuteNonQuery();
+                    result = Convert.ToInt32(parm3.Value).ToString();
+                    cn.Close();
+
+                }
+            }
+            catch (Exception e)
+            {
+            }
+            return result;
         }
     }
 }

@@ -4,35 +4,37 @@
         function fnneutral() {
            
         }
-        //function BindCategoryName() {
-        //    try {
-        //        $.ajax({
-        //            type: "POST",
-        //            url: "DataReport.aspx/BindCategoryName",
-        //            data: "{}",
-        //            contentType: "application/json; charset=utf-8",
-        //            global: false,
-        //            async: false,
-        //            dataType: "json",
-        //            success: function (data) {
-        //                var obj = jQuery.parseJSON(data.d);
-        //                var html = "";
-        //                $('#CName').empty();
-        //                html += '<option id="optcname" value="">Select</option>';
-        //                $.each(obj, function (key, value) {
-        //                    html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
-        //                });
-        //                $('#CName').append(html);
-        //            }
-        //        });
-        //    }
-        //    catch (ex) { alert(ex);}
-        //}
-        function BindItemName(CId) {
+        function BindArea() {
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: "DataReport.aspx/BindAreaData",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    global: false,
+                    async: false,
+                    dataType: "json",
+                    success: function (data) {
+                        var obj = jQuery.parseJSON(data.d);
+                        var html = "";
+                       
+                            $('#AreaName').empty();
+                            html += '<option id="optcname" value="">Select</option>';
+                            $.each(obj, function (key, value) {
+                                html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + ' (' + value.StateName + ')' + ' </option>';
+                            });
+                            $('#AreaName').append(html);
+                       
+                    }
+                });
+            }
+            catch (ex) { alert(ex); }
+        }
+        function BindItemName() {
             $.ajax({
                 type: "POST",
                 url: "DataReport.aspx/BindItemName",
-                data: "{CId:'" + CId +"'}",
+                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 global: false,
                 async: false,
@@ -124,6 +126,7 @@
             var BrandId = $("#BName").val();
             var SupplierId = $("#SName").val();
             var SupplierType = $("#SType").val();
+            var AreaName = $("#AreaName").val();
             
             ////SupplierId = SupplierId.replace("&amp;", "&");
             ////CategoryId = CategoryId.replace("&amp;", "&");
@@ -135,7 +138,7 @@
             $.ajax({
                 type: "POST",
                 url: "DataReport.aspx/DisplayAllData",
-                data: "{ItemId:'" + ItemId + "',BrandId:'" + BrandId + "',SupplierId:'" + SupplierId + "',SupplierType:'" + SupplierType +"'}",
+                data: "{ItemId:'" + ItemId + "',BrandId:'" + BrandId + "',SupplierId:'" + SupplierId + "',SupplierType:'" + SupplierType + "',AreaName:'" + AreaName +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -349,6 +352,11 @@
 									</select>
 
 							</div>
+                            <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Area</label>
+								  <select class="form-control" name="AreaName" id="AreaName">
+									</select>
+							</div>
 							<!-- Button -->
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">
 								<button type="button" class="btn btn-blue btn-square mrgr7" data-toggle="tooltip" title="Save" id="save" onclick="DisplayAllData();">Search</button>
@@ -378,6 +386,8 @@
             BindBrandName();
             BindSupplierType();
             BindSupplierName();
+            BindItemName();
+            BindArea();
             //BindCategoryName();
             //BindItemName();
 

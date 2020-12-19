@@ -7,8 +7,23 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Newtonsoft.Json;
 using OfficeOpenXml;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Web;
+//using System.Web.UI;
+//using System.Web.UI.WebControls;
+//using System.Data;
+//using System.Data.SqlClient;
+//using System.Configuration;
+//using System.Globalization;
+//using Newtonsoft.Json;
+//using System.IO;
+//using MySql.Data.MySqlClient;
+//using System.Security.Cryptography;
+//using System.Text;
 
-namespace SupplierData.Master
+namespace SupplierData
 {
     public partial class BrandMaster : System.Web.UI.Page
     {
@@ -204,6 +219,30 @@ namespace SupplierData.Master
                 cn.Close();
             }
             return "1";
+        }
+        [System.Web.Services.WebMethod]
+        public static string ImportInsert(string data)
+        {
+            string result = "";
+            try
+            {
+                
+                //ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+                //using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                //{
+                //    cn.Open();
+                //    SqlCommand cmd = new SqlCommand("SL_ImportMaster", cn); // Procedure Call 
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.AddWithValue("@json ", data);
+                //     result = cmd.ExecuteNonQuery().ToString();
+                //    cn.Close();
+                //}
+            }
+            catch (Exception ex)
+            {
+                //  ErrorLog.CreateLog("FrmAdminKeyMaster.aspx.cs", ex.Message + " " + "Line No. 43. Please contact to Administrator.", DateTime.Now, EntryAgent);
+            }
+            return result;
         }
     }
 }

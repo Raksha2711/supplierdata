@@ -10,13 +10,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/EPPlus.dll">
-      <publishTime>04/07/2020 09:39:46</publishTime>
+      <publishTime>07/04/2020 09:39:46</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/15/2015 03:06:24</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>11/09/2019 00:56:44</publishTime>
+      <publishTime>09/11/2019 00:56:44</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/18/2015 21:19:46</publishTime>
@@ -55,13 +55,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/18/2015 21:19:46</publishTime>
     </File>
     <File Include="bin/SupplierData.dll">
-      <publishTime>12/07/2020 18:33:42</publishTime>
+      <publishTime>12/17/2020 08:13:41</publishTime>
     </File>
     <File Include="bin/SupplierData.pdb">
-      <publishTime>12/07/2020 18:33:42</publishTime>
+      <publishTime>12/17/2020 08:13:41</publishTime>
     </File>
     <File Include="BrandExportToExcel.aspx">
-      <publishTime>12/02/2020 18:27:37</publishTime>
+      <publishTime>02/12/2020 18:27:37</publishTime>
     </File>
     <File Include="css/datepicker.css">
       <publishTime>04/29/2019 18:11:02</publishTime>
@@ -91,7 +91,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2019 18:11:02</publishTime>
     </File>
     <File Include="css/style.css">
-      <publishTime>12/06/2020 10:03:34</publishTime>
+      <publishTime>06/12/2020 10:03:34</publishTime>
     </File>
     <File Include="css/style1.css">
       <publishTime>04/29/2019 18:11:02</publishTime>
@@ -103,7 +103,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2019 18:11:02</publishTime>
     </File>
     <File Include="images/excel.png">
-      <publishTime>07/05/2018 13:56:53</publishTime>
+      <publishTime>05/07/2018 13:56:53</publishTime>
     </File>
     <File Include="JS/angular-datatables.min.js">
       <publishTime>04/29/2019 18:11:04</publishTime>
@@ -220,58 +220,70 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2019 18:11:05</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>12/06/2020 23:16:28</publishTime>
+      <publishTime>12/16/2020 06:52:05</publishTime>
     </File>
     <File Include="Master/AreaMaster.aspx">
-      <publishTime>12/05/2020 23:51:40</publishTime>
+      <publishTime>12/13/2020 17:07:28</publishTime>
     </File>
     <File Include="Master/BrandMapping.aspx">
-      <publishTime>12/06/2020 22:57:59</publishTime>
+      <publishTime>12/13/2020 17:33:01</publishTime>
     </File>
     <File Include="Master/BrandMaster.aspx">
-      <publishTime>12/05/2020 23:37:34</publishTime>
+      <publishTime>12/13/2020 17:14:51</publishTime>
     </File>
     <File Include="Master/CategoryMaster.aspx">
-      <publishTime>12/05/2020 23:32:44</publishTime>
+      <publishTime>12/15/2020 23:25:20</publishTime>
     </File>
     <File Include="Master/DesignationMaster.aspx">
-      <publishTime>12/06/2020 07:41:28</publishTime>
+      <publishTime>12/13/2020 17:21:14</publishTime>
     </File>
     <File Include="Master/ExportToExcel.aspx">
-      <publishTime>12/07/2020 11:01:47</publishTime>
+      <publishTime>12/16/2020 07:31:54</publishTime>
     </File>
     <File Include="Master/Service.aspx">
-      <publishTime>12/06/2020 08:21:33</publishTime>
+      <publishTime>06/12/2020 08:21:33</publishTime>
     </File>
     <File Include="Master/SubCategoryMapping.aspx">
-      <publishTime>12/07/2020 00:21:45</publishTime>
+      <publishTime>12/16/2020 08:01:15</publishTime>
     </File>
     <File Include="Master/SubCategoryMaster.aspx">
-      <publishTime>12/06/2020 00:56:50</publishTime>
+      <publishTime>12/15/2020 22:21:23</publishTime>
     </File>
     <File Include="Master/SupplierMapping.aspx">
-      <publishTime>12/07/2020 00:20:07</publishTime>
+      <publishTime>12/13/2020 17:37:18</publishTime>
     </File>
     <File Include="Master/SupplierMaster.aspx">
-      <publishTime>12/06/2020 08:22:10</publishTime>
+      <publishTime>06/12/2020 08:22:10</publishTime>
     </File>
     <File Include="Master/SupplierType.aspx">
-      <publishTime>12/05/2020 22:42:36</publishTime>
+      <publishTime>12/13/2020 17:32:16</publishTime>
     </File>
     <File Include="Master/TransactionData.aspx">
       <publishTime>11/29/2020 00:23:24</publishTime>
     </File>
+    <File Include="Master/UserMaster.aspx">
+      <publishTime>12/16/2020 06:42:46</publishTime>
+    </File>
+    <File Include="Master/UserRights.aspx">
+      <publishTime>12/17/2020 07:47:49</publishTime>
+    </File>
     <File Include="packages.config">
-      <publishTime>12/02/2020 08:13:04</publishTime>
+      <publishTime>02/12/2020 08:13:04</publishTime>
     </File>
     <File Include="Profile.aspx">
-      <publishTime>12/06/2020 15:45:04</publishTime>
+      <publishTime>12/16/2020 06:51:26</publishTime>
     </File>
     <File Include="Report/DataReport.aspx">
-      <publishTime>12/07/2020 10:36:35</publishTime>
+      <publishTime>12/13/2020 22:30:03</publishTime>
+    </File>
+    <File Include="Report/LoginReport.aspx">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Report/SupplierDataReport.aspx">
+      <publishTime>12/13/2020 22:10:54</publishTime>
     </File>
     <File Include="Site1.Master">
-      <publishTime>12/07/2020 10:15:46</publishTime>
+      <publishTime>12/17/2020 07:57:11</publishTime>
     </File>
     <File Include="vendors/bootstrap/css/bootstrap-theme.css">
       <publishTime>04/29/2019 18:11:05</publishTime>
@@ -2728,10 +2740,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2019 18:11:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/07/2020 18:33:43</publishTime>
+      <publishTime>12/15/2020 00:46:14</publishTime>
     </File>
     <File Include="WebService1.asmx">
-      <publishTime>12/02/2020 05:31:34</publishTime>
+      <publishTime>02/12/2020 05:31:34</publishTime>
     </File>
   </ItemGroup>
 </Project>

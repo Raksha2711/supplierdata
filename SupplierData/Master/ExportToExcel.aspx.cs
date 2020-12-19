@@ -281,11 +281,17 @@ namespace SupplierData.Master
                 using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
                 {
                     cn.Open();
-                    SqlCommand cmd = new SqlCommand("SL_SubCategoryMaster", cn); // Procedure Call 
+                    SqlCommand cmd = new SqlCommand("SL_SubCategoryMapping", cn); // Procedure Call 
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Type", 'S');
-                    cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
+
+                    cmd.Parameters.AddWithValue("@Brand", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Category", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@AreaName", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ContactPerson", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Designation", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;

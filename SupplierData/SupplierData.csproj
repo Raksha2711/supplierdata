@@ -141,9 +141,13 @@
     <Content Include="Master\SupplierType.aspx" />
     <Content Include="Master\TransactionData.aspx" />
     <Content Include="Master\Service.aspx" />
+    <Content Include="Master\UserMaster.aspx" />
+    <Content Include="Master\UserRights.aspx" />
     <Content Include="packages.config" />
     <Content Include="Profile.aspx" />
     <Content Include="Report\DataReport.aspx" />
+    <Content Include="Report\LoginReport.aspx" />
+    <Content Include="Report\SupplierDataReport.aspx" />
     <Content Include="Site1.Master" />
     <Content Include="vendors\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="vendors\bootstrap\css\bootstrap.css.map" />
@@ -978,9 +982,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncryptDecrypt.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ImportData.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1079,6 +1085,19 @@
     <Compile Include="Master\Service.aspx.designer.cs">
       <DependentUpon>Service.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Master\UserMaster.aspx.cs">
+      <DependentUpon>UserMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\UserMaster.aspx.designer.cs">
+      <DependentUpon>UserMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\UserRights.aspx.cs">
+      <DependentUpon>UserRights.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\UserRights.aspx.designer.cs">
+      <DependentUpon>UserRights.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1093,6 +1112,20 @@
     </Compile>
     <Compile Include="Report\DataReport.aspx.designer.cs">
       <DependentUpon>DataReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\LoginReport.aspx.cs">
+      <DependentUpon>LoginReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\LoginReport.aspx.designer.cs">
+      <DependentUpon>LoginReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\SupplierDataReport.aspx.cs">
+      <DependentUpon>SupplierDataReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\SupplierDataReport.aspx.designer.cs">
+      <DependentUpon>SupplierDataReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
