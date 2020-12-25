@@ -55,6 +55,7 @@
         debugger
         var UserName = $("#user").val();
         var Password = $("#password").val();
+        var EmpId = '<%= Session["EmpId"] %>';
         var error = "";
         if (UserName == "") {
             error = "Enter User Name.<br />";
@@ -76,7 +77,7 @@
             $.ajax({
                 type: "POST",
                 url: "UserMaster.aspx/UserInsert",
-                data: "{UserName:'" + UserName + "',Password:'" + Password +"'}",
+                data: "{UserName:'" + UserName + "',Password:'" + Password + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -150,6 +151,7 @@
            var error = "";
            var UserName = $("#InUserName" + Id).val();
            var Password = $("#InPassword" + Id).val();
+           var EmpId = '<%= Session["EmpId"] %>';
            if (UserName == "") {
                error += "Enter User Name.</br>";
            }
@@ -168,7 +170,7 @@
                $.ajax({
                    type: "POST",
                    url: "UserMaster.aspx/UpdateRecord",
-                   data: "{Id: '" + Id + "',UserName: '" + UserName + "',Password:'"+ Password +"'}",
+                   data: "{Id: '" + Id + "',UserName: '" + UserName + "',Password:'" + Password + "',ModifiedBy:'" + EmpId + "'}",
                    contentType: "application/json; charset=utf-8",
                    dataType: "json",
                    global: false,

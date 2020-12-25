@@ -77,7 +77,7 @@
                 var html = "";
                 $("#tblItemMaster thead").append('<tr>' +
                     '<th><a class="white" data-toggle="tooltip" title="Brand">Brand</a></th>' +
-                    '<th><a class="white" data-toggle="tooltip" title="Name">Sub Category Name</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Name">Product Name</a></th>' +
                     
                     '<th class="hidden"><a class="white" data-toggle="tooltip" title="Status">Status</a></th>' +
                     '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
@@ -115,13 +115,13 @@
         var ItemName = $("#CName").val();
         //var CId = $("#CName").val();
         var Brand = $("#BName").val();
-       
+        var EmpId = '<%= Session["EmpId"] %>';
 
         if (ItemName != "" &&  Brand != "Select" && Brand != "" ) {
             $.ajax({
                 type: "POST",
                 url: "BrandMapping.aspx/ItemInsert",
-                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "'}",
+                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -269,6 +269,7 @@
             if (Brand == "") {
                 error += "Please Enter Brand.</br>";
             }
+            var EmpId = '<%= Session["EmpId"] %>';
             if (error.trim() != "") {
                 Lobibox.notify('error', {
                     delay: 3000,
@@ -281,7 +282,7 @@
                 $.ajax({
                     type: "POST",
                     url: "BrandMapping.aspx/UpdateRecord",
-                    data: "{Id: '" + Id + "',Name: '" + Name + "',Brand: '" + Brand + "'}",
+                    data: "{Id: '" + Id + "',Name: '" + Name + "',Brand: '" + Brand + "',ModifiedBy:'" + EmpId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,
@@ -383,7 +384,7 @@
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
             <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                 <div class="page-header pull-left">
-                    <div class="page-title"><b>Brand SubCategory Mapping</b></div>
+                    <div class="page-title"><b>Brand Product Mapping</b></div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a href="<%=ConfigurationManager.AppSettings["url"] %>Report/DataReport.aspx">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -408,7 +409,7 @@
 									</select>
 							</div>
                               <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
-								<label>Sub Category Name</label>
+								<label>Product Name</label>
 								  <select class="form-control" name="CName" id="CName">
 									</select>
 							</div>

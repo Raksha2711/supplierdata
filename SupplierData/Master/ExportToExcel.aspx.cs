@@ -33,6 +33,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Website", DBNull.Value);
                     cmd.Parameters.AddWithValue("@TollFreeNo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -68,6 +70,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@StateId", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -102,6 +106,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Type", 'S');
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -136,6 +142,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Type", 'S');
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -175,6 +183,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Email", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Area", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Brand", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -215,6 +225,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@ContactPerson", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Designation", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -252,6 +264,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Type", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Brand", DBNull.Value);
                     cmd.Parameters.AddWithValue("@SubCategory", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -292,6 +306,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@ContactPerson", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Designation", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -326,6 +342,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Type", 'S');
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -367,7 +385,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Email", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactPerson2", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Mobile2", DBNull.Value);
-
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;

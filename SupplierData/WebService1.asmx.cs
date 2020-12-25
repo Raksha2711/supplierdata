@@ -147,7 +147,7 @@ namespace SupplierData
             string EmpID = Session["EmpId"].ToString();
             ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
 
-            //string IP4AddressArr = String.Empty;
+            string IP4AddressArr = String.Empty;
             //string IP4Address = String.Empty;
             //IP4AddressArr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             //if (!string.IsNullOrEmpty(IP4AddressArr))
@@ -167,25 +167,24 @@ namespace SupplierData
             //    }
 
             //}
-            string IP4Address = String.Empty;
+            string IP4AddressLocal = String.Empty;
             foreach (System.Net.IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
             {
                 if (IPA.AddressFamily.ToString() == "InterNetwork")
                 {
-                    IP4Address = IPA.ToString();
+                    IP4AddressLocal = IPA.ToString();
                     break;
                 }
             }
             int result = 0;
-            if (IP4Address != String.Empty)
+            if (IP4AddressLocal != String.Empty)
             {
                 using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
                 {
                     cn.Open();
-
                     SqlCommand cmd1 = new SqlCommand("SL_LoginData", cn); // Procedure Call
                     cmd1.CommandType = CommandType.StoredProcedure;
-                    cmd1.Parameters.AddWithValue("@IPAddress", IP4Address.Trim());
+                    cmd1.Parameters.AddWithValue("@IPAddress", IP4AddressLocal.Trim());
                     cmd1.Parameters.AddWithValue("@UserName", UserName.Trim());
                     cmd1.Parameters.AddWithValue("@UserId", EmpID.Trim());
                     cmd1.Parameters.AddWithValue("@Type",'I');

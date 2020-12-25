@@ -42,6 +42,7 @@ namespace SupplierData.Master
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@CId", BId);
                     cmd.Parameters.AddWithValue("@Type", "B");
+
                     SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
                     DataSet ds = new DataSet();
                     da.Fill(ds);
@@ -198,6 +199,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Type", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Brand", DBNull.Value);
                     cmd.Parameters.AddWithValue("@SubCategory", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -217,7 +220,7 @@ namespace SupplierData.Master
 
         }
         [System.Web.Services.WebMethod]
-        public static string SupplierInsert(string Name, string Type,string Brand,string SubCategory)
+        public static string SupplierInsert(string Name, string Type,string Brand,string SubCategory,string CreatedBy)
         {
             string i = "";
             try
@@ -234,6 +237,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@Type", Type);
                     cmd.Parameters.AddWithValue("@SubCategory", SubCategory);
+                    cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -250,7 +255,7 @@ namespace SupplierData.Master
             return i;
         }
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id, string Name, string Brand,string Type,string SubCategory)
+        public static string UpdateRecord(string Id, string Name, string Brand,string Type,string SubCategory,string ModifiedBy)
         {
             string i = "";
             try
@@ -267,6 +272,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@Type", Type);
                     cmd.Parameters.AddWithValue("@SubCategory", SubCategory);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -300,6 +307,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Type", DBNull.Value);
                     cmd.Parameters.AddWithValue("@SubCategory", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
