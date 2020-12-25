@@ -69,7 +69,6 @@
         function GetBrandDataReport() {
             debugger
             var ItemId = $("#IName").val();
-
             var BrandId = $("#BName").val();
             var SupplierId = $("#SName").val();
             var SupplierType = $("#SType").val();
@@ -150,13 +149,13 @@
                         '</table>');
                     var html = "";
                     $("#example thead").append('<tr>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Supplier Name">Supplier Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Supplier Name">SupplierName</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Address</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Pincode</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Contact Person 1</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Mobile No</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Contact Person 2</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Mobile No</a></th>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">ContactPerson1</a></th>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">MobileNo</a></th>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">ContactPerson2</a></th>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">MobileNo2</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Email </a></th>' +
                        
                         '</tr>');
@@ -176,10 +175,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportSupplierData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportSupplierData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportSupplierData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportSupplierData'
+                            },
                         ]
                     });
                 }
@@ -205,9 +216,9 @@
                     );
                     var html = "";
                     $("#example thead").append('<tr>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Name">Brand Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Name">BrandName</a></th>' +
                         '<th><a class="white" data-toggle="tooltip" title="Status">Website</a></th>' + 
-                        '<th><a class="white" data-toggle="tooltip" title="Status">Toll Free No</a></th></tr>');
+                        '<th><a class="white" data-toggle="tooltip" title="Status">TollFreeNo</a></th></tr>');
 
                     for (var i = 0; i < BrandList.length; i++) {
 
@@ -218,10 +229,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportBrandData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportBrandData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportBrandData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportBrandData'
+                            },
                         ]
                     });
 
@@ -259,10 +282,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportStateData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportStateData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportStateData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportStateData'
+                            },
                         ]
                     });
 
@@ -288,7 +323,7 @@
                         '</table>');
                     var html = "";
                     $("#example thead").append('<tr>' +
-                        '<th><a class="white" data-toggle="tooltip" title="SUPPLIER TYPE">SUPPLIER TYPE</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="SUPPLIER TYPE">SUPPLIERTYPE</a></th>' +
                         
                         '</tr>');
 
@@ -302,10 +337,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportSupplierTypeData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportSupplierTypeData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportSupplierTypeData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportSupplierTypeData'
+                            },
                         ]
                     });
 
@@ -339,10 +386,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportVerticalData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportVerticalData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportVerticalData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportVerticalData'
+                            },
                         ]
                     });
 
@@ -369,7 +428,7 @@
                         '</table>');
                     var html = "";
                     $("#example thead").append('<tr>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Sub Category Name">Sub Category Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Sub Category Name">ProductName</a></th>' +
                         '</tr>');
 
                     for (var i = 0; i < CategoryList.length; i++) {
@@ -382,10 +441,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportProductData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportProductData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportProductData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportProductData'
+                            },
                         ]
                     });
 
@@ -428,10 +499,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportDesignationData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportDesignationData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportDesignationData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportDesignationData'
+                            },
                         ]
                     });
 
@@ -467,20 +550,33 @@
 
                     for (var i = 0; i < SList.length; i++) {
                         html += ("<tr><td id = 'Brand" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Brand + "'>" + SList[i].Brand + "</a></td>" +
+                            "<td id='Area" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Area + "'>" + SList[i].Area + "</a></td>" + 
                             "<td id='Name" + SList[i].Id + "'><a  data-toggle='tooltip' title='" + SList[i].Name + "'>" + SList[i].Name + "</a></td>" +
                             "<td id = 'Address" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Address + "'>" + SList[i].Address + "</a></td>" +
                             "<td id='ContactNo" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].ContactNo + "'>" + SList[i].ContactNo + "</a></td>" +
                             "<td id='Email" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Email + "'>" + SList[i].Email + "</a></td>" +
-                            "<td id='Area" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Area + "'>" + SList[i].Area + "</a></td></tr> ");
+                            "</tr> ");
                     }
                     $("#example tbody").append(html);
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportServiceData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportServiceData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportServiceData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportServiceData'
+                            },
                         ]
                     });
                 }
@@ -509,7 +605,7 @@
                     $("#example thead").append('<tr>' +
                         //'<th><a class="white" data-toggle="tooltip" title="Category">Category</a></th>' +
                         '<th><a class="white" data-toggle="tooltip" title="Brand">Brand</a></th>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Name">Sub Category Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Name">ProductName</a></th>' +
                         '</tr>');
 
                     for (var i = 0; i < ItemList.length; i++) {
@@ -524,10 +620,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportProductData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportProductData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportProductData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportProductData'
+                            },
                         ]
                     });
                 }
@@ -553,11 +661,11 @@
                     var html = "";
                     $("#example thead").append('<tr>' +
                         '<th><a class="white" data-toggle="tooltip" title="Brand">Brand</a></th>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Name">Sub Category Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Name">ProductName</a></th>' +
                         '<th><a class="white" data-toggle="tooltip" title="Area">Area</a></th>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Executve Name">Executve Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Executve Name">ExecutveName</a></th>' +
                         '<th><a class="white" data-toggle="tooltip" title="Designation">Designation</a></th>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Contact No">Contact No</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Contact No">ContactNo</a></th>' +
                         
                         '</tr>');
 
@@ -577,10 +685,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportBrandPerson'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportBrandPerson'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportBrandPerson'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportBrandPerson'
+                            },
                         ]
                     });
 
@@ -607,11 +727,11 @@
                         '</table>');
                     var html = "";
                     $("#example thead").append('<tr>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Name">Supplier Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Name">SupplierName</a></th>' +
 
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Brand">Brand</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Sub Category">Sub Category</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Supplier Type</a></th>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Sub Category">ProductName</a></th>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">SupplierType</a></th>' +
                         '</tr>');
 
                     for (var i = 0; i < BrandList.length; i++) {
@@ -626,10 +746,22 @@
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
+                            {
+                                extend: 'excelHtml5',
+                                title: 'ExportSupplierMapping'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                title: 'ExportSupplierMapping'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                title: 'ExportSupplierMapping'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'ExportSupplierMapping'
+                            },
                         ]
                     });
                 }

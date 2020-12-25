@@ -71,6 +71,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@UserId", Id);
                     cmd.Parameters.AddWithValue("@FormId", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Type", 'S');
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
@@ -118,7 +120,7 @@ namespace SupplierData.Master
 
         //}
         [System.Web.Services.WebMethod]
-        public static string UpdateData(string Edit,string UserId)
+        public static string UpdateData(string Edit,string UserId,string CreatedBy)
         {
             string result = "";
             try
@@ -133,6 +135,7 @@ namespace SupplierData.Master
                     cmd1.Parameters.AddWithValue("@UserId", UserId);
                     cmd1.Parameters.AddWithValue("@FormId", DBNull.Value);
                     cmd1.Parameters.AddWithValue("@Type", 'D');
+                    cmd1.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     try
                     {
                         cmd1.ExecuteNonQuery();
@@ -157,6 +160,7 @@ namespace SupplierData.Master
                                 cmd.Parameters.AddWithValue("@UserId", UserId);
                                 cmd.Parameters.AddWithValue("@FormId", fedit);
                                 cmd.Parameters.AddWithValue("@Type", 'I');
+                                cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                                 try
                                 {
                                     cmd.ExecuteNonQuery();

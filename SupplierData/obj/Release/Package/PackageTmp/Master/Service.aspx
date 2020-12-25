@@ -204,6 +204,7 @@
             var Email = $("#email").val();
             var Area = $("#AreaName").val();
             var Brand = $("#BName").val();
+            var EmpId = '<%= Session["EmpId"] %>';
             Name = Name.replace("&amp;", "&");
 
 
@@ -248,7 +249,7 @@
             $.ajax({
                 type: "POST",
                 url: "Service.aspx/ServiceInsert",
-                data: "{Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area +"',Brand:'"+ Brand +"'}",
+                data: "{Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -375,6 +376,7 @@
             var Email = $("#InEmail" + Id).val();
             var Area = $("#InArea" + Id).val();
             var Brand = $("#InBrand" + Id).val();
+            var EmpId = '<%= Session["EmpId"] %>';
             Name = Name.replace("&amp;", "&");
 
 
@@ -413,7 +415,7 @@
                 $.ajax({
                     type: "POST",
                     url: "Service.aspx/UpdateRecord",
-                    data: "{Id:'"+Id + "',Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "'}",
+                    data: "{Id:'" + Id + "',Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',ModifiedBy:'" + EmpId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,
@@ -505,6 +507,85 @@
                 }
             });
         }
+        function ExportToTable() {
+            debugger
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;
+            /*Checks whether the file is a valid excel file*/
+            if (regex.test($("#excelfile").val().toLowerCase())) {
+                var xlsxflag = false; /*Flag for checking whether excel is .xls format or .xlsx format*/
+                if ($("#excelfile").val().toLowerCase().indexOf(".xlsx") > 0) {
+                    xlsxflag = true;
+                }
+                /*Checks whether the browser supports HTML5*/
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var data = e.target.result;
+                        /*Converts the excel data in to object*/
+                        if (xlsxflag) {
+                            var workbook = XLSX.read(data, { type: 'binary' });
+                        }
+                        else {
+                            var workbook = XLS.read(data, { type: 'binary' });
+                        }
+                        /*Gets all the sheetnames of excel in to a variable*/
+                        var sheet_name_list = workbook.SheetNames;
+
+                        var cnt = 0; /*This is used for restricting the script to consider only first sheet of excel*/
+                        sheet_name_list.forEach(function (y) { /*Iterate through all sheets*/
+                            /*Convert the cell value to Json*/
+                            if (xlsxflag) {
+                                var exceljson = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+                            }
+                            else {
+                                var exceljson = XLS.utils.sheet_to_row_object_array(workbook.Sheets[y]);
+                            }
+                            if (exceljson.length > 0 && cnt == 0) {
+                                BindTable(exceljson);
+                                cnt++;
+                            }
+                        });
+                        // $('#exceltable').show();
+                    }
+                    if (xlsxflag) {/*If excel file is .xlsx extension than creates a Array Buffer from excel*/
+                        reader.readAsArrayBuffer($("#excelfile")[0].files[0]);
+                    }
+                    else {
+                        reader.readAsBinaryString($("#excelfile")[0].files[0]);
+                    }
+                }
+                else {
+                    alert("Sorry! Your browser does not support HTML5!");
+                }
+            }
+            else {
+                alert("Please upload a valid Excel file!");
+            }
+        }
+        function BindTable(jsondata) {/*Function used to convert the JSON array to Html Table*/
+            var EmpId = '<%= Session["EmpId"] %>';
+            $.ajax({
+                type: "POST",
+                url: "Service.aspx/ImportInsert",
+                data: "{data:'" + JSON.stringify(jsondata) + "',CreatedBy:'" + EmpId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d > 0) {
+                        GetService();
+                    }
+                    else {
+                        Lobibox.notify('error', {
+                            delay: 2000,
+                            size: 'mini',
+                            icon: false,
+                            msg: 'Data  already Inserted.'
+                        });
+                    }
+
+                }
+            });
+        }
          </script>                         
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -563,6 +644,13 @@
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">
 								<button type="button" class="btn btn-blue btn-square mrgr7" data-toggle="tooltip" title="Save" id="save" onclick="SaveServiceData();">ADD</button>
 								<a href="#"><img src="<%=ConfigurationManager.AppSettings["url"] %>images/excel.png" class="mrgr7" data-toggle="tooltip" title="Export To Excel" onclick="OpenExcel();" /></a> 
+							</div>
+                            <div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">  
+                               <input type="file" id="excelfile" />  
+                                    </div>
+                             <div class="col-lg-2 col-md-3 col-sm-2 col-xs-6  mrgt30">  
+  
+                                 <button type="button" class="btn btn-blue btn-square mrgr7" data-toggle="tooltip" title="viewfile" id="viewfile" onclick="ExportToTable();">IMPORT</button>
 							</div>
 							<!-- /Button -->
 						</form>

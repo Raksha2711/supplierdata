@@ -129,14 +129,14 @@
         <div class="body-content">
             <div class="form-group mrgt5">
                 <div class="input-icon right"><i class="fa fa-user"></i>
-					<input type="text" placeholder="USER"  class="form-control" name="user" id="txtUserName"  value="Admin" />
+					<input type="text" placeholder="USER"  class="form-control" name="user" id="txtUserName"   />
 				</div>
             </div>
 			
             <div class="form-group mrgt30">
                 <div class="input-icon right"><i class="fa fa-key"></i>
           
-					<input type="password" placeholder="*********" class="form-control" name="password" id="txtPassword" value="User@3211"  style="-webkit-text-security: square;" onkeydown="if (event.keyCode == 13) document.getElementById('btnSubmit').click()"/>
+					<input type="password" placeholder="*********" class="form-control" name="password" id="txtPassword"   style="-webkit-text-security: square;" onkeydown="if (event.keyCode == 13) document.getElementById('btnSubmit').click()"/>
 				</div>
             </div>
 

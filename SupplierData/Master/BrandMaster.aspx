@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="BrandMaster.aspx.cs" Inherits="SupplierData.Master.BrandMaster" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="jquery-1.10.2.min.js" type="text/javascript"></script>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.4-a/xls.core.min.js"></script> 
+
 <script type="text/javascript">
     
     function fnneutral() {
@@ -21,13 +20,10 @@
     };
     function GetBrand() {
         var html = "";
-        var UserName = "Raksha";
-        var empid = "1";
-
         $.ajax({
             type: "POST",
             url: "BrandMaster.aspx/GetBrandData",
-            data: "{UserName: '" + UserName + "'}",
+            data: "{}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
@@ -80,6 +76,7 @@
         if (TollFreeNo == "") {
             error += "Enter TollFreeNo </br>"
         }
+        var EmpId = '<%= Session["EmpId"] %>';
         if (error.trim() != "") {
             Lobibox.notify('error', {
                 delay: 3000,
@@ -92,7 +89,7 @@
             $.ajax({
                 type: "POST",
                 url: "BrandMaster.aspx/BrandInsert",
-                data: "{BrandName:'" + BrandName + "',Website:'" + Website + "',TollFreeNo:'" + TollFreeNo +"'}",
+                data: "{BrandName:'" + BrandName + "',Website:'" + Website + "',TollFreeNo:'" + TollFreeNo + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -171,7 +168,6 @@
         document.getElementById('button' + Id).innerHTML = "<a href='javascript:EditRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:Delete(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
         PervID = "";
     }
-
     function UpdateRecord(Id) {
         var error = "";
         var Name = $("#InName" + Id).val();
@@ -186,6 +182,7 @@
         if (TollFreeNo == "") {
             error += "Please Enter TollFreeNo.</br>";
         }
+        var EmpId = '<%= Session["EmpId"] %>';
         if (error.trim() != "") {
             Lobibox.notify('error', {
                 delay: 3000,
@@ -198,7 +195,7 @@
             $.ajax({
                 type: "POST",
                 url: "BrandMaster.aspx/UpdateRecord",
-                data: "{Id: '" + Id + "',Name: '" + Name + "',Website: '" + Website + "',TollFreeNo:'" + TollFreeNo +"'}",
+                data: "{Id: '" + Id + "',Name: '" + Name + "',Website: '" + Website + "',TollFreeNo:'" + TollFreeNo + "',ModifiedBy:'" + EmpId +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 global: false,
@@ -251,9 +248,7 @@
             });
         }
     }
-
     var CurrentId = "";
-
     function Delete(Id) {
         CurrentId = Id;
         $("#deleteanchor" + Id).attr("data-target", "#modal-delete");
@@ -292,7 +287,6 @@
                 }
             });
         }
-
     function ExportToTable() {
         debugger
         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx|.xls)$/;
@@ -349,15 +343,22 @@
         }
     }
     function BindTable(jsondata) {/*Function used to convert the JSON array to Html Table*/
+        var EmpId = '<%= Session["EmpId"] %>';
         $.ajax({
             type: "POST",
             url: "BrandMaster.aspx/ImportInsert",
-            data: "{data:'" + JSON.stringify(jsondata) + "'}",
+            data: "{data:'" + JSON.stringify(jsondata) + "',CreatedBy:'" + EmpId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
                 if (data.d > 0) {
                     GetBrand();
+                    Lobibox.notify('success', {
+                        delay: 2000,
+                        size: 'mini',
+                        icon: false,
+                        msg: 'Data added successfully.'
+                    });
                 }
                 else {
                     Lobibox.notify('error', {

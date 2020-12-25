@@ -7,23 +7,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Newtonsoft.Json;
 using OfficeOpenXml;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Web;
-//using System.Web.UI;
-//using System.Web.UI.WebControls;
-//using System.Data;
-//using System.Data.SqlClient;
-//using System.Configuration;
-//using System.Globalization;
-//using Newtonsoft.Json;
-//using System.IO;
-//using MySql.Data.MySqlClient;
-//using System.Security.Cryptography;
-//using System.Text;
 
-namespace SupplierData
+namespace SupplierData.Master
 {
     public partial class BrandMaster : System.Web.UI.Page
     {
@@ -32,7 +17,7 @@ namespace SupplierData
         }
        
         [System.Web.Services.WebMethod]
-        public static string GetBrandData(string UserName)
+        public static string GetBrandData()
         {
             string result = "";
             try
@@ -48,6 +33,8 @@ namespace SupplierData
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Website", DBNull.Value);
                     cmd.Parameters.AddWithValue("@TollFreeNo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -68,7 +55,7 @@ namespace SupplierData
         }
 
         [System.Web.Services.WebMethod]
-        public static string BrandInsert(string BrandName, string Website,string TollFreeNo)
+        public static string BrandInsert(string BrandName, string Website,string TollFreeNo,string CreatedBy)
         {
             string i = "";
             try
@@ -84,6 +71,8 @@ namespace SupplierData
                     cmd.Parameters.AddWithValue("@Name",BrandName);
                     cmd.Parameters.AddWithValue("@Website", Website);
                     cmd.Parameters.AddWithValue("@TollFreeNo", TollFreeNo);
+                    cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -102,7 +91,7 @@ namespace SupplierData
 
 
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id,string Name,string Website,string TollFreeNo)
+        public static string UpdateRecord(string Id,string Name,string Website,string TollFreeNo,string ModifiedBy)
         {
             string i = "";
             try
@@ -118,6 +107,8 @@ namespace SupplierData
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@Website", Website);
                     cmd.Parameters.AddWithValue("@TollFreeNo", TollFreeNo);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -150,6 +141,8 @@ namespace SupplierData
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Website", DBNull.Value);
                     cmd.Parameters.AddWithValue("@TollFreeNo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -221,22 +214,23 @@ namespace SupplierData
             return "1";
         }
         [System.Web.Services.WebMethod]
-        public static string ImportInsert(string data)
+        public static string ImportInsert(string data,string CreatedBy)
         {
             string result = "";
             try
             {
-                
-                //ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
-                //using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
-                //{
-                //    cn.Open();
-                //    SqlCommand cmd = new SqlCommand("SL_ImportMaster", cn); // Procedure Call 
-                //    cmd.CommandType = CommandType.StoredProcedure;
-                //    cmd.Parameters.AddWithValue("@json ", data);
-                //     result = cmd.ExecuteNonQuery().ToString();
-                //    cn.Close();
-                //}
+
+                ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                {
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("SL_ImportBrand", cn); // Procedure Call 
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@json ", data);
+                    cmd.Parameters.AddWithValue("@CreatedBy ", CreatedBy);
+                    result = cmd.ExecuteNonQuery().ToString();
+                    cn.Close();
+                }
             }
             catch (Exception ex)
             {

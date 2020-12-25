@@ -162,11 +162,12 @@
                 var html = "";
                 $("#tblItemMaster thead").append('<tr>' +
                     '<th><a class="white" data-toggle="tooltip" title="Brand">Brand</a></th>' +
-                    '<th><a class="white" data-toggle="tooltip" title="Name">Sub Category Name</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Name">Product Name</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Area">Area</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Executve Name">Executive Person</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Designation">Designation</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Contact No">Contact No</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Visible">Visible</a></th>' +
                     '<th class="hidden"><a class="white" data-toggle="tooltip" title="Status">Status</a></th>' +
                     '<th data-orderable="false" ><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
                     '</tr>');
@@ -177,7 +178,8 @@
                         "<td id='Brand" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Brand + "'>" + ItemList[i].Brand + "</a></td><td id='Name" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Name + "'>" + ItemList[i].Name + "</a><span class='hidden' id='SID" + ItemList[i].Id + "' > " + ItemList[i].SubCategoryId + "</span></td>" +
                             "<td id='AreaName" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].AreaName + "'>" + ItemList[i].AreaName + "</a></td><td id='ContactPerson" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactPerson + "'>" + ItemList[i].ContactPerson + "</a></td>" +
                             "<td id='Designation" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Designation + "'>" + ItemList[i].Designation + "</a></td>" +
-                            "<td id='ContactNo" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactNo + "'>" + ItemList[i].ContactNo + "</a></td>" +
+                        "<td id='ContactNo" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactNo + "'>" + ItemList[i].ContactNo + "</a></td>" +
+                        "<td id='Visible" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Visible + "'>" + ItemList[i].Visible + "</a></td>" +
                         "<td class='hidden'  id='Status" + ItemList[i].Id + "'><a  data-toggle='tooltip' title='" + ItemList[i].Status + "'>" + ItemList[i].Status + "</a></td><td   id='button" + ItemList[i].Id + "'><a href='javascript:EditRecord(&apos;" + ItemList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + ItemList[i].Id + "' href='javascript:Delete(&apos;" + ItemList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></td></tr>");
                     //}
                     //else {
@@ -212,12 +214,13 @@
         var AreaName = $("#AreaName").val();
         var ContactPerson = $("#contactperson").val();
         var ContactNo = $("#contactno").val();
-
-        if (ItemName != "" && Brand != "Select" && Brand != "" && AreaName != "" && AreaName != "Select" && ContactPerson != "" && ContactNo != "" && Designation != "") {
+        var Visible = $("#visible").val();
+        var EmpId = '<%= Session["EmpId"] %>';
+        if (ItemName != "" && Brand != "Select" && Brand != "" && AreaName != "" && AreaName != "Select" && ContactPerson != "" && ContactNo != "" && Designation != "" && Visible != "" && Visible != "Select") {
             $.ajax({
                 type: "POST",
                 url: "SubCategoryMapping.aspx/ItemInsert",
-                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation +"'}",
+                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',Visible:'" + Visible + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -254,6 +257,7 @@
                     $("#DName").val('');
                     $("#BName").val('');
                     $("#IName").val('');
+                    $("#visible").val('');
                 }
             });
 
@@ -272,6 +276,7 @@
                     var ContactPerson = document.getElementById('SPContactPerson').innerHTML;
                     var Designation = document.getElementById('SPDesignation').innerHTML;
                     var ContactNo = document.getElementById('SPContactNo').innerHTML;
+                    var Visible = document.getElementById('SPVisible').innerHTML;
                   //  var Status = document.getElementById('SPStatus').innerHTML;
                 }
                 catch (ex) {
@@ -281,7 +286,7 @@
                     var ContactPerson = document.getElementById('ContactPerson' + PervID).childNodes[0].innerHTML;
                     var Designation = document.getElementById('Designation' + PervID).childNodes[0].innerHTML;
                     var ContactNo = document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML;
-                    
+                    var Visible = document.getElementById('Visible' + PervID).childNodes[0].innerHTML;
                 }
                 document.getElementById('Brand' + PervID).childNodes[0].innerHTML = Brand;
                 document.getElementById('Name' + PervID).childNodes[0].innerHTML = Name;
@@ -289,6 +294,7 @@
                 document.getElementById('ContactPerson' + PervID).childNodes[0].innerHTML = ContactPerson;
                 document.getElementById('Designation' + PervID).childNodes[0].innerHTML = Designation;
                 document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML = ContactNo;
+                document.getElementById('Visible' + PervID).childNodes[0].innerHTML = Visible;
                 document.getElementById('button' + PervID).innerHTML = "<a href='javascript:EditRecord(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Edit' ><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + PervID + "' href='javascript:Delete(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
             }
             var html = "";
@@ -298,6 +304,7 @@
             var ContactPerson = document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML;
             var Designation = document.getElementById('Designation' + Id).childNodes[0].innerHTML;
             var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
+            var Visible = document.getElementById('Visible' + Id).childNodes[0].innerHTML;
 
             var SubCategoryId = $("#SID" + Id)[0].innerText;
             document.getElementById('Brand' + Id).childNodes[0].innerHTML = "<select id='InBrand" + Id + "'  class='form-control' onclick='BindItemName(null," + Id + ")'><option>" + Brand + "</option></select><span class='none' id='SPBrand'>" + Brand + "</span>";  //onkeypress='return isCharacter(event)'
@@ -306,6 +313,7 @@
             document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactPerson" + Id + "'   value='" + ContactPerson + "' /><span class='none' id='SPContactPerson'>" + ContactPerson + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Designation' + Id).childNodes[0].innerHTML = "<select id='InDesignation" + Id + "' class='form-control'><option>" + Designation + "</option></select> <span class='none' id='SPDesignation'>" + Designation + "</span>";
             document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('Visible' + Id).childNodes[0].innerHTML = "<select id='InVisible" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPName'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('button' + Id).innerHTML = "<a href='javascript:UpdateRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Update' ><img src='../images/right.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:CancelRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Cancel'><img src='../images/cancel.png' class='CancelClick'/>&nbsp;</a>";
             
             
@@ -319,6 +327,14 @@
                 var strUser = ddlbrand.options[j].innerHTML;
                 if (strUser.trim() == Brand.trim()) {
                     ddlbrand.options[j].selected = true;
+                    break;
+                }
+            }
+            var ddlvisible = document.getElementById('InVisible' + Id);
+            for (var j = 0; j < ddlvisible.length; j++) {
+                var strUser = ddlvisible.options[j].innerHTML;
+                if (strUser.trim() == Visible.trim()) {
+                    ddlvisible.options[j].selected = true;
                     break;
                 }
             }
@@ -392,7 +408,11 @@
             var AreaName = $("#InAreaName" + Id).val();
             var ContactPerson = $("#InContactPerson" + Id).val();
             var ContactNo = $("#InContactNo" + Id).val();
-
+            var Visible = $("#InVisible" + Id).val();
+            var EmpId = '<%= Session["EmpId"] %>';
+            if (Visible == "" || Visible == "Select") {
+                error += "Please select.</br>";
+            }
             if (ItemName == "" ) {
                 error += "Please Enter Name.</br>";
             }
@@ -425,7 +445,7 @@
                 $.ajax({
                     type: "POST",
                     url: "SubCategoryMapping.aspx/UpdateRecord",
-                    data: "{Id: '" + Id + "',ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation +"'}",
+                    data: "{Id: '" + Id + "',ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',Visible:'" + Visible + "',ModifiedDate:'" + EmpId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,
@@ -524,11 +544,11 @@
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
             <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                 <div class="page-header pull-left">
-                    <div class="page-title"><b>Sub Category Mapping</b></div>
+                    <div class="page-title"><b>Brand Person Mapping</b></div>
                 </div>
                 <ol class="breadcrumb page-breadcrumb pull-right">
                     <li><i class="fa fa-home"></i>&nbsp;<a href="<%=ConfigurationManager.AppSettings["url"] %>Report/DataReport.aspx">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                    <li class="active">Sub Category Mapping</li>
+                    <li class="active">Brand Person Mapping</li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
@@ -555,7 +575,7 @@
                               
                             
                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
-								<label>Sub Category Name</label>
+								<label>Product Name</label>
 								<select class="form-control" name="IName" id="IName">
 									</select>
 							</div>
@@ -577,6 +597,15 @@
                               <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Contact No</label>
 								<input type="text" id="contactno" name="contactno"  placeholder="CONTACT NO" class=" form-control"  />
+							</div>
+                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Visible</label>
+								<%--<input type="text" id="visible" name="visible"  placeholder="visible" class=" form-control"  />--%>
+                                  <select class="form-control" name="visible" id="visible">
+                                      <option value="">Select</option>
+                                      <option value="Y">YES</option>
+                                      <option value="N">NO</option>
+									</select>
 							</div>
                             	
 							<!-- Button -->

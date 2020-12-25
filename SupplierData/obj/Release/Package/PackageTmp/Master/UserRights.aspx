@@ -80,7 +80,7 @@
                                 searchPlaceholder: "Search"
                             },
                             "sorting": false,
-                            "scrollY": "550px",
+                           // "scrollY": "550px",
                             "bPaginate": false, //Pagging not display
                             "bFilter": false
                         });
@@ -92,7 +92,7 @@
         function UpdateUserRight() {
             var Id = $("#UserName").val();
             var FID, Fname = "";
-           
+            var EmpId = '<%= Session["EmpId"] %>';
             var FormArray1 = new Array();
             debugger
             var j = 0;
@@ -112,7 +112,7 @@
             $.ajax({
                 type: "POST",
                 url: "UserRights.aspx/UpdateData",
-                data: "{Edit:'" + testjsondept + "',UserId:'"+ Id +"'}",
+                data: "{Edit:'" + testjsondept + "',UserId:'" + Id + "',CreatedBy:'" + EmpId +"'}",
                 contentType: "application/json; charset=utf-8",
                 global: false,
                 async: false,
@@ -190,7 +190,7 @@
 						<div class="col-lg-6 col-lg-offset-3 col-xs-12 overflowauto" id="DivPageName"></div>                                          
                     
                 </div>
-                    <div class="col-lg-1 col-md-3 col-sm-3 col-xs-6">
+                    <div  class="row mrgt30">
 							<button type="button" class="btn btn-save hidden" data-toggle="tooltip" title="Update" id="update" onclick="UpdateUserRight();">UPDATE</button>
 						</div>
 				<!-- /Form Layouts -->

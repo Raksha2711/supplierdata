@@ -215,13 +215,13 @@
         //var SType = $("#SType option:selected").html();
         var Brand = $("#BName").val();
         var SubCategory = $("#IName").val();
-       
+        var EmpId = '<%= Session["EmpId"] %>';
         SType = SType.replace("&amp;", "&");
         if (Name != "" && SType != ""  ) {
             $.ajax({
                 type: "POST",
                 url: "SupplierMapping.aspx/SupplierInsert",
-                data: "{Name:'" + Name + "',Type:'" + SType + "',Brand:'" + Brand + "',SubCategory:'" + SubCategory+"'}",
+                data: "{Name:'" + Name + "',Type:'" + SType + "',Brand:'" + Brand + "',SubCategory:'" + SubCategory + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -350,6 +350,7 @@
             var Brand = $("#InBrand" + Id).val();
             var SubCategory = $("#InSubCategory" + Id).val();
             var Type = $("#InType" + Id).val();
+            var EmpId = '<%= Session["EmpId"] %>';
             if (Name == "") {
                 error += "Please Enter Name.</br>";
             }
@@ -375,7 +376,7 @@
                 $.ajax({
                     type: "POST",
                     url: "SupplierMapping.aspx/UpdateRecord",
-                    data: "{Id: '" + Id + "',Name: '" + Name + "',Brand: '" + Brand + "',SubCategory :'" + SubCategory + "',Type:'" + Type +"'}",
+                    data: "{Id: '" + Id + "',Name: '" + Name + "',Brand: '" + Brand + "',SubCategory :'" + SubCategory + "',Type:'" + Type + "',ModifiedBy:'" + EmpId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,

@@ -92,7 +92,7 @@
         function UpdateUserRight() {
             var Id = $("#UserName").val();
             var FID, Fname = "";
-           
+            var EmpId = '<%= Session["EmpId"] %>';
             var FormArray1 = new Array();
             debugger
             var j = 0;
@@ -112,7 +112,7 @@
             $.ajax({
                 type: "POST",
                 url: "UserRights.aspx/UpdateData",
-                data: "{Edit:'" + testjsondept + "',UserId:'"+ Id +"'}",
+                data: "{Edit:'" + testjsondept + "',UserId:'" + Id + "',CreatedBy:'" + EmpId +"'}",
                 contentType: "application/json; charset=utf-8",
                 global: false,
                 async: false,
@@ -161,12 +161,15 @@
 						<form id="userregi" name="userregi">
 							
                               
-                              <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
-								<label>User Name</label>
+                              <div class="col-lg-5 col-md-4 col-sm-3 col-xs-6 mrgt7" style="text-align:right">
+								<label>User Name : </label>
+								  
+							</div>
+                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								
 								  <select class="form-control" name="UserName" id="UserName">
 									</select>
 							</div>
-
                               <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 
 								<button type="button" class="btn btn-save" data-toggle="tooltip" title="display" id="display" onclick="DisplayData();">SEARCH</button>
@@ -191,7 +194,9 @@
                     
                 </div>
                     <div  class="row mrgt30">
+                        <div class="col-lg-8 col-lg-offset-3 col-xs-12">
 							<button type="button" class="btn btn-save hidden" data-toggle="tooltip" title="Update" id="update" onclick="UpdateUserRight();">UPDATE</button>
+                            </div>
 						</div>
 				<!-- /Form Layouts -->
 			</div>
