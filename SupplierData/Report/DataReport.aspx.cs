@@ -183,15 +183,12 @@ namespace SupplierData.Report
             string result = "";
             try
             {
-                //connection.con();
                 ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
                 using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
                 {
                     cn.Open();
                     SqlCommand cmd = new SqlCommand("BindSupplierName", cn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    //cmd.Parameters.AddWithValue("@BId", DBNull.Value);
-                    //cmd.Parameters.AddWithValue("@Type", "R");
                     SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
                     DataSet ds = new DataSet();
                     da.Fill(ds);
@@ -215,16 +212,13 @@ namespace SupplierData.Report
             string result = "";
             try
             {
-               // SupplierId = SupplierId.Replace( "&", "&amp;");
                 ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
                 using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
                 {
                     cn.Open();
                     SqlCommand cmd = new SqlCommand("SL_DataReport", cn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    
                     cmd.Parameters.AddWithValue("@ItemId", ItemId);
-                    //cmd.Parameters.AddWithValue("@CategoryId", CategoryId);
                     cmd.Parameters.AddWithValue("@BrandId", BrandId);
                     cmd.Parameters.AddWithValue("@SupplierId", SupplierId);
                     cmd.Parameters.AddWithValue("@SupplierType", SupplierType);
