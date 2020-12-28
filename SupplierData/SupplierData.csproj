@@ -983,6 +983,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EncryptDecrypt.cs" />
+    <Compile Include="ErrorLog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

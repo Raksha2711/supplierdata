@@ -152,7 +152,7 @@
                         "<th><a class='white' data-toggle='tooltip' title='Brand'>Brand</a></th>" +
                         "<th><a  class='white' data-toggle='tooltip' title='WebSite'>WebSite</a></th>" +
                         "<th><a  class='white' data-toggle='tooltip' title='TollFreeNo'>TollFreeNo</a></th>" +
-                        "<th><a class='white' data-toggle='tooltip' title='Sub Category Name'>Sub Category Name</a></th>" +
+                        "<th><a class='white' data-toggle='tooltip' title='Sub Category Name'>Product Name</a></th>" +
                         "<th><a class='white' data-toggle='tooltip' title='Supplier Name'>Supplier Name</a></th>" +
                         "<th><a class='white' data-toggle='tooltip' title='Supplier Type'>Supplier Type</a></th>" +
                         "<th><a class='white' data-toggle='tooltip' title='Area'>Area</a></th>" +

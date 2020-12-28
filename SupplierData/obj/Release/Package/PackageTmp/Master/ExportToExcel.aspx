@@ -143,12 +143,12 @@
                 success: function (data) {
                     var SList = jQuery.parseJSON(data.d);
                     $("#example").empty();
-                    $("#example").append(
-                        '<thead></thead>' +
-                        '<tbody></tbody>' +
-                        '</table>');
+                    //$("#example").append(
+                    //    '<thead></thead>' +
+                    //    '<tbody></tbody>' +
+                    //    '</table>');
                     var html = "";
-                    $("#example thead").append('<tr>' +
+                    $("#example").append('<thead><tr>' +
                         '<th><a class="white" data-toggle="tooltip" title="Supplier Name">SupplierName</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Address</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Pincode</a></th>' +
@@ -156,9 +156,8 @@
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">MobileNo</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">ContactPerson2</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">MobileNo2</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Email </a></th>' +
-                       
-                        '</tr>');
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Email </a></th></thead>' +
+                        '</tr><tbody>');
 
                     for (var i = 0; i < SList.length; i++) {
                         html += ("<tr><td id='Name" + SList[i].Id + "'><a  data-toggle='tooltip' title='" + SList[i].Name + "'>" + SList[i].Name + "</a></td>" +
@@ -171,25 +170,26 @@
                             "<td id='EmailId" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].EmailId + "'>" + SList[i].EmailId + "</a></td></tr>"); 
                        
                     }
-                    $("#example tbody").append(html);
+                    html += "</tbody></table>";
+                    $("#example").append(html);
                     $('#example').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportSupplierData'
+                                filename: 'ExportSupplierData1'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportSupplierData'
+                                filename: 'ExportSupplierData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportSupplierData'
+                                filename: 'ExportSupplierData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportSupplierData'
+                                filename: 'ExportSupplierData'
                             },
                         ]
                     });
@@ -221,7 +221,6 @@
                         '<th><a class="white" data-toggle="tooltip" title="Status">TollFreeNo</a></th></tr>');
 
                     for (var i = 0; i < BrandList.length; i++) {
-
                         html += ("<tr><td id='Name" + BrandList[i].Id + "'><a  data-toggle='tooltip' title='" + BrandList[i].Name + "'>" + BrandList[i].Name + "</a></td> <td id='Website" + BrandList[i].Id + "'><a data-toggle='tooltip' title='" + BrandList[i].Website + "'>" + BrandList[i].Website + "</a></td><td id='TollFreeNo" + BrandList[i].Id + "'><a data-toggle='tooltip' title='" + BrandList[i].TollFreeNo + "'>" + BrandList[i].TollFreeNo + "</a></td></tr>");
                     }
 
@@ -231,19 +230,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportBrandData'
+                                filename: 'ExportBrandData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportBrandData'
+                                filename: 'ExportBrandData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportBrandData'
+                                filename: 'ExportBrandData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportBrandData'
+                                filename: 'ExportBrandData'
                             },
                         ]
                     });
@@ -284,19 +283,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportStateData'
+                                filename: 'ExportStateData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportStateData'
+                                filename: 'ExportStateData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportStateData'
+                                filename: 'ExportStateData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportStateData'
+                                filename: 'ExportStateData'
                             },
                         ]
                     });
@@ -339,19 +338,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportSupplierTypeData'
+                                filename: 'ExportSupplierTypeData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportSupplierTypeData'
+                                filename: 'ExportSupplierTypeData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportSupplierTypeData'
+                                filename: 'ExportSupplierTypeData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportSupplierTypeData'
+                                filename: 'ExportSupplierTypeData'
                             },
                         ]
                     });
@@ -388,19 +387,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportVerticalData'
+                                filename: 'ExportVerticalData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportVerticalData'
+                                filename: 'ExportVerticalData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportVerticalData'
+                                filename: 'ExportVerticalData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportVerticalData'
+                                filename: 'ExportVerticalData'
                             },
                         ]
                     });
@@ -443,19 +442,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                         ]
                     });
@@ -501,19 +500,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportDesignationData'
+                                filename: 'ExportDesignationData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportDesignationData'
+                                filename: 'ExportDesignationData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportDesignationData'
+                                filename: 'ExportDesignationData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportDesignationData'
+                                filename: 'ExportDesignationData'
                             },
                         ]
                     });
@@ -563,19 +562,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportServiceData'
+                                filename: 'ExportServiceData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportServiceData'
+                                filename: 'ExportServiceData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportServiceData'
+                                filename: 'ExportServiceData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportServiceData'
+                                filename: 'ExportServiceData'
                             },
                         ]
                     });
@@ -622,19 +621,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportProductData'
+                                filename: 'ExportProductData'
                             },
                         ]
                     });
@@ -687,19 +686,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportBrandPerson'
+                                filename: 'ExportBrandPerson'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportBrandPerson'
+                                filename: 'ExportBrandPerson'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportBrandPerson'
+                                filename: 'ExportBrandPerson'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportBrandPerson'
+                                filename: 'ExportBrandPerson'
                             },
                         ]
                     });
@@ -748,19 +747,19 @@
                         buttons: [
                             {
                                 extend: 'excelHtml5',
-                                title: 'ExportSupplierMapping'
+                                filename: 'ExportSupplierMapping'
                             },
                             {
                                 extend: 'copyHtml5',
-                                title: 'ExportSupplierMapping'
+                                filename: 'ExportSupplierMapping'
                             },
                             {
                                 extend: 'csvHtml5',
-                                title: 'ExportSupplierMapping'
+                                filename: 'ExportSupplierMapping'
                             },
                             {
                                 extend: 'pdfHtml5',
-                                title: 'ExportSupplierMapping'
+                                filename: 'ExportSupplierMapping'
                             },
                         ]
                     });
