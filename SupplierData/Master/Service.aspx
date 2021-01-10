@@ -222,11 +222,13 @@
             //if (Email == "") {
             //    error += "Please Enter EmailId.</br>";
             //}
-            if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(Email)) {
+            if (Email != "") {
+                if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(Email)) {
 
-            }
-            else {
-                error += "Please Enter Valid EmailId.</br>";
+                }
+                else {
+                    error += "Please Enter Valid EmailId.</br>";
+                }
             }
             if (Area == "") {
                 error += "Please Enter Area.</br>";

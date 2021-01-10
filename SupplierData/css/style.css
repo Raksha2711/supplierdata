@@ -5,6 +5,7 @@
 	#topbar .navbar-top-links ul.dropdown-alerts li a:focus {
 	  background: #edeef0 !important;
 	}
+
 	.notificationimg{
     min-width: 400px;
 	background: url("../images/tag.png") no-repeat;
