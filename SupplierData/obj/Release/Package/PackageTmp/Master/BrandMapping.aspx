@@ -1,5 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="BrandMapping.aspx.cs" Inherits="SupplierData.Master.BrandMapping" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .mycheckbox input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        .checkbox-grid li {
+            display: block;
+            float: left;
+            width: 25%;
+        }
+        input.largerCheckbox { 
+            width: 18px; 
+            height: 18px; 
+        }
+    </style>
     <script type="text/javascript">
         function fnneutral() {
         }
@@ -8,8 +22,9 @@
             BindBrandName();
             BindSubCategoryName();
             GetBrandMapping();
-       
+            
         };
+       
         function BindBrandName() {
             
             debugger
@@ -27,9 +42,7 @@
                     $('#BName').empty();
                     html += '<option id="optcname" value="">Select</option>';
                     $.each(obj, function (key, value) {
-                       
                             html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
-                       
                     });
                     $('#BName').append(html);
                     //$('#BName').multiselect('rebuild');
@@ -48,12 +61,13 @@
                 success: function (data) {
                     var obj = jQuery.parseJSON(data.d);
                     var html = "";
-                    $('#CName').empty();
-                    html += '<option id="optcname" value="">Select</option>';
+                    $('#divCB').empty();
+                    html += '<ul class="checkbox-grid">';
                     $.each(obj, function (key, value) {
-                        html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+                        html += '<li><input type="checkbox" name="Items[]" class="largerCheckbox"  value=' + value.Id +' > ' + value.Name + '</input></li>';//'<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
                     });
-                    $('#CName').append(html);
+                    html += "</ul>";
+                    $('#divCB').append(html);
                 }
             });
         }
@@ -112,12 +126,32 @@
 
     function SaveItemData() {
         debugger
-        var ItemName = $("#CName").val();
-        //var CId = $("#CName").val();
+        var error = "";
         var Brand = $("#BName").val();
         var EmpId = '<%= Session["EmpId"] %>';
-
-        if (ItemName != "" &&  Brand != "Select" && Brand != "" ) {
+        var checkboxes = document.getElementsByName('Items[]');
+        var ItemName = "";
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            if (checkboxes[i].checked) {
+                ItemName += "," + checkboxes[i].value;
+            }
+        }
+        if (ItemName) ItemName = ItemName.substring(1);
+        if (ItemName == "") {
+            error += "Select Product."
+        }
+        if (Brand == "" || Brand == "Select") {
+            error += "Select Brand."
+        }
+        if (error != "") {
+            Lobibox.notify('error', {
+                delay: 2000,
+                size: 'mini',
+                icon: false,
+                msg: error
+            });
+        }
+        if (ItemName != "" && Brand != "Select" && Brand != "" && error == "") {
             $.ajax({
                 type: "POST",
                 url: "BrandMapping.aspx/ItemInsert",
@@ -141,6 +175,7 @@
                             msg: 'Data Inserted Succesfully.'
                         });
                         GetBrandMapping();
+
                     }
                     else {
                         Lobibox.notify('error', {
@@ -152,7 +187,13 @@
                     }
                    
                    
-                    $("#CName").val('');
+                    //$("#CName").val('');
+                    var checkboxes = document.getElementsByName('Items[]');
+                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                        if (checkboxes[i].checked) {
+                            checkboxes[i].checked = false;
+                        }
+                    }
                     $("#BName").val('');
 
                 }
@@ -377,7 +418,7 @@
             });
         }
 
-</script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <div id="page-wrapper">
@@ -401,32 +442,29 @@
 					<div class="row bg-aliceblue pdb15" id="search">
 						<form id="userregi" name="userregi">
 							
-                              
+                              <div class="row mrgt30">
                               
                               <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Brand</label>
 								  <select class="form-control" name="BName" id="BName">
 									</select>
 							</div>
-                              <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+                              <div class="col-lg-8 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Product Name</label>
-								  <select class="form-control" name="CName" id="CName">
-									</select>
+								  <div  id="divCB">
+                                </div>
 							</div>
                             
-                           <%-- <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
-								<label>Sub Category Name</label>
-								<input type="text" id="item" name="item"  placeholder="ITEM NAME" class=" form-control"  />
-							</div>--%>
                           
-                            <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
-							
+                          
                             	
 							<!-- Button -->
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">
 								<button type="button" class="btn btn-blue btn-square mrgr7" data-toggle="tooltip" title="Save" id="save" onclick="SaveItemData();">ADD</button>
 								<a href="#"><img src="<%=ConfigurationManager.AppSettings["url"] %>images/excel.png" class="mrgr7" data-toggle="tooltip" title="Export To Excel" onclick="OpenExcel();" /></a> 
 							</div>
+                                  </div>
+                            
 							<!-- /Button -->
 						</form>
 					</div>
@@ -462,3 +500,4 @@
 			<!--END PAGE-CONTENT-->
 		</div>
 </asp:Content>
+

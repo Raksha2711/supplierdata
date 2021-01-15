@@ -26,6 +26,36 @@ namespace SupplierData.Master
 
         }
         [System.Web.Services.WebMethod]
+        public static string BindStaffName()
+        {
+            string result = "";
+            try
+            {
+                //connection.con();
+                ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                {
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("BindStaff", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    result = JsonConvert.SerializeObject(ds.Tables[0]);
+                    cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                // ErrorLog.CreateLog("FrmAdminMailData.aspx.cs", ex.Message + " " + "Line No. 45. Please contact to Administrator.", DateTime.Now, "");
+            }
+            finally
+            {
+                //connection.cn.Close();
+            }
+            return result;
+        }
+        [System.Web.Services.WebMethod]
         public static string BindDesignation()
         {
             string result = "";
@@ -168,7 +198,9 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@ContactPerson", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Designation", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Visible", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleD", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleN", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleE", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -191,7 +223,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string ItemInsert(string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo,string Designation,string Visible,string CreatedBy)
+        public static string ItemInsert(string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo,string Designation,string VisibleD,string VisibleN,string VisibleE,string CreatedBy)
         {
             string i = "";
             try
@@ -211,7 +243,9 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@ContactPerson", ContactPerson);
                     cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
                     cmd.Parameters.AddWithValue("@Designation", Designation);
-                    cmd.Parameters.AddWithValue("@Visible", Visible);
+                    cmd.Parameters.AddWithValue("@VisibleD", VisibleD);
+                    cmd.Parameters.AddWithValue("@VisibleN", VisibleN);
+                    cmd.Parameters.AddWithValue("@VisibleE", VisibleE);
                     cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -231,7 +265,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id,string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo, string Designation,string Visible,string ModifiedBy)
+        public static string UpdateRecord(string Id,string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo, string Designation,string VisibleD,string VisibleN,string VisibleE,string ModifiedBy)
         {
             string i = "";
             try
@@ -251,7 +285,9 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@ContactPerson", ContactPerson);
                     cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
                     cmd.Parameters.AddWithValue("@Designation", Designation);
-                    cmd.Parameters.AddWithValue("@Visible", Visible);
+                    cmd.Parameters.AddWithValue("@VisibleD", VisibleD);
+                    cmd.Parameters.AddWithValue("@VisibleN", VisibleN);
+                    cmd.Parameters.AddWithValue("@VisibleE", VisibleE);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -290,7 +326,9 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@ContactPerson", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Designation", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Visible", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleD", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleN", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleE", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);

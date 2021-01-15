@@ -59,18 +59,7 @@ success: function (data) {
                 "<td id='Mobile2" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Mobile2 + "'>" + SList[i].Mobile2 + "</a></td>" +
                 "<td id='EmailId" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].EmailId + "'>" + SList[i].EmailId + "</a></td>" +
                 "<td id='button" + SList[i].Id + "'><a href='javascript:EditRecord(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + SList[i].Id + "' href='javascript:Delete(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></tr>");
-        //}
-        //else {
-        //    html += ("<tr><td id='Name" + SList[i].Id + "'><a  data-toggle='tooltip' title='" + SList[i].Name + "'>" + SList[i].Name + "</a></td>" +
-        //        "<td id='Address" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Address + "'>" + SList[i].Address + "</a></td>" +
-        //        "<td id='Pincode" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Pincode + "'>" + SList[i].Pincode + "</a></td>" +
-        //        "<td id='ContactPerson1" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].ContactPerson1 + "'>" + SList[i].ContactPerson1 + "</a></td>" +
-        //        "<td id='Mobile1" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Mobile1 + "'>" + SList[i].Mobile1 + "</a></td>" +
-        //        "<td id='ContactPerson2" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].ContactPerson2 + "'>" + SList[i].ContactPerson2 + "</a></td>" +
-        //        "<td id='Mobile2" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Mobile2 + "'>" + SList[i].Mobile2 + "</a></td>" +
-        //        "<td id='EmailId" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].EmailId + "'>" + SList[i].EmailId + "</a></td>" +
-        //        "<td class='hidden' id='Status" + SList[i].Id + "'><a  data-toggle='tooltip' title='" + SList[i].Status + "'>" + SList[i].Status + "</a></td><td  class='hidden' id='button" + SList[i].Id + "'><a href='javascript:EditRecord(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;<a id='deleteanchor" + SList[i].Id + "' />&nbsp;</a></td></tr>");
-        //}
+        
     }
     $("#tblSupplierMaster tbody").append(html);
     $('#tblSupplierMaster').dataTable({
@@ -110,12 +99,13 @@ var Name = $("#name").val();
         error += "Please Enter Mobile1.</br>";
 
     }
-    
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(Email)) {
+    if (Email != "") {
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(Email)) {
 
-    }
-    else {
-        error += "Please Enter Valid EmailId.</br>";
+        }
+        else {
+            error += "Please Enter Valid EmailId.</br>";
+        }
     }
     if (error.trim() != "") {
         Lobibox.notify('error', {

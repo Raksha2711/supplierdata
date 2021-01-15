@@ -63,9 +63,62 @@
             else if (params == "DATAREPORT") {
                 GetBrandDataReport();
             }
+            else if (params == "STAFF") {
+                GetStaff();
+            }
             else {
             }
         });
+        function GetStaff() {
+            var html = "";
+            $.ajax({
+                type: "POST",
+                url: "ExportToExcel.aspx/GetstaffData",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    debugger
+                    var BrandList = jQuery.parseJSON(data.d);
+                    var html = "";
+                    $("#example").append('<thead><tr>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Name"> Name</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Contact">Contact No</a></th>' +
+                        '<th><a class="white" data-toggle="tooltip" title="Email">Email</a></th>' +
+                        
+                        '</tr></thead><tbody>');
+                    for (var i = 0; i < BrandList.length; i++) {
+                        html += ("<tr><td id='Name" + BrandList[i].Id + "'><a  data-toggle='tooltip' title='" + BrandList[i].Name + "'>" + BrandList[i].Name + "</a></td><td id='ContactNo" + BrandList[i].Id + "'><a  data-toggle='tooltip' title='" + BrandList[i].ContactNo + "'>" + BrandList[i].ContactNo + "</a></td> <td id='Email" + BrandList[i].Id + "'><a data-toggle='tooltip' title='" + BrandList[i].Email + "'>" + BrandList[i].Email + "</a></td></tr></tbody>");
+                    }
+
+                    $("#example").append(html);
+                    $('#example').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'excelHtml5',
+                                filename: 'ExportPersonData'
+                            },
+                            {
+                                extend: 'copyHtml5',
+                                filename: 'ExportPersonData'
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                filename: 'ExportPersonData'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                filename: 'ExportPersonData'
+                            },
+                        ]
+                    });
+
+
+                }
+
+            });
+        }
         function GetBrandDataReport() {
             debugger
             var ItemId = $("#IName").val();
@@ -768,7 +821,7 @@
             });
         }
 
-        </script>
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">

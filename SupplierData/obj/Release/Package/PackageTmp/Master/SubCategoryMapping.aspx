@@ -8,7 +8,42 @@
         BindBrandName(null);
         BindArea(null);
         BindDesignation(null);
+        BindStaffName(null);
         };
+        function BindStaffName(Id) {
+
+            debugger
+            $.ajax({
+                type: "POST",
+                url: "SubCategoryMapping.aspx/BindStaffName",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                global: false,
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    var obj = jQuery.parseJSON(data.d);
+                    var html = "";
+                    if (Id == "" || Id == null) {
+                        $('#SName').empty();
+                        html += '<option id="optcname" value="">Select</option>';
+                        $.each(obj, function (key, value) {
+                            html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+                        });
+                        $('#SName').append(html);
+                    }
+                    else {
+                        $('#InContactPerson' + Id).empty();
+                        html += '<option id="optcname" value="">Select</option>';
+                        $.each(obj, function (key, value) {
+                            html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+                        });
+                        $('#InContactPerson' + Id).append(html);
+                    }
+                    //$('#BName').multiselect('rebuild');
+                }
+            });
+        }
         function BindDesignation(Id) {
             $.ajax({
                 type: "POST",
@@ -167,7 +202,9 @@
                     '<th><a class="white" data-toggle="tooltip" title="Executve Name">Executive Person</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Designation">Designation</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Contact No">Contact No</a></th>' +
-                    '<th><a class="white" data-toggle="tooltip" title="Visible">Visible</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Desg</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Contact</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Email</a></th>' +
                     '<th class="hidden"><a class="white" data-toggle="tooltip" title="Status">Status</a></th>' +
                     '<th data-orderable="false" ><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
                     '</tr>');
@@ -179,7 +216,9 @@
                             "<td id='AreaName" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].AreaName + "'>" + ItemList[i].AreaName + "</a></td><td id='ContactPerson" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactPerson + "'>" + ItemList[i].ContactPerson + "</a></td>" +
                             "<td id='Designation" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Designation + "'>" + ItemList[i].Designation + "</a></td>" +
                         "<td id='ContactNo" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactNo + "'>" + ItemList[i].ContactNo + "</a></td>" +
-                        "<td id='Visible" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Visible + "'>" + ItemList[i].Visible + "</a></td>" +
+                        "<td id='VisibleD" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleD + "'>" + ItemList[i].VisibleD + "</a></td>" +
+                        "<td id='VisibleN" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleN + "'>" + ItemList[i].VisibleN + "</a></td>" +
+                        "<td id='VisibleE" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleE + "'>" + ItemList[i].VisibleE + "</a></td>" +
                         "<td class='hidden'  id='Status" + ItemList[i].Id + "'><a  data-toggle='tooltip' title='" + ItemList[i].Status + "'>" + ItemList[i].Status + "</a></td><td   id='button" + ItemList[i].Id + "'><a href='javascript:EditRecord(&apos;" + ItemList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + ItemList[i].Id + "' href='javascript:Delete(&apos;" + ItemList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></td></tr>");
                     //}
                     //else {
@@ -211,16 +250,19 @@
         var ItemName = $("#IName").val();
         var Designation = $("#DName").val();
         var Brand = $("#BName").val();
+        var ContactPerson = $("#SName").val();
         var AreaName = $("#AreaName").val();
-        var ContactPerson = $("#contactperson").val();
+        //var ContactPerson = $("#contactperson").val();
         var ContactNo = $("#contactno").val();
-        var Visible = $("#visible").val();
+        var VisibleD = $("#visibleD").val();
+        var VisibleN = $("#visibleN").val();
+        var VisibleE = $("#visibleE").val();
         var EmpId = '<%= Session["EmpId"] %>';
-        if (ItemName != "" && Brand != "Select" && Brand != "" && AreaName != "" && AreaName != "Select" && ContactPerson != "" && ContactNo != "" && Designation != "" && Visible != "" && Visible != "Select") {
+        if (ItemName != "" && Brand != "Select" && Brand != "" && AreaName != "" && AreaName != "Select" && ContactPerson != "" && Designation != "" && VisibleD != "" && VisibleD != "Select" && VisibleE != "" && VisibleE != "Select" && VisibleN != "" && VisibleN != "Select") {
             $.ajax({
                 type: "POST",
                 url: "SubCategoryMapping.aspx/ItemInsert",
-                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',Visible:'" + Visible + "',CreatedBy:'" + EmpId + "'}",
+                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',VisibleD:'" + VisibleD + "',VisibleN:'" + VisibleN + "',VisibleE:'" + VisibleE + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -257,7 +299,9 @@
                     $("#DName").val('');
                     $("#BName").val('');
                     $("#IName").val('');
-                    $("#visible").val('');
+                    $("#visibleD").val('');
+                    $("#visibleN").val('');
+                    $("#visibleE").val('');
                 }
             });
 
@@ -276,7 +320,9 @@
                     var ContactPerson = document.getElementById('SPContactPerson').innerHTML;
                     var Designation = document.getElementById('SPDesignation').innerHTML;
                     var ContactNo = document.getElementById('SPContactNo').innerHTML;
-                    var Visible = document.getElementById('SPVisible').innerHTML;
+                    var VisibleD = document.getElementById('SPVisibleD').innerHTML;
+                    var VisibleN = document.getElementById('SPVisibleN').innerHTML;
+                    var VisibleE = document.getElementById('SPVisibleE').innerHTML;
                   //  var Status = document.getElementById('SPStatus').innerHTML;
                 }
                 catch (ex) {
@@ -286,7 +332,9 @@
                     var ContactPerson = document.getElementById('ContactPerson' + PervID).childNodes[0].innerHTML;
                     var Designation = document.getElementById('Designation' + PervID).childNodes[0].innerHTML;
                     var ContactNo = document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML;
-                    var Visible = document.getElementById('Visible' + PervID).childNodes[0].innerHTML;
+                    var VisibleD = document.getElementById('VisibleD' + PervID).childNodes[0].innerHTML;
+                    var VisibleN = document.getElementById('VisibleN' + PervID).childNodes[0].innerHTML;
+                    var VisibleE = document.getElementById('VisibleE' + PervID).childNodes[0].innerHTML;
                 }
                 document.getElementById('Brand' + PervID).childNodes[0].innerHTML = Brand;
                 document.getElementById('Name' + PervID).childNodes[0].innerHTML = Name;
@@ -294,7 +342,9 @@
                 document.getElementById('ContactPerson' + PervID).childNodes[0].innerHTML = ContactPerson;
                 document.getElementById('Designation' + PervID).childNodes[0].innerHTML = Designation;
                 document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML = ContactNo;
-                document.getElementById('Visible' + PervID).childNodes[0].innerHTML = Visible;
+                document.getElementById('VisibleD' + PervID).childNodes[0].innerHTML = VisibleD;
+                document.getElementById('VisibleN' + PervID).childNodes[0].innerHTML = VisibleN;
+                document.getElementById('VisibleE' + PervID).childNodes[0].innerHTML = VisibleE;
                 document.getElementById('button' + PervID).innerHTML = "<a href='javascript:EditRecord(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Edit' ><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + PervID + "' href='javascript:Delete(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
             }
             var html = "";
@@ -304,24 +354,36 @@
             var ContactPerson = document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML;
             var Designation = document.getElementById('Designation' + Id).childNodes[0].innerHTML;
             var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
-            var Visible = document.getElementById('Visible' + Id).childNodes[0].innerHTML;
+            var VisibleD = document.getElementById('VisibleD' + Id).childNodes[0].innerHTML;
+            var VisibleN = document.getElementById('VisibleN' + Id).childNodes[0].innerHTML;
+            var VisibleE = document.getElementById('VisibleE' + Id).childNodes[0].innerHTML;
 
             var SubCategoryId = $("#SID" + Id)[0].innerText;
             document.getElementById('Brand' + Id).childNodes[0].innerHTML = "<select id='InBrand" + Id + "'  class='form-control' onclick='BindItemName(null," + Id + ")'><option>" + Brand + "</option></select><span class='none' id='SPBrand'>" + Brand + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Name' + Id).childNodes[0].innerHTML = "<select id='InName" + Id + "'  class='form-control' ><option value= " + SubCategoryId + ">" + Name + "</option></select><span class='none' id='SPName'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('AreaName' + Id).childNodes[0].innerHTML = "<select id='InAreaName" + Id + "' class='form-control' ><option>" + AreaName + "</option></select> <span class='none' id='SPAreaName'>" + AreaName + "</span>";
-            document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactPerson" + Id + "'   value='" + ContactPerson + "' /><span class='none' id='SPContactPerson'>" + ContactPerson + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML = "<select class='form-control' id='InContactPerson" + Id + "' ><option>" + ContactPerson + "</option></select><span class='none' id='SPContactPerson'>" + ContactPerson + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Designation' + Id).childNodes[0].innerHTML = "<select id='InDesignation" + Id + "' class='form-control'><option>" + Designation + "</option></select> <span class='none' id='SPDesignation'>" + Designation + "</span>";
             document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";  //onkeypress='return isCharacter(event)'
-            document.getElementById('Visible' + Id).childNodes[0].innerHTML = "<select id='InVisible" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPName'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('VisibleD' + Id).childNodes[0].innerHTML = "<select id='InVisibleD" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleD'>" + VisibleD + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('VisibleN' + Id).childNodes[0].innerHTML = "<select id='InVisibleN" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleN'>" + VisibleN + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('VisibleE' + Id).childNodes[0].innerHTML = "<select id='InVisibleE" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleE'>" + VisibleE + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('button' + Id).innerHTML = "<a href='javascript:UpdateRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Update' ><img src='../images/right.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:CancelRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Cancel'><img src='../images/cancel.png' class='CancelClick'/>&nbsp;</a>";
             
             
             BindBrandName(Id);
             EditBindArea(Id);
             BindDesignation(Id);
+            BindStaffName(Id);
             debugger
-        
+            var ddlstaff = document.getElementById('InContactPerson' + Id);
+            for (var j = 0; j < ddlstaff.length; j++) {
+                var strUser = ddlstaff.options[j].innerHTML;
+                if (strUser.trim() == ContactPerson.trim()) {
+                    ddlstaff.options[j].selected = true;
+                    break;
+                }
+            }
             var ddlbrand = document.getElementById('InBrand' + Id);
             for (var j = 0; j < ddlbrand.length; j++) {
                 var strUser = ddlbrand.options[j].innerHTML;
@@ -330,11 +392,27 @@
                     break;
                 }
             }
-            var ddlvisible = document.getElementById('InVisible' + Id);
-            for (var j = 0; j < ddlvisible.length; j++) {
-                var strUser = ddlvisible.options[j].innerHTML;
-                if (strUser.trim() == Visible.trim()) {
-                    ddlvisible.options[j].selected = true;
+            var ddlvisibleD = document.getElementById('InVisibleD' + Id);
+            for (var j = 0; j < ddlvisibleD.length; j++) {
+                var strUser = ddlvisibleD.options[j].innerHTML;
+                if (strUser.trim() == VisibleD.trim()) {
+                    ddlvisibleD.options[j].selected = true;
+                    break;
+                }
+            }
+            var ddlvisibleN = document.getElementById('InVisibleN' + Id);
+            for (var j = 0; j < ddlvisibleN.length; j++) {
+                var strUser = ddlvisibleN.options[j].innerHTML;
+                if (strUser.trim() == VisibleN.trim()) {
+                    ddlvisibleN.options[j].selected = true;
+                    break;
+                }
+            }
+            var ddlvisibleE = document.getElementById('InVisibleE' + Id);
+            for (var j = 0; j < ddlvisibleE.length; j++) {
+                var strUser = ddlvisibleE.options[j].innerHTML;
+                if (strUser.trim() == VisibleE.trim()) {
+                    ddlvisibleE.options[j].selected = true;
                     break;
                 }
             }
@@ -408,9 +486,11 @@
             var AreaName = $("#InAreaName" + Id).val();
             var ContactPerson = $("#InContactPerson" + Id).val();
             var ContactNo = $("#InContactNo" + Id).val();
-            var Visible = $("#InVisible" + Id).val();
+            var VisibleD = $("#InVisibleD" + Id).val();
+            var VisibleN = $("#InVisibleN" + Id).val();
+            var VisibleE = $("#InVisibleE" + Id).val();
             var EmpId = '<%= Session["EmpId"] %>';
-            if (Visible == "" || Visible == "Select") {
+            if (VisibleD == "" || VisibleD == "Select" || VisibleN == "" || VisibleN == "Select" || VisibleE == "" || VisibleE =="Select") {
                 error += "Please select.</br>";
             }
             if (ItemName == "" ) {
@@ -445,7 +525,7 @@
                 $.ajax({
                     type: "POST",
                     url: "SubCategoryMapping.aspx/UpdateRecord",
-                    data: "{Id: '" + Id + "',ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',Visible:'" + Visible + "',ModifiedDate:'" + EmpId + "'}",
+                    data: "{Id: '" + Id + "',ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',VisibleD:'" + VisibleD + "',VisibleN:'" + VisibleN + "',VisibleE:'" + VisibleE + "',ModifiedBy:'" + EmpId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,
@@ -537,7 +617,7 @@
                 }
             });
         }
-        </script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <div id="page-wrapper">
@@ -587,7 +667,9 @@
 							</div>
                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Excutive Name</label>
-								<input type="text" id="contactperson" name="contactperson"  placeholder="CONTACT" class=" form-control"  />
+                                <select class="form-control" name="SName" id="SName">
+									</select>
+								<%--<input type="text" id="contactperson" name="contactperson"  placeholder="CONTACT" class=" form-control"  />--%>
 							</div>
                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Designation</label>
@@ -598,16 +680,34 @@
 								<label>Contact No</label>
 								<input type="text" id="contactno" name="contactno"  placeholder="CONTACT NO" class=" form-control"  />
 							</div>
-                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
-								<label>Visible</label>
-								<%--<input type="text" id="visible" name="visible"  placeholder="visible" class=" form-control"  />--%>
-                                  <select class="form-control" name="visible" id="visible">
+                             <%--<div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Contact No</label>
+								<input type="text" id="contactno" name="contactno"  placeholder="CONTACT NO" class=" form-control"  />
+							</div>--%>
+                            <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Visible Desg</label>
+                                  <select class="form-control" name="visibleD" id="visibleD">
                                       <option value="">Select</option>
                                       <option value="Y">YES</option>
                                       <option value="N">NO</option>
 									</select>
 							</div>
-                            	
+                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Visible Contact</label>
+                                  <select class="form-control" name="visibleN" id="visibleN">
+                                      <option value="">Select</option>
+                                      <option value="Y">YES</option>
+                                      <option value="N">NO</option>
+									</select>
+							</div>
+                            	<div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Visible Email</label>
+                                  <select class="form-control" name="visibleE" id="visibleE">
+                                      <option value="">Select</option>
+                                      <option value="Y">YES</option>
+                                      <option value="N">NO</option>
+									</select>
+							</div>
 							<!-- Button -->
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">
 								<button type="button" class="btn btn-blue btn-square mrgr7" data-toggle="tooltip" title="Save" id="save" onclick="SaveItemData();">ADD</button>

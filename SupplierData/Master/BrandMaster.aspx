@@ -1,5 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="BrandMaster.aspx.cs" Inherits="SupplierData.Master.BrandMaster" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+   <style>
+       #Picture {
+    width: 120px;
+    height: 120px;
+}
+#imgInp { display:none;}
+
+   </style>
     <script src="jquery-1.10.2.min.js" type="text/javascript"></script>  
 
 <script type="text/javascript">
@@ -64,18 +72,32 @@
     function SaveBrandData() {
         debugger
         var error = "";
-        var BrandName = $("#brand").val();
-        if (BrandName == "") {
-            error +="Enter Brand Name</br>"
-        }
-        var Website = $("#website").val();
-        if (Website == "") {
-            error += "Enter Website </br>"
-        }
-        var TollFreeNo = $("#tollfreeno").val();
-        if (TollFreeNo == "") {
-            error += "Enter TollFreeNo </br>"
-        }
+        //var BrandName = $("#brand").val();
+        //if (BrandName == "") {
+        //    error +="Enter Brand Name</br>"
+        //}
+        //var Website = $("#website").val();
+        //if (Website == "") {
+        //    error += "Enter Website </br>"
+        //}
+        //var TollFreeNo = $("#tollfreeno").val();
+        //if (TollFreeNo == "") {
+        //    error += "Enter TollFreeNo </br>"
+        //}
+        debugger
+        var file1 = $("#imageBrowes").val();
+        var file = $("#imageBrowes").get(0).files;
+        var data = new FormData;
+        data.append("ImageFile", file[0]);
+        var formData = new FormData();
+        formData.append('imageBrowes', $('#imageBrowes')[0].files[0]);
+        //var data = new FormData();
+        //var file = $('#uploadEditorImage')[0].files[0]
+        //var fd = new FormData();
+        //fd.append('theFile', file);
+        
+        //var Filedata = $("#Picture")[0].currentSrc;
+        //,Filedata:'" + JSON.stringify(Filedata) + "'
         var EmpId = '<%= Session["EmpId"] %>';
         if (error.trim() != "") {
             Lobibox.notify('error', {
@@ -89,10 +111,17 @@
             $.ajax({
                 type: "POST",
                 url: "BrandMaster.aspx/BrandInsert",
-                data: "{BrandName:'" + BrandName + "',Website:'" + Website + "',TollFreeNo:'" + TollFreeNo + "',CreatedBy:'" + EmpId + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+            //$.ajax({
+            //    type: "POST",
+            //    url: "BrandMaster.aspx/BrandInsert",
+            //    data: data,//"{BrandName:'" + BrandName + "',Website:'" + Website + "',TollFreeNo:'" + TollFreeNo + "',CreatedBy:'" + EmpId + "'}",
+            //    contentType: false,
+            //    dataType: "json",
+            //    success: function (data) {
                     if (data.d == 1) {
                         Lobibox.notify('error', {
                             delay: 2000,
@@ -402,6 +431,47 @@
     //    $(tableid).append(headerTr$);
     //    return columnSet;
     //}
+    $(document).ready(function () {
+        $("#imageBrowes").change(function () {
+            var File = this.files;
+            if (File && File[0]) {
+                ReadImage(File[0]);
+            }
+        })
+    });
+    
+    var ReadImage = function (file) {
+
+        var reader = new FileReader;
+        var image = new Image;
+
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+
+            image.src = _file.target.result;
+            image.onload = function () {
+
+                var height = this.height;
+                var width = this.width;
+                var type = file.type;
+                var size = ~~(file.size / 1024) + "KB";
+
+                $("#targetImg").attr('src', _file.target.result);
+                $("#description").text("Size:" + size + ", " + height + "X " + width + ", " + type + "");
+                $("#imgPreview").show();
+
+            }
+
+        }
+    }
+    var ClearPreview = function () {
+        $("#imageBrowes").val('');
+        $("#description").text('');
+        $("#imgPreview").hide();
+
+    }
+
+
 
 </script>
 </asp:Content>
@@ -426,7 +496,7 @@
 				<div id="form-layouts">
                     <!-- Search Form -->
 					<div class="row bg-aliceblue pdb15" id="search">
-						<form id="userregi" name="userregi">
+						<form id="userregi" name="userregi" method="post">
 							
                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Brand</label>
@@ -450,7 +520,28 @@
 								<label>Toll Free Number</label>
 								<input type="text" id="tollfreeno" name="tollfreeno"  placeholder="Toll Free Nunber " class=" form-control"   onkeypress="return isNumber(event);"  maxlength="11"  required/>
 							</div>
-                           
+                            <div>
+
+                                  <input type="file" id="imageBrowes" name="file" />
+                                <div id="imgPreview" class="thumbnail" style="display:none">
+                <img class="img-responsive" id="targetImg" />
+                <div class="caption">
+                    <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                    <span id="description"></span>
+                </div>
+                <a href="#" class="btn btn-default" onclick="Uploadimage()">Upload</a>
+            </div>
+                                 <div class="col-md-2 thumbnail" id="uploadedImage" >
+
+
+       </div>
+                            </div>
+                            <%--<div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Upload</label>
+                                <input type="file"  id="uploadEditorImage"  />
+                            <img id="Picture" data-src="#" /> <br />
+        <input type='file' id="imgInp" accept="image/*" value=""/>
+                                </div>--%>
                             	
 							<!-- Button -->
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">
