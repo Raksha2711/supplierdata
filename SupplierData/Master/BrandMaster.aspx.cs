@@ -7,6 +7,9 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Newtonsoft.Json;
 using OfficeOpenXml;
+using Amazon.S3;
+using Amazon.S3.Model;
+using System.Web;
 
 namespace SupplierData.Master
 {
@@ -53,33 +56,75 @@ namespace SupplierData.Master
             return result;
 
         }
+        public static string FixBase64ForImage(string image)
+        {
+            System.Text.StringBuilder sbText = new System.Text.StringBuilder(image, image.Length);
 
+            sbText.Replace("\r\n", String.Empty);
+            sbText.Replace(" ", String.Empty);
+            sbText.Replace("\"", String.Empty);
+
+            return sbText.ToString();
+        }
+
+        public void ImageUpload(HttpPostedFileWrapper ImageFile)
+        {
+
+            var file = ImageFile;
+
+            if (file != null)
+            {
+
+                var fileName = Path.GetFileName(file.FileName);
+                var extention = Path.GetExtension(file.FileName);
+                var filenamewithoutextension = Path.GetFileNameWithoutExtension(file.FileName);
+
+                //file.SaveAs(Server.MapPath("/UploadedImage/" + file.FileName));
+
+
+            }
+
+           // return Json(file.FileName, JsonRequestBehavior.AllowGet);
+
+        }
         [System.Web.Services.WebMethod]
-        public static string BrandInsert(string BrandName, string Website,string TollFreeNo,string CreatedBy)
+        public static string BrandInsert(HttpPostedFileWrapper  ImageFile)//string BrandName, string Website,string TollFreeNo,string CreatedBy, 
         {
             string i = "";
             try
             {
-                ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
-                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                // var file = model.ImageFile;
+                 var file = ImageFile;
+
+                if (file != null)
                 {
-                    cn.Open();
-                    SqlCommand cmd = new SqlCommand("SL_BrandMaster", cn); // Procedure Call 
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Type", 'I');
-                    cmd.Parameters.AddWithValue("@Id", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Name",BrandName);
-                    cmd.Parameters.AddWithValue("@Website", Website);
-                    cmd.Parameters.AddWithValue("@TollFreeNo", TollFreeNo);
-                    cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
-                    cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
-                    SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
-                    parm3.Size = 50;
-                    parm3.Direction = ParameterDirection.Output;
-                    int result = cmd.ExecuteNonQuery();
-                    i = parm3.Value.ToString();
-                    cn.Close();
+
+                    var fileName = Path.GetFileName(file.FileName);
+                    var extention = Path.GetExtension(file.FileName);
+                    var filenamewithoutextension = Path.GetFileNameWithoutExtension(file.FileName);
                 }
+
+
+                //    ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+                //using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                //{
+                //    cn.Open();
+                //    SqlCommand cmd = new SqlCommand("SL_BrandMaster", cn); // Procedure Call 
+                //    cmd.CommandType = CommandType.StoredProcedure;
+                //    cmd.Parameters.AddWithValue("@Type", 'I');
+                //    cmd.Parameters.AddWithValue("@Id", DBNull.Value);
+                //    cmd.Parameters.AddWithValue("@Name",BrandName);
+                //    cmd.Parameters.AddWithValue("@Website", Website);
+                //    cmd.Parameters.AddWithValue("@TollFreeNo", TollFreeNo);
+                //    cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
+                //    cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
+                //    SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
+                //    parm3.Size = 50;
+                //    parm3.Direction = ParameterDirection.Output;
+                //    int result = cmd.ExecuteNonQuery();
+                //    i = parm3.Value.ToString();
+                //    cn.Close();
+                //}
             }
             catch (Exception e)
             {
@@ -88,7 +133,6 @@ namespace SupplierData.Master
             }
             return i;
         }
-
 
         [System.Web.Services.WebMethod]
         public static string UpdateRecord(string Id,string Name,string Website,string TollFreeNo,string ModifiedBy)
@@ -165,7 +209,6 @@ namespace SupplierData.Master
             }
             return (i);
         }
-        
 
         [System.Web.Services.WebMethod]
         public static string GetImport()

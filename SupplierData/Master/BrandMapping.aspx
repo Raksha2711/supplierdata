@@ -22,8 +22,9 @@
             BindBrandName();
             BindSubCategoryName();
             GetBrandMapping();
-       
+            
         };
+       
         function BindBrandName() {
             
             debugger

@@ -27,6 +27,7 @@ namespace SupplierData.Master
 
         }
 
+        
         [System.Web.Services.WebMethod]
         public static string BindBrandName()
         {

@@ -140,14 +140,12 @@ namespace SupplierData
             }
             return clearText;
         }
-
         [System.Web.Services.WebMethod(EnableSession = true)]
         public  int InsertLoginData(string UserName)
         {
             string EmpID = Session["EmpId"].ToString();
             ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
-
-            string IP4AddressArr = String.Empty;
+            //string IP4AddressArr = String.Empty;
             //string IP4Address = String.Empty;
             //IP4AddressArr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
             //if (!string.IsNullOrEmpty(IP4AddressArr))

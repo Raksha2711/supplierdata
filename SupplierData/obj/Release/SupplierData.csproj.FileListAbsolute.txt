@@ -50,3 +50,9 @@ G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\obj\Release\Suppli
 G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\obj\Release\SupplierData.csproj.CopyComplete
 G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\obj\Release\SupplierData.dll
 G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\obj\Release\SupplierData.pdb
+G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.Core.dll
+G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.S3.dll
+G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.Core.pdb
+G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.Core.xml
+G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.S3.pdb
+G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.S3.xml
