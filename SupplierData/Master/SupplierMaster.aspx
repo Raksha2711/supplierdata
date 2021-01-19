@@ -45,6 +45,7 @@ success: function (data) {
         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Contact Person 2</a></th>' +
         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Mobile No</a></th>' +
         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Email </a></th>' +
+        '<th><a class="white" data-toggle="tooltip" title="Type">Remarks </a></th>' +
         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
         '</tr>');
 
@@ -58,6 +59,7 @@ success: function (data) {
                 "<td id='ContactPerson2" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].ContactPerson2 + "'>" + SList[i].ContactPerson2 + "</a></td>" +
                 "<td id='Mobile2" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Mobile2 + "'>" + SList[i].Mobile2 + "</a></td>" +
                 "<td id='EmailId" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].EmailId + "'>" + SList[i].EmailId + "</a></td>" +
+                "<td id='Remarks" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Remarks + "'>" + SList[i].Remarks + "</a></td>" +
                 "<td id='button" + SList[i].Id + "'><a href='javascript:EditRecord(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + SList[i].Id + "' href='javascript:Delete(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></tr>");
         
     }
@@ -82,6 +84,7 @@ var Name = $("#name").val();
     var Email = $("#email").val();
     var ContactPerson2 = $("#contactperson2").val();
     var Mobile2 = $("#mobile2").val();
+    var Remarks = $("#remarks").val();
     var EmpId = '<%= Session["EmpId"] %>';
     if (Name == "") {
         error += "Please Enter Name.</br>";
@@ -119,7 +122,7 @@ var Name = $("#name").val();
 $.ajax({
     type: "POST",
     url: "SupplierMaster.aspx/SupplierInsert",
-    data: "{Name:'" + Name + "',Address:'" + Address + "',Pincode:'" + Pincode + "',ContactPerson1:'" + ContactPerson1 + "',Mobile1:'" + Mobile1 + "',ContactPerson2:'" + ContactPerson2 + "',Mobile2:'" + Mobile2 + "',Email:'" + Email + "',CreatedBy:'" + EmpId + "'}",
+    data: "{Name:'" + Name + "',Address:'" + Address + "',Pincode:'" + Pincode + "',ContactPerson1:'" + ContactPerson1 + "',Mobile1:'" + Mobile1 + "',ContactPerson2:'" + ContactPerson2 + "',Mobile2:'" + Mobile2 + "',Email:'" + Email + "',CreatedBy:'" + EmpId + "',Remarks:'" + Remarks + "'}",
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: function (data) {
@@ -157,6 +160,7 @@ $.ajax({
         document.getElementById('contactperson2').value = "";
         document.getElementById('mobile2').value = "";
         document.getElementById('email').value = "";
+        document.getElementById('remarks').value = "";
     }
 });
 
@@ -177,6 +181,7 @@ $.ajax({
                      var ContactPerson2 = document.getElementById('SPContactPerson2').innerHTML;
                      var Mobile2 = document.getElementById('SPMobile2').innerHTML;
                      var EmailId = document.getElementById('SPEmailId').innerHTML;
+                     var Remarks = document.getElementById('SPRemarks').innerHTML;
                  }
                  catch (ex) {
                      var Name = document.getElementById('Name' + PervID).childNodes[0].innerHTML;
@@ -187,6 +192,7 @@ $.ajax({
                      var ContactPerson2 = document.getElementById('ContactPerson2' + PervID).childNodes[0].innerHTML;
                      var Mobile2 = document.getElementById('Mobile2' + PervID).childNodes[0].innerHTML;
                      var EmailId = document.getElementById('EmailId' + PervID).childNodes[0].innerHTML;
+                     var Remarks = document.getElementById('Remarks' + PervID).childNodes[0].innerHTML;
                  }
 
 
@@ -198,6 +204,7 @@ $.ajax({
                  document.getElementById('ContactPerson2' + PervID).childNodes[0].innerHTML = ContactPerson2;
                  document.getElementById('Mobile2' + PervID).childNodes[0].innerHTML = Mobile2;
                  document.getElementById('EmailId' + PervID).childNodes[0].innerHTML = EmailId;
+                 document.getElementById('Remarks' + PervID).childNodes[0].innerHTML = Remarks;
                  document.getElementById('button' + PervID).innerHTML = "<a href='javascript:EditRecord(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Edit' ><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + PervID + "' href='javascript:Delete(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
              }
              var Name = document.getElementById('Name' + Id).childNodes[0].innerHTML;
@@ -208,6 +215,7 @@ $.ajax({
              var ContactPerson2 = document.getElementById('ContactPerson2' + Id).childNodes[0].innerHTML;
              var Mobile2 = document.getElementById('Mobile2' + Id).childNodes[0].innerHTML;
              var EmailId = document.getElementById('EmailId' + Id).childNodes[0].innerHTML;
+             var Remarks = document.getElementById('Remarks' + Id).childNodes[0].innerHTML;
              document.getElementById('Name' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InName" + Id + "'   value='" + Name + "' /><span class='none' id='SPName'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
              document.getElementById('Address' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InAddress" + Id + "'   value='" + Address + "' /><span class='none' id='SPAddress'>" + Address + "</span>";  //onkeypress='return isCharacter(event)'
              document.getElementById('Pincode' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InPincode" + Id + "'   value='" + Name + "' maxlength='6' /><span class='none' id='SPPincode'>" + Pincode + "</span>";  //onkeypress='return isCharacter(event)'
@@ -216,6 +224,7 @@ $.ajax({
              document.getElementById('ContactPerson2' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactPerson2" + Id + "'   value='" + ContactPerson2 + "' /><span class='none' id='SPContactPerson2'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
              document.getElementById('Mobile2' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InMobile2" + Id + "'   value='" + Mobile2 + "'  maxlength='10' onkeypress='return isNumber(event);' /><span class='none' id='SPMobile2'>" + Mobile2 + "</span>";  //onkeypress='return isCharacter(event)'
              document.getElementById('EmailId' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InEmailId" + Id + "'   value='" + EmailId + "' /><span class='none' id='SPEmailId'>" + EmailId + "</span>";  //onkeypress='return isCharacter(event)'
+             document.getElementById('Remarks' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InRemarks" + Id + "'   value='" + Remarks + "' /><span class='none' id='SPRemarks'>" + Remarks + "</span>";  //onkeypress='return isCharacter(event)'
              document.getElementById('button' + Id).innerHTML = "<a href='javascript:UpdateRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Update' ><img src='../images/right.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:CancelRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Cancel'><img src='../images/cancel.png' class='CancelClick'/>&nbsp;</a>";
              PervID = Id;
          }
@@ -239,6 +248,7 @@ $.ajax({
              var ContactPerson2 = $("#InContactPerson2" + Id).val();
              var Mobile2 = $("#InMobile2" + Id).val();
              var EmailId = $("#InEmailId" + Id).val();
+             var Remarks = $("#InRemarks" + Id).val();
              var EmpId = '<%= Session["EmpId"] %>';
              if (Name == "") {
                  error += "Please Enter Name.</br>";
@@ -271,7 +281,7 @@ $.ajax({
                  $.ajax({
                      type: "POST",
                      url: "SupplierMaster.aspx/UpdateRecord",
-                     data: "{Id:'" + Id + "',Name:'" + Name + "',Address:'" + Address + "',Pincode:'" + Pincode + "',ContactPerson1:'" + ContactPerson1 + "',Mobile1:'" + Mobile1 + "',ContactPerson2:'" + ContactPerson2 + "',Mobile2:'" + Mobile2 + "',Email:'" + EmailId + "',ModifiedBy:'" + EmpId + "'}",
+                     data: "{Id:'" + Id + "',Name:'" + Name + "',Address:'" + Address + "',Pincode:'" + Pincode + "',ContactPerson1:'" + ContactPerson1 + "',Mobile1:'" + Mobile1 + "',ContactPerson2:'" + ContactPerson2 + "',Mobile2:'" + Mobile2 + "',Email:'" + EmailId + "',ModifiedBy:'" + EmpId + "',Remarks:'" + Remarks + "'}",
                      contentType: "application/json; charset=utf-8",
                      dataType: "json",
                      global: false,
@@ -442,7 +452,7 @@ $.ajax({
                  }
              });
          }
-</script>
+     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <!--BEGIN PAGE WRAPPER-->
@@ -503,6 +513,11 @@ $.ajax({
                                     <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Email</label>
 								<input type="text" id="email" name="email"  placeholder="EMAIL" class=" form-control"  />
+							</div>
+                            
+                                    <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Remarks</label>
+								<input type="text" id="remarks" name="remarks"  placeholder="Remarks" class=" form-control"  />
 							</div>
 							<!-- Button -->
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">

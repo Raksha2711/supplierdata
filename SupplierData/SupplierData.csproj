@@ -230,6 +230,7 @@
     <Content Include="vendors\slimScroll\slimScroll.jquery.json" />
     <Content Include="BrandExportToExcel.aspx" />
     <Content Include="WebService1.asmx" />
+    <Content Include="FileUpload.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

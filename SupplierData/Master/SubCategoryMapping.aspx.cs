@@ -241,7 +241,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Category", ItemName);
                     cmd.Parameters.AddWithValue("@AreaName", AreaName);
                     cmd.Parameters.AddWithValue("@ContactPerson", ContactPerson);
-                    cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
+                    cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Designation", Designation);
                     cmd.Parameters.AddWithValue("@VisibleD", VisibleD);
                     cmd.Parameters.AddWithValue("@VisibleN", VisibleN);

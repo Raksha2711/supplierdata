@@ -158,6 +158,7 @@
                     '<th><a class="white" data-toggle="tooltip" title="Address">Address</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="ContactNo">ContactNo</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Email">Email</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Remarks">Remarks</a></th>' +
                     '<th data-orderable="false" class="hidden"><a class="white" data-toggle="tooltip" title="Status">Status</a></th>' +
                     '<th data-orderable="false" ><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
                     '</tr>');
@@ -170,6 +171,7 @@
                             "<td id = 'Address" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Address + "'>" + SList[i].Address + "</a></td>" + 
                             "<td id='ContactNo" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].ContactNo + "'  onkeypress='return isNumber(event);'  maxlength='11'>" + SList[i].ContactNo + "</a></td>" +
                             "<td id='Email" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Email + "'>" + SList[i].Email + "</a></td>" +
+                            "<td id='Remarks" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Remarks + "'>" + SList[i].Remarks + "</a></td>" +
                             "<td class='hidden' id='Status" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Status + "'>" + SList[i].Status + "</a></td>" + 
                             "<td  id='button" + SList[i].Id + "'><a href='javascript:EditRecord(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png' /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + SList[i].Id + "' href='javascript:Delete(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></tr > ");
                     //}
@@ -191,7 +193,7 @@
                         searchPlaceholder: "Search"
                     }
                 });
-
+                PervID = "";
             }
            
         });
@@ -204,6 +206,7 @@
             var Email = $("#email").val();
             var Area = $("#AreaName").val();
             var Brand = $("#BName").val();
+            var Remarks = $("#Remarks").val();
             var EmpId = '<%= Session["EmpId"] %>';
             Name = Name.replace("&amp;", "&");
 
@@ -251,7 +254,7 @@
             $.ajax({
                 type: "POST",
                 url: "Service.aspx/ServiceInsert",
-                data: "{Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',CreatedBy:'" + EmpId + "'}",
+                data: "{Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',CreatedBy:'" + EmpId + "',Remarks:'"+ Remarks +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -284,6 +287,7 @@
                     document.getElementById('address').value = "";
                     document.getElementById('contact').value = "";
                     document.getElementById('email').value = "";
+                    document.getElementById('Remarks').value = "";
                     $("#AreaName").val('');
                     $("#BName").val('');
 
@@ -305,6 +309,7 @@
                     var Address = document.getElementById('SPAddress').innerHTML;
                     var ContactNo = document.getElementById('SPContactNo').innerHTML;
                     var Email = document.getElementById('SPEmail').innerHTML;
+                    var Remarks = document.getElementById('SPRemarks').innerHTML;
                     //  var Status = document.getElementById('SPStatus').innerHTML;
                 }
                 catch (ex) {
@@ -314,6 +319,7 @@
                     var Address = document.getElementById('Address' + PervID).childNodes[0].innerHTML;
                     var ContactNo = document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML;
                     var Email = document.getElementById('Email' + PervID).childNodes[0].innerHTML;
+                    var Remarks = document.getElementById('Remarks' + PervID).childNodes[0].innerHTML;
 
                 }
                 document.getElementById('Brand' + PervID).childNodes[0].innerHTML = Brand;
@@ -322,6 +328,7 @@
                 document.getElementById('Address' + PervID).childNodes[0].innerHTML = Address;
                 document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML = ContactNo;
                 document.getElementById('Email' + PervID).childNodes[0].innerHTML = Email;
+                document.getElementById('Remarks' + PervID).childNodes[0].innerHTML = Remarks;
                 document.getElementById('button' + PervID).innerHTML = "<a href='javascript:EditRecord(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Edit' ><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + PervID + "' href='javascript:Delete(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
             }
             var html = "";
@@ -331,6 +338,7 @@
             var Address = document.getElementById('Address' + Id).childNodes[0].innerHTML;
             var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
             var Email = document.getElementById('Email' + Id).childNodes[0].innerHTML;
+            var Remarks = document.getElementById('Remarks' + Id).childNodes[0].innerHTML;
 
             document.getElementById('Brand' + Id).childNodes[0].innerHTML = "<select id='InBrand" + Id + "'  class='form-control' ><option>" + Brand + "</option></select><span class='none' id='SPBrand'>" + Brand + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Area' + Id).childNodes[0].innerHTML = "<select id='InArea" + Id + "'  class='form-control' ><option>" + Area + "</option></select><span class='none' id='SPArea'>" + Area + "</span>";  //onkeypress='return isCharacter(event)'
@@ -338,6 +346,7 @@
             document.getElementById('Address' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InAddress" + Id + "'   value='" + Address + "' /><span class='none' id='SPAddress'>" + Address + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Email' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InEmail" + Id + "'   value='" + Email + "' /><span class='none' id='SPEmail'>" + Email + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('Remarks' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InRemarks" + Id + "'   value='" + Remarks + "' /><span class='none' id='SPRemarks'>" + Remarks + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('button' + Id).innerHTML = "<a href='javascript:UpdateRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Update' ><img src='../images/right.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:CancelRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Cancel'><img src='../images/cancel.png' class='CancelClick'/>&nbsp;</a>";
             BindBrandName(Id);
             EditBindArea(Id);
@@ -378,6 +387,7 @@
             var Email = $("#InEmail" + Id).val();
             var Area = $("#InArea" + Id).val();
             var Brand = $("#InBrand" + Id).val();
+            var Remarks = $("#InRemarks" + Id).val();
             var EmpId = '<%= Session["EmpId"] %>';
             Name = Name.replace("&amp;", "&");
 
@@ -417,7 +427,7 @@
                 $.ajax({
                     type: "POST",
                     url: "Service.aspx/UpdateRecord",
-                    data: "{Id:'" + Id + "',Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',ModifiedBy:'" + EmpId + "'}",
+                    data: "{Id:'" + Id + "',Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',ModifiedBy:'" + EmpId + "',Remarks:'" + Remarks +"'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,
@@ -588,7 +598,7 @@
                 }
             });
         }
-         </script>                         
+    </script>                         
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <!--BEGIN PAGE WRAPPER-->
@@ -638,7 +648,10 @@
 								<label>Email</label>
 								<input type="text" id="email" name="email"  placeholder="na@na.com" class=" form-control"  />
 							</div>
-
+                            <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Remarks</label>
+								<input type="text" id="Remarks" name="Remarks"  placeholder="Remarks" class=" form-control"  />
+							</div>
                             
                               
                             	

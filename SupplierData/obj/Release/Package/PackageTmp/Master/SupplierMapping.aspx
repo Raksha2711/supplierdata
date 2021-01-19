@@ -439,7 +439,7 @@
             document.getElementById('deleteanchor' + Id).click();
         }
         function DeleteRecord() {
-
+            debugger
             var Id = CurrentId;
             $.ajax({
                 type: "POST",
@@ -448,7 +448,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    if (data.d == Id) {
+                    if (data.d == 0) {
                         //document.getElementById('Flag' + CompId).innerHTML = "<a data-toggle='tooltip' title='" + Flag + "'>" + Flag + "</a>";
                         //document.getElementById('button' + CompId).innerHTML = "<a href='javascript:EditRecord(&apos;" + CompId + "&apos;)' data-toggle='tooltip' title='Edit' ><img src='../images/edit.png'/></a>&nbsp;<a id='deleteanchor" + CompId + "' >&nbsp;</a>";
                         Lobibox.notify('success', {
