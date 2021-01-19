@@ -209,7 +209,8 @@
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">MobileNo</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">ContactPerson2</a></th>' +
                         '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">MobileNo2</a></th>' +
-                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Email </a></th></thead>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Email </a></th>' +
+                        '<th data-orderable="false"><a class="white" data-toggle="tooltip" title="Type">Remarks </a></th></thead>' +
                         '</tr><tbody>');
 
                     for (var i = 0; i < SList.length; i++) {
@@ -220,7 +221,8 @@
                             "<td id='Mobile1" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Mobile1 + "'>" + SList[i].Mobile1 + "</a></td>" +
                             "<td id='ContactPerson2" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].ContactPerson2 + "'>" + SList[i].ContactPerson2 + "</a></td>" +
                             "<td id='Mobile2" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Mobile2 + "'>" + SList[i].Mobile2 + "</a></td>" +
-                            "<td id='EmailId" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].EmailId + "'>" + SList[i].EmailId + "</a></td></tr>"); 
+                            "<td id='EmailId" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].EmailId + "'>" + SList[i].EmailId + "</a></td>" + 
+                            "<td id='Remarks" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Remarks + "'>" + SList[i].Remarks + "</a></td></tr >"); 
                        
                     }
                     html += "</tbody></table>";
@@ -598,7 +600,8 @@
                         '<th><a class="white" data-toggle="tooltip" title="Name">Name</a></th>' +
                         '<th><a class="white" data-toggle="tooltip" title="Address">Address</a></th>' +
                         '<th><a class="white" data-toggle="tooltip" title="ContactNo">ContactNo</a></th>' +
-                        '<th><a class="white" data-toggle="tooltip" title="Email">Email</a></th></tr>');
+                        '<th><a class="white" data-toggle="tooltip" title="Email">Email</a></th>' + 
+                         '<th><a class="white" data-toggle="tooltip" title="Remarks">Remarks</a></th></tr> ');
 
                     for (var i = 0; i < SList.length; i++) {
                         html += ("<tr><td id = 'Brand" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Brand + "'>" + SList[i].Brand + "</a></td>" +
@@ -607,7 +610,8 @@
                             "<td id = 'Address" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Address + "'>" + SList[i].Address + "</a></td>" +
                             "<td id='ContactNo" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].ContactNo + "'>" + SList[i].ContactNo + "</a></td>" +
                             "<td id='Email" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Email + "'>" + SList[i].Email + "</a></td>" +
-                            "</tr> ");
+                            "<td id='Remarks" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Remarks + "'>" + SList[i].Remarks + "</a></td>" +
+                            "</tr>");
                     }
                     $("#example tbody").append(html);
                     $('#example').DataTable({

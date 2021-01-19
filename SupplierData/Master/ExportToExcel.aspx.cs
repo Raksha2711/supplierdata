@@ -185,6 +185,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Brand", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remarks", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -394,6 +395,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Mobile2", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remarks", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;

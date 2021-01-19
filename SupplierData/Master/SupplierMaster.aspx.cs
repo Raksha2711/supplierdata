@@ -36,6 +36,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Mobile2", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remarks", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -56,7 +57,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string SupplierInsert(string Name, string Address, string Pincode, string ContactPerson1, string Mobile1, string ContactPerson2, string Mobile2, string Email,string CreatedBy)
+        public static string SupplierInsert(string Name, string Address, string Pincode, string ContactPerson1, string Mobile1, string ContactPerson2, string Mobile2, string Email,string CreatedBy,string Remarks)
         {
             string i = "";
             try
@@ -79,6 +80,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Email", Email);
                     cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
+                    cmd.Parameters.AddWithValue("@Remarks", Remarks);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -96,7 +98,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id, string Name, string Address, string Pincode, string ContactPerson1, string Mobile1, string ContactPerson2, string Mobile2, string Email,string ModifiedBy)
+        public static string UpdateRecord(string Id, string Name, string Address, string Pincode, string ContactPerson1, string Mobile1, string ContactPerson2, string Mobile2, string Email,string ModifiedBy,string Remarks)
         {
             string i = "";
             try
@@ -120,6 +122,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Email", Email);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
+                    cmd.Parameters.AddWithValue("@Remarks", Remarks);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -159,6 +162,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Email", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remarks", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;

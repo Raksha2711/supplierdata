@@ -86,9 +86,7 @@
         function InsertLoginData() {
             var UserName = document.getElementById('txtUserName').value;
             var result = 0;
-            <%--var EmpID = '<%= Session["EmpId"] %>';
-            alert(EmpID);
-             var UserName = '<%= Session["txtUserName"] %>';--%>
+            
             $.ajax({
                 type: "POST",
                 url: "WebService1.asmx/InsertLoginData",
@@ -140,16 +138,7 @@
 				</div>
             </div>
 
-            <%--<div class="form-group mrgt30">
-				<select class="form-control loginselect" id="ddlY">
-					<option>2016</option>
-					<option>2017</option>
-				</select>
-			</div>--%>
-			
-           <%-- <div class="forget-password mrgt23">
-				<a class='btn-forgot-pwd' onclick="redirecttoother();">Forgot Password ?</a>
-			</div>--%>
+            
 			
 			<!-- Buttons -->
             <!-- Buttons -->
@@ -168,13 +157,7 @@
 			<div class="col-lg-11 txtcenter mrgt30 pdr0">
 				<label>&copy; Supplier Services  &nbsp;2020 &nbsp;Version &nbsp;1.0</label>
 			</div>
-            <%--<div class="col-lg-12 mrgt30 pdr0">
-				<div class="form-group pull-right">
-					<button type="button" class="btn btn-save" id="btnSubmit" onclick="LoginClick();">Log In
-						&nbsp;<i class="fa fa-chevron-circle-right"></i>
-					</button>
-				</div>
-			</div>--%>
+            
 			<!-- /Buttons -->
 		</div>
     </form>

@@ -1,13 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="BrandMaster.aspx.cs" Inherits="SupplierData.Master.BrandMaster" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   <style>
-       #Picture {
-    width: 120px;
-    height: 120px;
-}
-#imgInp { display:none;}
-
-   </style>
     <script src="jquery-1.10.2.min.js" type="text/javascript"></script>  
 
 <script type="text/javascript">
@@ -84,13 +76,6 @@
         if (TollFreeNo == "") {
             error += "Enter TollFreeNo </br>"
         }
-        //var data = new FormData();
-        //var file = $('#uploadEditorImage')[0].files[0]
-        //var fd = new FormData();
-        //fd.append('theFile', file);
-        
-        //var Filedata = $("#Picture")[0].currentSrc;
-        //,Filedata:'" + JSON.stringify(Filedata) + "'
         var EmpId = '<%= Session["EmpId"] %>';
         if (error.trim() != "") {
             Lobibox.notify('error', {
@@ -417,37 +402,6 @@
     //    $(tableid).append(headerTr$);
     //    return columnSet;
     //}
-    $(document).ready(function () {
-        var currentSrc = $('#Picture').attr('src');
-        if (currentSrc == null || currentSrc == "") {
-            $('#Picture').attr('src', 'http://i38.photobucket.com/albums/e149/eloginko/profile_male_large_zpseedb2954.jpg');
-
-            $("#Picture").on('click', function () { $("#imgInp").trigger('click') })
-        }
-
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#Picture').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#imgInp").change(function () {
-            readURL(this);
-        });
-
-    });
-
-
-
-
-
 
 </script>
 </asp:Content>
@@ -472,7 +426,7 @@
 				<div id="form-layouts">
                     <!-- Search Form -->
 					<div class="row bg-aliceblue pdb15" id="search">
-						<form id="userregi" name="userregi" method="post">
+						<form id="userregi" name="userregi">
 							
                             <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Brand</label>
@@ -496,12 +450,7 @@
 								<label>Toll Free Number</label>
 								<input type="text" id="tollfreeno" name="tollfreeno"  placeholder="Toll Free Nunber " class=" form-control"   onkeypress="return isNumber(event);"  maxlength="11"  required/>
 							</div>
-                            <%--<div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
-								<label>Upload</label>
-                                <input type="file"  id="uploadEditorImage"  />
-                            <img id="Picture" data-src="#" /> <br />
-        <input type='file' id="imgInp" accept="image/*" value=""/>
-                                </div>--%>
+                           
                             	
 							<!-- Button -->
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">

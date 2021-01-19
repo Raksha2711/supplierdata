@@ -201,7 +201,7 @@
                     '<th><a class="white" data-toggle="tooltip" title="Area">Area</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Executve Name">Executive Person</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Designation">Designation</a></th>' +
-                    '<th><a class="white" data-toggle="tooltip" title="Contact No">Contact No</a></th>' +
+                    '<th class="hidden"><a class="white" data-toggle="tooltip" title="Contact No">Contact No</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Desg</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Contact</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Email</a></th>' +
@@ -215,7 +215,7 @@
                         "<td id='Brand" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Brand + "'>" + ItemList[i].Brand + "</a></td><td id='Name" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Name + "'>" + ItemList[i].Name + "</a><span class='hidden' id='SID" + ItemList[i].Id + "' > " + ItemList[i].SubCategoryId + "</span></td>" +
                             "<td id='AreaName" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].AreaName + "'>" + ItemList[i].AreaName + "</a></td><td id='ContactPerson" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactPerson + "'>" + ItemList[i].ContactPerson + "</a></td>" +
                             "<td id='Designation" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].Designation + "'>" + ItemList[i].Designation + "</a></td>" +
-                        "<td id='ContactNo" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactNo + "'>" + ItemList[i].ContactNo + "</a></td>" +
+                        "<td class='hidden' id='ContactNo" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].ContactNo + "'>" + ItemList[i].ContactNo + "</a></td>" +
                         "<td id='VisibleD" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleD + "'>" + ItemList[i].VisibleD + "</a></td>" +
                         "<td id='VisibleN" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleN + "'>" + ItemList[i].VisibleN + "</a></td>" +
                         "<td id='VisibleE" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleE + "'>" + ItemList[i].VisibleE + "</a></td>" +
@@ -253,7 +253,7 @@
         var ContactPerson = $("#SName").val();
         var AreaName = $("#AreaName").val();
         //var ContactPerson = $("#contactperson").val();
-        var ContactNo = $("#contactno").val();
+        var ContactNo = ""; $("#contactno").val();
         var VisibleD = $("#visibleD").val();
         var VisibleN = $("#visibleN").val();
         var VisibleE = $("#visibleE").val();
@@ -319,7 +319,7 @@
                     var AreaName = document.getElementById('SPAreaName').innerHTML;
                     var ContactPerson = document.getElementById('SPContactPerson').innerHTML;
                     var Designation = document.getElementById('SPDesignation').innerHTML;
-                    var ContactNo = document.getElementById('SPContactNo').innerHTML;
+                    //var ContactNo = document.getElementById('SPContactNo').innerHTML;
                     var VisibleD = document.getElementById('SPVisibleD').innerHTML;
                     var VisibleN = document.getElementById('SPVisibleN').innerHTML;
                     var VisibleE = document.getElementById('SPVisibleE').innerHTML;
@@ -331,7 +331,7 @@
                     var AreaName = document.getElementById('AreaName' + PervID).childNodes[0].innerHTML;
                     var ContactPerson = document.getElementById('ContactPerson' + PervID).childNodes[0].innerHTML;
                     var Designation = document.getElementById('Designation' + PervID).childNodes[0].innerHTML;
-                    var ContactNo = document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML;
+                   // var ContactNo = document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML;
                     var VisibleD = document.getElementById('VisibleD' + PervID).childNodes[0].innerHTML;
                     var VisibleN = document.getElementById('VisibleN' + PervID).childNodes[0].innerHTML;
                     var VisibleE = document.getElementById('VisibleE' + PervID).childNodes[0].innerHTML;
@@ -341,7 +341,7 @@
                 document.getElementById('AreaName' + PervID).childNodes[0].innerHTML = AreaName;
                 document.getElementById('ContactPerson' + PervID).childNodes[0].innerHTML = ContactPerson;
                 document.getElementById('Designation' + PervID).childNodes[0].innerHTML = Designation;
-                document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML = ContactNo;
+                //document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML = ContactNo;
                 document.getElementById('VisibleD' + PervID).childNodes[0].innerHTML = VisibleD;
                 document.getElementById('VisibleN' + PervID).childNodes[0].innerHTML = VisibleN;
                 document.getElementById('VisibleE' + PervID).childNodes[0].innerHTML = VisibleE;
@@ -353,7 +353,7 @@
             var AreaName = document.getElementById('AreaName' + Id).childNodes[0].innerHTML;
             var ContactPerson = document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML;
             var Designation = document.getElementById('Designation' + Id).childNodes[0].innerHTML;
-            var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
+           // var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
             var VisibleD = document.getElementById('VisibleD' + Id).childNodes[0].innerHTML;
             var VisibleN = document.getElementById('VisibleN' + Id).childNodes[0].innerHTML;
             var VisibleE = document.getElementById('VisibleE' + Id).childNodes[0].innerHTML;
@@ -364,7 +364,7 @@
             document.getElementById('AreaName' + Id).childNodes[0].innerHTML = "<select id='InAreaName" + Id + "' class='form-control' ><option>" + AreaName + "</option></select> <span class='none' id='SPAreaName'>" + AreaName + "</span>";
             document.getElementById('ContactPerson' + Id).childNodes[0].innerHTML = "<select class='form-control' id='InContactPerson" + Id + "' ><option>" + ContactPerson + "</option></select><span class='none' id='SPContactPerson'>" + ContactPerson + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Designation' + Id).childNodes[0].innerHTML = "<select id='InDesignation" + Id + "' class='form-control'><option>" + Designation + "</option></select> <span class='none' id='SPDesignation'>" + Designation + "</span>";
-            document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";  //onkeypress='return isCharacter(event)'
+            //document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('VisibleD' + Id).childNodes[0].innerHTML = "<select id='InVisibleD" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleD'>" + VisibleD + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('VisibleN' + Id).childNodes[0].innerHTML = "<select id='InVisibleN" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleN'>" + VisibleN + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('VisibleE' + Id).childNodes[0].innerHTML = "<select id='InVisibleE" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleE'>" + VisibleE + "</span>";  //onkeypress='return isCharacter(event)'
@@ -485,7 +485,7 @@
             var Brand = $("#InBrand" + Id).val();
             var AreaName = $("#InAreaName" + Id).val();
             var ContactPerson = $("#InContactPerson" + Id).val();
-            var ContactNo = $("#InContactNo" + Id).val();
+            var ContactNo = "";$("#InContactNo" + Id).val();
             var VisibleD = $("#InVisibleD" + Id).val();
             var VisibleN = $("#InVisibleN" + Id).val();
             var VisibleE = $("#InVisibleE" + Id).val();
@@ -510,9 +510,9 @@
                 error += "Please Enter ContactPerson.</br>";
             }
             
-            if (ContactNo == "") {
-                error += "Please Enter ContactNo.</br>";
-            }
+            //if (ContactNo == "") {
+            //    error += "Please Enter ContactNo.</br>";
+            //}
             if (error.trim() != "") {
                 Lobibox.notify('error', {
                     delay: 3000,
@@ -676,7 +676,7 @@
 								  <select class="form-control" name="DName" id="DName">
 									</select>
 							</div>
-                              <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+                              <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7 hidden">
 								<label>Contact No</label>
 								<input type="text" id="contactno" name="contactno"  placeholder="CONTACT NO" class=" form-control"  />
 							</div>
