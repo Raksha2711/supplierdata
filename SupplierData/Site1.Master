@@ -151,14 +151,8 @@
                     <li><a onclick="javascript:LogoutPage('<%= Session["EmpId"] %>');"><img class="mrgl5" src="<%=ConfigurationManager.AppSettings["url"] %>images/logout.png" title="Logout" alt="" /></a></li>
                  </ul>
                </div>
-
-             
-
 		</nav>
         </div>
-       
-
-
 <!-- wrapper -->
 <div id="wrapper">
 <!--BEGIN SIDEBAR MENU-->

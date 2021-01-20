@@ -55,3 +55,4 @@ G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.Core.pd
 G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.Core.xml
 G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.S3.pdb
 G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\bin\AWSSDK.S3.xml
+G:\SupplierData\SupplierData_Raksha\supplierdata\SupplierData\obj\Debug\SupplierData.csprojAssemblyReference.cache
