@@ -26,36 +26,36 @@ namespace SupplierData.Master
         {
 
         }
-        [System.Web.Services.WebMethod]
-        public static string BindAreaData()
-        {
-            string result = "";
-            try
-            {
-                //connection.con();
-                ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
-                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
-                {
-                    cn.Open();
-                    SqlCommand cmd = new SqlCommand("BindAreaName", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    result = JsonConvert.SerializeObject(ds.Tables[0]);
-                    cn.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                //ErrorLog.CreateLog("FrmAdminMailData.aspx.cs", ex.Message + " " + "Line No. 45. Please contact to Administrator.", DateTime.Now, "");
-            }
-            finally
-            {
-                //connection.cn.Close();
-            }
-            return result;
-        }
+        //[System.Web.Services.WebMethod]
+        //public static string BindAreaData()
+        //{
+        //    string result = "";
+        //    try
+        //    {
+        //        //connection.con();
+        //        ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+        //        using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+        //        {
+        //            cn.Open();
+        //            SqlCommand cmd = new SqlCommand("BindAreaName", cn);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
+        //            DataSet ds = new DataSet();
+        //            da.Fill(ds);
+        //            result = JsonConvert.SerializeObject(ds.Tables[0]);
+        //            cn.Close();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //ErrorLog.CreateLog("FrmAdminMailData.aspx.cs", ex.Message + " " + "Line No. 45. Please contact to Administrator.", DateTime.Now, "");
+        //    }
+        //    finally
+        //    {
+        //        //connection.cn.Close();
+        //    }
+        //    return result;
+        //}
         [System.Web.Services.WebMethod]
         public static string GetServiceData()
         {
@@ -74,7 +74,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Address", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Email", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Area", DBNull.Value);
+                    //cmd.Parameters.AddWithValue("@Area", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Brand", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
@@ -99,7 +99,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string ServiceInsert(string Name, string Address,string ContactNo,string Email,string Area,string Brand,string CreatedBy,string Remarks)
+        public static string ServiceInsert(string Name, string Address,string ContactNo,string Email,string Brand,string CreatedBy,string Remarks)
         {
             string i = "";
             try
@@ -116,7 +116,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Address", Address);
                     cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
                     cmd.Parameters.AddWithValue("@Email", Email);
-                    cmd.Parameters.AddWithValue("@Area", Area);
+                    //cmd.Parameters.AddWithValue("@Area", Area);
                     cmd.Parameters.AddWithValue("@Brand", Brand);
                     cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
@@ -168,7 +168,7 @@ namespace SupplierData.Master
             return result;
         }
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id, string Name, string Address, string ContactNo, string Email, string Area, string Brand,string ModifiedBy,string Remarks)
+        public static string UpdateRecord(string Id, string Name, string Address, string ContactNo, string Email, string Brand,string ModifiedBy,string Remarks)
         {
             string i = "";
             try
@@ -185,7 +185,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Address", Address);
                     cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
                     cmd.Parameters.AddWithValue("@Email", Email);
-                    cmd.Parameters.AddWithValue("@Area", Area);
+                   // cmd.Parameters.AddWithValue("@Area", Area);
                     cmd.Parameters.AddWithValue("@Brand", Brand);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
@@ -222,7 +222,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Address", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Email", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Area", DBNull.Value);
+                   // cmd.Parameters.AddWithValue("@Area", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Brand", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);

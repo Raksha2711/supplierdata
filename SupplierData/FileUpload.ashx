@@ -79,9 +79,9 @@ public class FileUpload : IHttpHandler
                             var putRequest = new PutObjectRequest();
                             putRequest.BucketName = "b2bpotential";        // Your bucket name
                             putRequest.ContentType = "image/jpeg";
-                            putRequest.InputStream = file.InputStream;
+                            putRequest.InputStream = file.InputStream;//BrandImages/
                             // key will be the name of the image in your bucket
-                            putRequest.Key = imgNewName;
+                            putRequest.Key = "BrandImages/"+ imgNewName;
                             PutObjectResponse putResponse = s3.PutObject(putRequest);
                             retValue = imgNewName;
                             context.Response.ContentType = "application/json";
