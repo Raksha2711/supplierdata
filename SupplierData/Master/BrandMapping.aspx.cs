@@ -1,22 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
-using System.Xml;
-using System.Xml.Linq;
-using System.Drawing;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Collections.Generic;
-using System.Net;
 using System.Configuration;
 using Newtonsoft.Json;
-using System.Text;
-
 
 namespace SupplierData.Master
 {
@@ -129,6 +115,37 @@ namespace SupplierData.Master
                 //SendMailError.SendMail("FrmCarHireSupplierMaster.aspx.cs", e.Message + " " + "Line No. 171", UserName);
             }
             return i;
+        }
+        [System.Web.Services.WebMethod]
+        public static string BindBrandSubCategoryName(int Id)
+        {
+            string result = "";
+            try
+            {
+                //connection.con();
+                ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
+                using (SqlConnection cn = new SqlConnection(conn.ConnectionString))
+                {
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("BindBrandSubCategoryName", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", Id);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd); // pass command in to the adapter
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    result = JsonConvert.SerializeObject(ds.Tables[0]);
+                    cn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                //ErrorLog.CreateLog("FrmAdminMailData.aspx.cs", ex.Message + " " + "Line No. 45. Please contact to Administrator.", DateTime.Now, "");
+            }
+            finally
+            {
+                //connection.cn.Close();
+            }
+            return result;
         }
         [System.Web.Services.WebMethod]
         public static string BindSubCategoryName()

@@ -45,11 +45,37 @@
                             html += '<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
                     });
                     $('#BName').append(html);
-                    //$('#BName').multiselect('rebuild');
                 }
             });
         }
-        function BindSubCategoryName(Id, Name) {
+        var arrNotes = new Array();
+        function BindBrandSubcatory(Id) {
+            //var i = 0;
+            arrNotes = [];
+            $.ajax({
+                type: "POST",
+                url: "BrandMapping.aspx/BindBrandSubCategoryName",
+                data: "{Id:'" + Id + "'}",
+                contentType: "application/json; charset=utf-8",
+                global: false,
+                async: false,
+                dataType: "json",
+                success: function (data1) {
+                    debugger
+                    var obj1 = jQuery.parseJSON(data1.d);
+                    for (var i = 0; i < obj1.length; i++) {
+                        // $.each(obj1, function (key, value) {
+                        arrNotes[i]=obj1[i].productid;
+                    }
+                      //  i++;
+                    // });
+                    //if (arrNotes.length > 0) {
+                        BindSubCategoryName(Id, null, 0)
+                    //}
+                }
+            });
+        }
+        function BindSubCategoryName(Id, Name,val) {
             $.ajax({
                 type: "POST",
                 url: "BrandMapping.aspx/BindSubCategoryName",
@@ -59,15 +85,35 @@
                 async: false,
                 dataType: "json",
                 success: function (data) {
-                    var obj = jQuery.parseJSON(data.d);
-                    var html = "";
-                    $('#divCB').empty();
-                    html += '<ul class="checkbox-grid">';
-                    $.each(obj, function (key, value) {
-                        html += '<li><input type="checkbox" name="Items[]" class="largerCheckbox"  value=' + value.Id +' > ' + value.Name + '</input></li>';//'<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
-                    });
-                    html += "</ul>";
-                    $('#divCB').append(html);
+                   
+                        debugger
+                        var obj = jQuery.parseJSON(data.d);
+                        var html = "";
+                        $('#divCB').empty();
+                        html += '<ul class="checkbox-grid">';
+                    for (var i = 0; i < obj.length; i++) {
+                        if (val == 0 && arrNotes != "") {
+                            for (var j = 0; j < arrNotes.length; j++) {
+                                if (obj[i].Id == arrNotes[j]) {
+                                    html += '<li><input type="checkbox" name="Items[]" class="largerCheckbox"  value=' + obj[i].Id + ' checked> ' + obj[i].Name + '</input></li>';//'<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+                                }
+                                else {
+                                    html += '<li><input type="checkbox" name="Items[]" class="largerCheckbox"  value=' + obj[i].Id + ' > ' + obj[i].Name + '</input></li>';//'<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+                                }
+
+                            }
+                        }
+                        else {
+                            html += '<li><input type="checkbox" name="Items[]" class="largerCheckbox"  value=' + obj[i].Id + ' > ' + obj[i].Name + '</input></li>';//'<option id=optcname' + value.Id + ' value=' + value.Id + '>' + value.Name + '</option>';
+
+                        }
+                        }
+
+
+                        html += "</ul>";
+                        $('#divCB').append(html);
+                    //arrNotes = "";
+                       
                 }
             });
         }
@@ -499,5 +545,17 @@
 			</div>
 			<!--END PAGE-CONTENT-->
 		</div>
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+            $("#BName").change(function () {
+                var BId = $(this).val();
+                BindBrandSubcatory(BId);
+            });
+
+        });
+    </script>
 </asp:Content>
 

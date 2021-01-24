@@ -35,6 +35,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Website", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remark", DBNull.Value);
                     cmd.Parameters.AddWithValue("@TollFreeNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
@@ -90,7 +91,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string BrandInsert(string BrandName, string Website,string TollFreeNo,string CreatedBy,string ImageURL)
+        public static string BrandInsert(string BrandName, string Website,string TollFreeNo,string Remark, string CreatedBy,string ImageURL)
         {
             string i = "";
             try
@@ -107,6 +108,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", BrandName);
                     cmd.Parameters.AddWithValue("@Website", Website);
                     cmd.Parameters.AddWithValue("@TollFreeNo", TollFreeNo);
+                    cmd.Parameters.AddWithValue("@Remark", Remark);
                     cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@Image", ImageURL);
@@ -127,7 +129,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id,string Name,string Website,string TollFreeNo,string ModifiedBy, string ImageURL)
+        public static string UpdateRecord(string Id,string Name,string Website,string TollFreeNo, string Remark, string ModifiedBy, string ImageURL)
         {
             string i = "";
             try
@@ -143,9 +145,10 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@Website", Website);
                     cmd.Parameters.AddWithValue("@TollFreeNo", TollFreeNo);
+                    cmd.Parameters.AddWithValue("@Remark", Remark);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
-                    cmd.Parameters.AddWithValue("@ImageURL", ImageURL);
+                    cmd.Parameters.AddWithValue("@Image", ImageURL);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;
@@ -180,7 +183,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@TollFreeNo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@ImageURL", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Image", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
                     parm3.Size = 50;
                     parm3.Direction = ParameterDirection.Output;

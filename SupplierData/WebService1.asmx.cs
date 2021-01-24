@@ -145,35 +145,35 @@ namespace SupplierData
         {
             string EmpID = Session["EmpId"].ToString();
             ConnectionStringSettings conn = ConfigurationManager.ConnectionStrings["SilverConnection"];
-            //string IP4AddressArr = String.Empty;
-            //string IP4Address = String.Empty;
-            //IP4AddressArr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            //if (!string.IsNullOrEmpty(IP4AddressArr))
-            //{
-            //    string[] ipRange = IP4AddressArr.Split(',');
-            //    IP4Address = ipRange[0].Trim();
-            //}
-            //else
-            //{
-            //    foreach (System.Net.IPAddress IPA in Dns.GetHostAddresses(HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"].ToString()))
-            //    {
-            //        if (IPA.AddressFamily.ToString() == "InterNetwork")
-            //        {
-            //            IP4Address = IPA.ToString();
-            //            break;
-            //        }
-            //    }
-
-            //}
+            string IP4AddressArr = String.Empty;
             string IP4Address = String.Empty;
-            foreach (System.Net.IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
+            IP4AddressArr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (!string.IsNullOrEmpty(IP4AddressArr))
             {
-                if (IPA.AddressFamily.ToString() == "InterNetwork")
-                {
-                    IP4Address = IPA.ToString();
-                    break;
-                }
+                string[] ipRange = IP4AddressArr.Split(',');
+                IP4Address = ipRange[0].Trim();
             }
+            else
+            {
+                foreach (System.Net.IPAddress IPA in Dns.GetHostAddresses(HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"].ToString()))
+                {
+                    if (IPA.AddressFamily.ToString() == "InterNetwork")
+                    {
+                        IP4Address = IPA.ToString();
+                        break;
+                    }
+                }
+
+            }
+            //string IP4Address = String.Empty;
+            //foreach (System.Net.IPAddress IPA in Dns.GetHostAddresses(Dns.GetHostName()))
+            //{
+            //    if (IPA.AddressFamily.ToString() == "InterNetwork")
+            //    {
+            //        IP4Address = IPA.ToString();
+            //        break;
+            //    }
+            //}
             int result = 0;
             if (IP4Address != String.Empty)
             {

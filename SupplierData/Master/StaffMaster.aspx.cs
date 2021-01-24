@@ -33,6 +33,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Email", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remark", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Image", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -55,7 +57,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string StaffInsert(string Name, string Email,string ContactNo, string CreatedBy)
+        public static string StaffInsert(string Name, string Email,string ContactNo, string Remark, string ImageURL, string CreatedBy)
         {
             string i = "";
             try
@@ -71,6 +73,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@Email", Email);
                     cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
+                    cmd.Parameters.AddWithValue("@Remark", Remark);
+                    cmd.Parameters.AddWithValue("@Image", ImageURL);
                     cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -90,7 +94,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id, string Name, string Email, string ContactNo, string ModifiedBy)
+        public static string UpdateRecord(string Id, string Name, string Email, string ContactNo, string Remark, string ImageURL, string ModifiedBy)
         {
             string i = "";
             try
@@ -106,6 +110,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@Email", Email);
                     cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
+                    cmd.Parameters.AddWithValue("@Remark", Remark);
+                    cmd.Parameters.AddWithValue("@Image", ImageURL);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -140,6 +146,8 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Email", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ContactNo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remark", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Image", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);

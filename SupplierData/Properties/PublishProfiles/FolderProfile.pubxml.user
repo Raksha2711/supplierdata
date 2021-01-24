@@ -67,10 +67,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2020 11:39:13</publishTime>
     </File>
     <File Include="bin/SupplierData.dll">
-      <publishTime>01/19/2021 08:22:45</publishTime>
+      <publishTime>01/24/2021 17:04:19</publishTime>
     </File>
     <File Include="bin/SupplierData.pdb">
-      <publishTime>01/19/2021 08:22:45</publishTime>
+      <publishTime>01/24/2021 17:04:19</publishTime>
     </File>
     <File Include="BrandExportToExcel.aspx">
       <publishTime>12/19/2020 11:39:10</publishTime>
@@ -109,7 +109,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2020 11:39:10</publishTime>
     </File>
     <File Include="FileUpload.ashx">
-      <publishTime>01/18/2021 23:24:24</publishTime>
+      <publishTime>01/22/2021 23:14:19</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>12/19/2020 11:39:10</publishTime>
@@ -238,13 +238,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2021 07:48:55</publishTime>
     </File>
     <File Include="Master/AreaMaster.aspx">
-      <publishTime>12/25/2020 14:36:28</publishTime>
+      <publishTime>01/22/2021 08:48:50</publishTime>
     </File>
     <File Include="Master/BrandMapping.aspx">
-      <publishTime>01/12/2021 12:42:27</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Master/BrandMaster.aspx">
-      <publishTime>01/19/2021 08:17:23</publishTime>
+      <publishTime>01/23/2021 22:32:07</publishTime>
     </File>
     <File Include="Master/CategoryMaster.aspx">
       <publishTime>12/25/2020 14:36:28</publishTime>
@@ -256,16 +256,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2021 07:32:11</publishTime>
     </File>
     <File Include="Master/Service.aspx">
-      <publishTime>01/19/2021 07:16:11</publishTime>
+      <publishTime>01/22/2021 21:31:28</publishTime>
     </File>
     <File Include="Master/StaffMaster.aspx">
-      <publishTime>01/12/2021 11:28:40</publishTime>
+      <publishTime>01/24/2021 13:39:10</publishTime>
     </File>
     <File Include="Master/SubCategoryMapping.aspx">
-      <publishTime>01/17/2021 19:30:11</publishTime>
+      <publishTime>01/24/2021 14:36:49</publishTime>
     </File>
     <File Include="Master/SubCategoryMaster.aspx">
-      <publishTime>12/25/2020 14:36:28</publishTime>
+      <publishTime>01/24/2021 11:42:20</publishTime>
     </File>
     <File Include="Master/SupplierMapping.aspx">
       <publishTime>01/18/2021 22:19:47</publishTime>
@@ -301,7 +301,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2020 11:39:10</publishTime>
     </File>
     <File Include="Site1.Master">
-      <publishTime>01/19/2021 07:42:44</publishTime>
+      <publishTime>01/24/2021 17:02:45</publishTime>
     </File>
     <File Include="vendors/bootstrap/css/bootstrap-theme.css">
       <publishTime>12/19/2020 11:39:11</publishTime>
@@ -2758,7 +2758,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2020 11:39:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/13/2021 08:09:23</publishTime>
+      <publishTime>01/22/2021 07:56:18</publishTime>
     </File>
     <File Include="WebService1.asmx">
       <publishTime>12/19/2020 11:39:10</publishTime>

@@ -147,6 +147,7 @@ namespace SupplierData.Master
             }
             return result;
         }
+
         [System.Web.Services.WebMethod]
         public static string BindAreaData()
         {
@@ -201,6 +202,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@VisibleD", DBNull.Value);
                     cmd.Parameters.AddWithValue("@VisibleN", DBNull.Value);
                     cmd.Parameters.AddWithValue("@VisibleE", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleP", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -223,7 +225,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string ItemInsert(string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo,string Designation,string VisibleD,string VisibleN,string VisibleE,string CreatedBy)
+        public static string ItemInsert(string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo,string Designation,string VisibleD,string VisibleN,string VisibleE, string VisibleP, string CreatedBy)
         {
             string i = "";
             try
@@ -246,6 +248,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@VisibleD", VisibleD);
                     cmd.Parameters.AddWithValue("@VisibleN", VisibleN);
                     cmd.Parameters.AddWithValue("@VisibleE", VisibleE);
+                    cmd.Parameters.AddWithValue("@VisibleP", VisibleP);
                     cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -265,7 +268,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id,string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo, string Designation,string VisibleD,string VisibleN,string VisibleE,string ModifiedBy)
+        public static string UpdateRecord(string Id,string ItemName, string Brand, string AreaName, string ContactPerson, string ContactNo, string Designation,string VisibleD,string VisibleN,string VisibleE, string VisibleP, string ModifiedBy)
         {
             string i = "";
             try
@@ -288,6 +291,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@VisibleD", VisibleD);
                     cmd.Parameters.AddWithValue("@VisibleN", VisibleN);
                     cmd.Parameters.AddWithValue("@VisibleE", VisibleE);
+                    cmd.Parameters.AddWithValue("@VisibleP", VisibleP);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -329,6 +333,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@VisibleD", DBNull.Value);
                     cmd.Parameters.AddWithValue("@VisibleN", DBNull.Value);
                     cmd.Parameters.AddWithValue("@VisibleE", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@VisibleP", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);

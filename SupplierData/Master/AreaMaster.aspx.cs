@@ -73,6 +73,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@StateId", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remark", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -95,7 +96,7 @@ namespace SupplierData.Master
         }
 
         [System.Web.Services.WebMethod]
-        public static string AreaInsert(string Name, string StateId,string CreatedBy)
+        public static string AreaInsert(string Name, string StateId, string Remark, string CreatedBy)
         {
             string i = "";
             try
@@ -110,6 +111,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Id", DBNull.Value);
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@StateId", StateId);
+                    cmd.Parameters.AddWithValue("@Remark", Remark);
                     cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy);
                     cmd.Parameters.AddWithValue("@ModifiedBy", CreatedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -128,7 +130,7 @@ namespace SupplierData.Master
             return i;
         }
         [System.Web.Services.WebMethod]
-        public static string UpdateRecord(string Id, string Name, string StateId,string ModifiedBy)
+        public static string UpdateRecord(string Id, string Name, string StateId, string Remark, string ModifiedBy)
         {
             string i = "";
             try
@@ -143,6 +145,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Id", Id);
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@StateId", StateId);
+                    cmd.Parameters.AddWithValue("@Remark", Remark);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", ModifiedBy);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);
@@ -176,6 +179,7 @@ namespace SupplierData.Master
                     cmd.Parameters.AddWithValue("@Id", Id);
                     cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     cmd.Parameters.AddWithValue("@StateId", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Remark", DBNull.Value);
                     cmd.Parameters.AddWithValue("@CreatedBy", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ModifiedBy", DBNull.Value);
                     SqlParameter parm3 = cmd.Parameters.Add("@check", SqlDbType.VarChar);

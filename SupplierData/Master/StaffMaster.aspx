@@ -26,7 +26,7 @@
             dataType: "json",
             success: function (data) {
                 debugger
-                var BrandList = jQuery.parseJSON(data.d);
+                var StaffList = jQuery.parseJSON(data.d);
                // alert(BrandList);
                 $("#divid").empty();
                 $("#divid").append('<table id="tblStaffMaster" class="datatable table table-bordered">' +
@@ -38,11 +38,22 @@
                     '<th><a class="white" data-toggle="tooltip" title="Name"> Name</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Contact">Contact No</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Email">Email</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Remark">Remark</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Status">Logo</a></th>' +
                     '<th data-orderable="false" class="hidden"><a class="white" data-toggle="tooltip" title="Status">Status</a></th>' +
                     '<th data-orderable="false" ><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
                     '</tr>');
-                for (var i = 0; i < BrandList.length; i++) {
-                    html += ("<tr><td id='Name" + BrandList[i].Id + "'><a  data-toggle='tooltip' title='" + BrandList[i].Name + "'>" + BrandList[i].Name + "</a></td><td id='ContactNo" + BrandList[i].Id + "'><a  data-toggle='tooltip' title='" + BrandList[i].ContactNo + "'>" + BrandList[i].ContactNo + "</a></td> <td id='Email" + BrandList[i].Id + "'><a data-toggle='tooltip' title='" + BrandList[i].Email + "'>" + BrandList[i].Email + "</a></td> <td class='hidden' id='Status" + BrandList[i].Id + "'><a  data-toggle='tooltip' title='" + BrandList[i].Status + "'>" + BrandList[i].Status + "</a></td><td   id='button" + BrandList[i].Id + "'><a href='javascript:EditRecord(&apos;" + BrandList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + BrandList[i].Id + "' href='javascript:Delete(&apos;" + BrandList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></tr>");
+                for (var i = 0; i < StaffList.length; i++) {
+                    if (StaffList[i].Name == null || StaffList[i].Name == "null") {
+                        StaffList[i].Name = "";
+                    }
+                    if (StaffList[i].Remark == null || StaffList[i].Remark == "null") {
+                        StaffList[i].Remark = "";
+                    }
+                    if (StaffList[i].ImageURL == "null" || StaffList[i].ImageURL == null) {
+                        StaffList[i].ImageURL = "";
+                    }
+                    html += ("<tr><td id='Name" + StaffList[i].Id + "'><a  data-toggle='tooltip' title='" + StaffList[i].Name + "'>" + StaffList[i].Name + "</a></td><td id='ContactNo" + StaffList[i].Id + "'><a  data-toggle='tooltip' title='" + StaffList[i].ContactNo + "'>" + StaffList[i].ContactNo + "</a></td> <td id='Email" + StaffList[i].Id + "'><a data-toggle='tooltip' title='" + StaffList[i].Email + "'>" + StaffList[i].Email + "</a></td><td id='Remark" + StaffList[i].Id + "'><a  data-toggle='tooltip' title='" + StaffList[i].Remark + "'>" + StaffList[i].Remark + "</a></td><td id='tdImage" + StaffList[i].Id + "'> <input type='file' id='imgStaff" + StaffList[i].Id + "' name='imgStaff" + StaffList[i].Id + "' style='display:none;' /><img class='img-responsive' id='targetImg' src='https://b2bpotential.s3.ap-south-1.amazonaws.com/BrandImages/" + StaffList[i].ImageURL + "' width='30px' height='10px' title='" + StaffList[i].ImageURL + "'> <input type='hidden' Id='InOldImg" + StaffList[i].Id + "' value='" + StaffList[i].ImageURL + "' /></td > <td class='hidden' id='Status" + StaffList[i].Id + "'><a  data-toggle='tooltip' title='" + StaffList[i].Status + "'>" + StaffList[i].Status + "</a></td><td   id='button" + StaffList[i].Id + "'><a href='javascript:EditRecord(&apos;" + StaffList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + StaffList[i].Id + "' href='javascript:Delete(&apos;" + StaffList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></tr>");
                 }
                 
                 $("#tblStaffMaster tbody").append(html);
@@ -61,6 +72,7 @@
         debugger
         var error = "";
         var Name = $("#name").val();
+
         if (Name == "") {
             error +="Enter  Name</br>"
         }
@@ -72,54 +84,96 @@
         if (Email == "") {
             error += "Enter Email </br>"
         }
-        var EmpId = '<%= Session["EmpId"] %>';
-        if (error.trim() != "") {
-            Lobibox.notify('error', {
-                delay: 3000,
-                size: 'mini',
-                icon: false,
-                msg: error
-            });
+        var Remark = $("#remark").val();
+        var MediaImage = "imageBrowes";
+        var filename;
+        var fileUpload = $("#imageBrowes").get(0);
+        debugger
+        var myfile = document.getElementById('imageBrowes').value;
+        if (myfile == "") {
+            myfile = '1';
         }
-        else {
-            $.ajax({
-                type: "POST",
-                url: "StaffMaster.aspx/StaffInsert",
-                data: "{Name:'" + Name + "',ContactNo:'" + ContactNo + "',Email:'" + Email + "',CreatedBy:'" + EmpId + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    if (data.d == 1) {
-                        Lobibox.notify('error', {
-                            delay: 2000,
-                            size: 'mini',
-                            icon: false,
-                            msg: 'Data  already Inserted.'
-                        });
+        var ext = myfile.substring(myfile.lastIndexOf('.') + 1);
+        var files = fileUpload.files;
+        var test = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            test.append(files[i].name, files[i]);
+            filename = files[i].name;
+        }
+
+
+        var EmpId = '<%= Session["EmpId"] %>';
+
+        var ImageURL = "";
+        $.ajax({
+            url: "../FileUpload.ashx?value=" + MediaImage + "/" + filename,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: test,
+            dataType: "json",
+            success: function (data) {
+                if (data != "") {
+                    debugger
+                    if (data == null) {
+                        data = "";
                     }
-                    else if (data.d == 0) {
-                        Lobibox.notify('success', {
-                            delay: 2000,
+                    ImageURL = data;
+                    if (error.trim() != "") {
+                        Lobibox.notify('error', {
+                            delay: 3000,
                             size: 'mini',
                             icon: false,
-                            msg: 'Data Inserted Succesfully.'
+                            msg: error
                         });
-                        GetStaff();
                     }
                     else {
-                        Lobibox.notify('error', {
-                            delay: 2000,
-                            size: 'mini',
-                            icon: false,
-                            msg: 'Data not Inserted Succesfully.'
+                        $.ajax({
+                            type: "POST",
+                            url: "StaffMaster.aspx/StaffInsert",
+                            data: "{Name:'" + Name + "',ContactNo:'" + ContactNo + "',Email:'" + Email + "',Remark: '" + Remark + "',ImageURL:'" + ImageURL + "',CreatedBy:'" + EmpId + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.d == 1) {
+                                    Lobibox.notify('error', {
+                                        delay: 2000,
+                                        size: 'mini',
+                                        icon: false,
+                                        msg: 'Data  already Inserted.'
+                                    });
+                                }
+                                else if (data.d == 0) {
+                                    Lobibox.notify('success', {
+                                        delay: 2000,
+                                        size: 'mini',
+                                        icon: false,
+                                        msg: 'Data Inserted Succesfully.'
+                                    });
+                                    GetStaff();
+                                }
+                                else {
+                                    Lobibox.notify('error', {
+                                        delay: 2000,
+                                        size: 'mini',
+                                        icon: false,
+                                        msg: 'Data not Inserted Succesfully.'
+                                    });
+                                }
+                                document.getElementById('name').value = "";
+                                document.getElementById('contactno').value = "";
+                                document.getElementById('email').value = "";
+                                document.getElementById('remark').value = "";
+                                document.getElementById('imageBrowes').value = "";
+                                $('#targetImg').attr('src', '')
+                                $("#imgPreview").hide();
+                            }
                         });
                     }
-                    document.getElementById('name').value = "";
-                    document.getElementById('contactno').value = "";
-                    document.getElementById('email').value = "";
                 }
-            });
-        }
+            }
+        });
+        
         }
     function OpenExcel() {
         window.open("ExportToExcel.aspx?Type=STAFF", '_blank');
@@ -133,28 +187,37 @@
                 var Name = document.getElementById('SPName').innerHTML;
                 var ContactNo = document.getElementById('SPcontactno').innerHTML;
                 var Email = document.getElementById('SPEmail').innerHTML;
+                var Remark = document.getElementById('SPRemark').innerHTML;
             }
             catch (ex) {
                 var Name = document.getElementById('Name' + PervID).childNodes[0].innerHTML;
                 var ContactNo = document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML;
                 var Email = document.getElementById('Email' + PervID).childNodes[0].innerHTML;
+                var Remark = document.getElementById('Remark' + PervID).childNodes[0].innerHTML;
             }
             document.getElementById('Name' + PervID).childNodes[0].innerHTML = Name;
             document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML = ContactNo;
             document.getElementById('Email' + PervID).childNodes[0].innerHTML = Email;
+            document.getElementById('Remark' + PervID).childNodes[0].innerHTML = Remark;
+            document.getElementById('tdImage' + PervID).childNodes[0].innerHTML = "<input type='file' id='imageBrowes" + PervID + "' name='imageBrowes" + PervID + "' /><div id='imgPreview" + PervID + "' class='thumbnail' style='display: none'><img class='img-responsive' id='targetImg" + PervID + "' /><div class='caption'><a href='#' onclick='ClearPreview1(" + PervID + ")'><i class='glyphicon glyphicon - trash'></i></a></div>";
             document.getElementById('button' + PervID).innerHTML = "<a href='javascript:EditRecord(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Edit' ><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + PervID + "' href='javascript:Delete(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
         }
         var html = "";
         var Name = document.getElementById('Name' + Id).childNodes[0].innerHTML;
         var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
         var Email = document.getElementById('Email' + Id).childNodes[0].innerHTML;
+        var Remark = document.getElementById('Remark' + Id).childNodes[0].innerHTML;
+        $("#imgStaff" + Id).removeAttr('style');
         document.getElementById('Name' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InName" + Id + "'   value='" + Name + "' /><span class='none' id='SPName'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
         document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";
         document.getElementById('Email' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InEmail" + Id + "'   value='" + Email + "'   /><span class='none' id='SPEmail'>" + Email + "</span>";
+        document.getElementById('Remark' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InRemark" + Id + "'   value='" + Remark + "' /><span class='none' id='SPRemark'>" + Remark + "</span>";
+        document.getElementById('tdImage' + Id).childNodes[0].innerHTML = "<input type = 'file' id ='imageBrowes" + Id + "' name = 'imageBrowes" + Id + "' /> <div id='imgPreview" + Id + "' class='thumbnail' style='display: none'><img class='img-responsive' id='targetImg" + Id + "' /><div class='caption'><a href='#' onclick='ClearPreview1(" + Id + ")'><i class='glyphicon glyphicon - trash'></i></a></div>";
         document.getElementById('button' + Id).innerHTML = "<a href='javascript:UpdateRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Update' ><img src='../images/right.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:CancelRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Cancel'><img src='../images/cancel.png' class='CancelClick'/>&nbsp;</a>";
         PervID = Id;
     }
-    function CancelRecord(Id) {
+        function CancelRecord(Id) {
+            GetStaff();
         var Name = document.getElementById('SPName').innerHTML;
         var ContactNo = document.getElementById('SPContactNo').innerHTML;
         var Email = document.getElementById('SPEmail').innerHTML;
@@ -164,85 +227,218 @@
         document.getElementById('button' + Id).innerHTML = "<a href='javascript:EditRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:Delete(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
         PervID = "";
     }
-    function UpdateRecord(Id) {
-        var error = "";
-        var Name = $("#InName" + Id).val();
-        var ContactNo = $("#InContactNo" + Id).val();
-        var Email = $("#InEmail" + Id).val();
-        if (Name == "") {
-            error += "Please Enter Name.</br>";
-        }
-        if (ContactNo == "") {
-            error += "Please Enter ContactNo.</br>";
-        }
-        if (Email == "") {
-            error += "Please Enter Email.</br>";
-        }
-        var EmpId = '<%= Session["EmpId"] %>';
-        if (error.trim() != "") {
-            Lobibox.notify('error', {
-                delay: 3000,
-                size: 'mini',
-                icon: false,
-                msg: error
-            });
-        }
-        else {
-            $.ajax({
-                type: "POST",
-                url: "StaffMaster.aspx/UpdateRecord",
-                data: "{Id: '" + Id + "',Name: '" + Name + "',ContactNo: '" + ContactNo + "',Email:'" + Email + "',ModifiedBy:'" + EmpId + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                global: false,
-                async: false,
-                success: function (data) {
+        function UpdateRecord(Id) {
 
-                    if (data.d == 1) {
-                        Lobibox.notify('error', {
-                            delay: 3000,
-                            size: 'mini',
-                            icon: false,
-                            msg: 'Name is already exists.'
-                        });
-                    }
-                    else if (data.d == 0) {
+            var MediaImage = "imageBrowes" + Id;
+            var filename;
+            var fileUpload = $("#imgStaff" + Id).get(0);
+            debugger
+            var myfile = document.getElementById('imgStaff' + Id).value;
+            if (myfile == "") {
+                myfile = '1';
+            }
+            var ext = myfile.substring(myfile.lastIndexOf('.') + 1);
+            var files = fileUpload.files;
+            var test = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                test.append(files[i].name, files[i]);
+                filename = files[i].name;
+            }
 
-                        Lobibox.notify('success', {
-                            delay: 3000,
-                            size: 'mini',
-                            icon: false,
-                            msg: 'Data saved Successfully.'
-                        });
-                        GetStaff();
-                    }
-                    else if (data.d == 2) {
-                        Lobibox.notify('error', {
-                            delay: 3000,
-                            size: 'mini',
-                            icon: false,
-                            msg: 'Name is  already Exists.'
-                        });
-                    }
-                    else if (data.d == "3") {
-                        Lobibox.notify('error', {
-                            delay: 1500,
-                            size: 'mini',
-                            icon: false,
-                            msg: 'Enter Valid  Name'
-                        });
-                    }
-                    else {
-                        Lobibox.notify('error', {
-                            delay: 3000,
-                            size: 'mini',
-                            icon: false,
-                            msg: ' Name is not saved Succesfully.'
-                        });
-                    }
+            var ImageURL = "";
+            var isFile = false;
+            if (fileUpload.files.length > 0) {
+                isFile = true;
+            }
+
+            if (!isFile) {
+                var imgVal = $("#InOldImg" + Id).val();
+                if (imgVal == "null") { imgVal = "" }
+                if (imgVal == undefined) { imgVal = "" }
+                ImageURL = imgVal;
+
+                var error = "";
+                var Name = $("#InName" + Id).val();
+                var ContactNo = $("#InContactNo" + Id).val();
+                var Email = $("#InEmail" + Id).val();
+                var Remark = $("#InRemark" + Id).val();
+                if (Name == "") {
+                    error += "Please Enter Name.</br>";
                 }
-            });
-        }
+                if (ContactNo == "") {
+                    error += "Please Enter ContactNo.</br>";
+                }
+                if (Email == "") {
+                    error += "Please Enter Email.</br>";
+                }
+                var EmpId = '<%= Session["EmpId"] %>';
+
+                if (error.trim() != "") {
+                    Lobibox.notify('error', {
+                        delay: 3000,
+                        size: 'mini',
+                        icon: false,
+                        msg: error
+                    });
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "StaffMaster.aspx/UpdateRecord",
+                        data: "{Id: '" + Id + "',Name: '" + Name + "',ContactNo: '" + ContactNo + "',Email:'" + Email + "',Remark: '" + Remark + "',ImageURL:'" + ImageURL + "',ModifiedBy:'" + EmpId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        global: false,
+                        async: false,
+                        success: function (data) {
+
+                            if (data.d == 1) {
+                                Lobibox.notify('error', {
+                                    delay: 3000,
+                                    size: 'mini',
+                                    icon: false,
+                                    msg: 'Name is already exists.'
+                                });
+                            }
+                            else if (data.d == 0) {
+
+                                Lobibox.notify('success', {
+                                    delay: 3000,
+                                    size: 'mini',
+                                    icon: false,
+                                    msg: 'Data saved Successfully.'
+                                });
+                                GetStaff();
+                            }
+                            else if (data.d == 2) {
+                                Lobibox.notify('error', {
+                                    delay: 3000,
+                                    size: 'mini',
+                                    icon: false,
+                                    msg: 'Name is  already Exists.'
+                                });
+                            }
+                            else if (data.d == "3") {
+                                Lobibox.notify('error', {
+                                    delay: 1500,
+                                    size: 'mini',
+                                    icon: false,
+                                    msg: 'Enter Valid  Name'
+                                });
+                            }
+                            else {
+                                Lobibox.notify('error', {
+                                    delay: 3000,
+                                    size: 'mini',
+                                    icon: false,
+                                    msg: ' Name is not saved Succesfully.'
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+            else {
+                $.ajax({
+                    url: "../FileUpload.ashx?value=" + MediaImage + "/" + filename,
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: test,
+                    dataType: "json",
+                    success: function (data) {
+                        //if (data != "") {
+                        debugger
+                        if (data == null) { data = "" }
+                        if (data == undefined) { data = "" }
+                        ImageURL = data;
+
+                        var error = "";
+                        var Name = $("#InName" + Id).val();
+                        var ContactNo = $("#InContactNo" + Id).val();
+                        var Email = $("#InEmail" + Id).val();
+                        var Remark = $("#InRemark" + Id).val();
+                        if (Name == "") {
+                            error += "Please Enter Name.</br>";
+                        }
+                        if (ContactNo == "") {
+                            error += "Please Enter ContactNo.</br>";
+                        }
+                        if (Email == "") {
+                            error += "Please Enter Email.</br>";
+                        }
+
+                        var EmpId = '<%= Session["EmpId"] %>';
+
+                        if (error.trim() != "") {
+                            Lobibox.notify('error', {
+                                delay: 3000,
+                                size: 'mini',
+                                icon: false,
+                                msg: error
+                            });
+                        }
+                        else {
+                            $.ajax({
+                                type: "POST",
+                                url: "StaffMaster.aspx/UpdateRecord",
+                                data: "{Id: '" + Id + "',Name: '" + Name + "',ContactNo: '" + ContactNo + "',Email:'" + Email + "',Remark: '" + Remark + "',ImageURL:'" + ImageURL + "',ModifiedBy:'" + EmpId + "'}",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                global: false,
+                                async: false,
+                                success: function (data) {
+
+                                    if (data.d == 1) {
+                                        Lobibox.notify('error', {
+                                            delay: 3000,
+                                            size: 'mini',
+                                            icon: false,
+                                            msg: 'Name is already exists.'
+                                        });
+                                    }
+                                    else if (data.d == 0) {
+
+                                        Lobibox.notify('success', {
+                                            delay: 3000,
+                                            size: 'mini',
+                                            icon: false,
+                                            msg: 'Data saved Successfully.'
+                                        });
+                                        GetStaff();
+                                    }
+                                    else if (data.d == 2) {
+                                        Lobibox.notify('error', {
+                                            delay: 3000,
+                                            size: 'mini',
+                                            icon: false,
+                                            msg: 'Name is  already Exists.'
+                                        });
+                                    }
+                                    else if (data.d == "3") {
+                                        Lobibox.notify('error', {
+                                            delay: 1500,
+                                            size: 'mini',
+                                            icon: false,
+                                            msg: 'Enter Valid  Name'
+                                        });
+                                    }
+                                    else {
+                                        Lobibox.notify('error', {
+                                            delay: 3000,
+                                            size: 'mini',
+                                            icon: false,
+                                            msg: ' Name is not saved Succesfully.'
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        
+       
     }
     var CurrentId = "";
     function Delete(Id) {
@@ -369,9 +565,49 @@
         });
     }
     
-    
+        $(document).ready(function () {
+            $("#imageBrowes").change(function () {
+                var File = this.files;
+                if (File && File[0]) {
+                    //debugger
+                    //var filePath = File[0];
+                    //var t = filePath.type.split("/")[1].toLowerCase();
+                    //if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+                    //    alert('Please select a valid image file');
+                    //    document.getElementById("imageBrowes").value = '';
+                    //    return false;
+                    //}
+                    //else {
+                    //    ReadImage(File[0]);
+                    //}
+                    ReadImage(File[0]);
+                }
+            })
+        });
+        var ReadImage = function (file) {
+            var reader = new FileReader;
+            var image = new Image;
+            reader.readAsDataURL(file);
+            reader.onload = function (_file) {
+                image.src = _file.target.result;
+                image.onload = function () {
+                    var height = this.height;
+                    var width = this.width;
+                    var type = file.type;
+                    var size = ~~(file.size / 1024) + "KB";
+                    $("#targetImg").attr('src', _file.target.result);
+                    $("#description").text("Size:" + size + ", " + height + "X " + width + ", " + type + "");
+                    $("#imgPreview").show();
+                }
+            }
+        }
 
-
+        var ClearPreview = function () {
+            $("#imageBrowes").val('');
+            //$("#description").text('');
+            $("#imgPreview").hide();
+            $("#targetImg").val('')
+        }
 
     </script>
 </asp:Content>
@@ -419,7 +655,21 @@
 								<label>Email</label>
 								<input type="text" id="email" name="email"  placeholder="Email" class=" form-control"  />
 							</div>
-                            	
+                            <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+                            <label>Remark</label>
+                            <input type="text" id="remark" name="remark" placeholder="REMARK" class=" form-control" />
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+                             <label>Logo</label>
+                            <input type="file" id="imageBrowes" name="imageBrowes" />
+                            <div id="imgPreview" class="thumbnail" style="display: none">
+                                <img class="img-responsive" id="targetImg" />
+                                <div class="caption">
+                                    <a href="#" onclick="ClearPreview()"><i class="glyphicon glyphicon-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
 							<!-- Button -->
 							<div class="col-lg-2 col-md-3 col-sm-2 col-xs-6 txtcenter mrgt30">
 								<button type="button" class="btn btn-blue btn-square mrgr7" data-toggle="tooltip" title="Save" id="save" onclick="SaveStaffData();">ADD</button>

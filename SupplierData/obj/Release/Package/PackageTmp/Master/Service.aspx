@@ -13,10 +13,10 @@
             return false;
         }
      window.onload = function () {
-         EditBindArea(null);
+         //EditBindArea(null);
          BindBrandName(null);
          GetService();
-         BindArea();
+         //BindArea();
         };
         function BindBrandName(Id) {
             $.ajax({
@@ -153,7 +153,7 @@
                 var html = "";
                 $("#tblServieMaster thead").append('<tr>' +
                     '<th><a class="white" data-toggle="tooltip" title="Brand">Brand</a></th>' +
-                    '<th><a class="white" data-toggle="tooltip" title="Area">Area</a></th>' +
+                    //'<th><a class="white" data-toggle="tooltip" title="Area">Area</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Name">Name</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Address">Address</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="ContactNo">ContactNo</a></th>' +
@@ -166,7 +166,7 @@
                 for (var i = 0; i < SList.length; i++) {
                   //  if (SList[i].Status == "Active") {
                         html += ("<tr><td id = 'Brand" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Brand + "'>" + SList[i].Brand + "</a></td>" +
-                            "<td id='Area" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Area + "'>" + SList[i].Area + "</a></td>" +
+                            //"<td id='Area" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Area + "'>" + SList[i].Area + "</a></td>" +
                             "<td id = 'Name" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Name + "'>" + SList[i].Name + "</a></td >" + 
                             "<td id = 'Address" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Address + "'>" + SList[i].Address + "</a></td>" + 
                             "<td id='ContactNo" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].ContactNo + "'  onkeypress='return isNumber(event);'  maxlength='11'>" + SList[i].ContactNo + "</a></td>" +
@@ -174,16 +174,7 @@
                             "<td id='Remarks" + SList[i].Id + "' ><a data-toggle='tooltip' title='" + SList[i].Remarks + "'>" + SList[i].Remarks + "</a></td>" +
                             "<td class='hidden' id='Status" + SList[i].Id + "'><a data-toggle='tooltip' title='" + SList[i].Status + "'>" + SList[i].Status + "</a></td>" + 
                             "<td  id='button" + SList[i].Id + "'><a href='javascript:EditRecord(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png' /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + SList[i].Id + "' href='javascript:Delete(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></tr > ");
-                    //}
-                    //else {
-                    //    html += ("<tr><td id = 'Brand" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Brand + "'>" + SList[i].Brand + "</a></td>" +
-                    //        "<td id='Name" + SList[i].Id + "'><a  data-toggle='tooltip' title='" + SList[i].Name + "'>" + SList[i].Name + "</a></td>" +
-                    //        "<td id = 'Address" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Address + "'>" + SList[i].Address + "</a></td>" +
-                    //        "<td id='ContactNo" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].ContactNo + "'>" + SList[i].ContactNo + "</a></td>" +
-                    //        "<td id='Email" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Email + "'>" + SList[i].Email + "</a></td>" +
-                    //        "<td id='Area" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Area + "'>" + SList[i].Area + "</a></td>" +
-                    //        "<td class='hidden' id = 'Status" + SList[i].Id + "' > <a data-toggle='tooltip' title='" + SList[i].Status + "'>" + SList[i].Status + "</a></td > <td class='hidden' id='button" + SList[i].Id + "'><a href='javascript:EditRecord(&apos;" + SList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png' /></a>&nbsp;<a id='deleteanchor" + SList[i].Id + "' />&nbsp;</a></td ></tr > ");
-                    //}
+                    
                 }
                 
                 $("#tblServieMaster tbody").append(html);
@@ -204,7 +195,7 @@
             var Address = $("#address").val();
             var Contact = $("#contact").val();
             var Email = $("#email").val();
-            var Area = $("#AreaName").val();
+          //  var Area = $("#AreaName").val();
             var Brand = $("#BName").val();
             var Remarks = $("#Remarks").val();
             var EmpId = '<%= Session["EmpId"] %>';
@@ -233,9 +224,9 @@
                     error += "Please Enter Valid EmailId.</br>";
                 }
             }
-            if (Area == "") {
-                error += "Please Enter Area.</br>";
-            }
+            //if (Area == "") {
+            //    error += "Please Enter Area.</br>";
+            //}
 
             if (Brand == "") {
                 error += "Please Enter Brand.</br>";
@@ -254,7 +245,7 @@
             $.ajax({
                 type: "POST",
                 url: "Service.aspx/ServiceInsert",
-                data: "{Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',CreatedBy:'" + EmpId + "',Remarks:'"+ Remarks +"'}",
+                data: "{Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Brand:'" + Brand + "',CreatedBy:'" + EmpId + "',Remarks:'"+ Remarks +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -288,7 +279,7 @@
                     document.getElementById('contact').value = "";
                     document.getElementById('email').value = "";
                     document.getElementById('Remarks').value = "";
-                    $("#AreaName").val('');
+                    //$("#AreaName").val('');
                     $("#BName").val('');
 
                 }
@@ -304,7 +295,7 @@
             if (PervID != "") {
                 try {
                     var Name = document.getElementById('SPBrand').innerHTML;
-                    var Area = document.getElementById('SPArea').innerHTML;
+                   // var Area = document.getElementById('SPArea').innerHTML;
                     var Name = document.getElementById('SPName').innerHTML;
                     var Address = document.getElementById('SPAddress').innerHTML;
                     var ContactNo = document.getElementById('SPContactNo').innerHTML;
@@ -314,7 +305,7 @@
                 }
                 catch (ex) {
                     var Brand = document.getElementById('Brand' + PervID).childNodes[0].innerHTML;
-                    var Area = document.getElementById('Area' + PervID).childNodes[0].innerHTML;
+                   // var Area = document.getElementById('Area' + PervID).childNodes[0].innerHTML;
                     var Name = document.getElementById('Name' + PervID).childNodes[0].innerHTML;
                     var Address = document.getElementById('Address' + PervID).childNodes[0].innerHTML;
                     var ContactNo = document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML;
@@ -323,7 +314,7 @@
 
                 }
                 document.getElementById('Brand' + PervID).childNodes[0].innerHTML = Brand;
-                document.getElementById('Area' + PervID).childNodes[0].innerHTML = Area;
+                //document.getElementById('Area' + PervID).childNodes[0].innerHTML = Area;
                 document.getElementById('Name' + PervID).childNodes[0].innerHTML = Name;
                 document.getElementById('Address' + PervID).childNodes[0].innerHTML = Address;
                 document.getElementById('ContactNo' + PervID).childNodes[0].innerHTML = ContactNo;
@@ -333,7 +324,7 @@
             }
             var html = "";
             var Brand = document.getElementById('Brand' + Id).childNodes[0].innerHTML;
-            var Area = document.getElementById('Area' + Id).childNodes[0].innerHTML;
+           // var Area = document.getElementById('Area' + Id).childNodes[0].innerHTML;
             var Name = document.getElementById('Name' + Id).childNodes[0].innerHTML;
             var Address = document.getElementById('Address' + Id).childNodes[0].innerHTML;
             var ContactNo = document.getElementById('ContactNo' + Id).childNodes[0].innerHTML;
@@ -341,7 +332,7 @@
             var Remarks = document.getElementById('Remarks' + Id).childNodes[0].innerHTML;
 
             document.getElementById('Brand' + Id).childNodes[0].innerHTML = "<select id='InBrand" + Id + "'  class='form-control' ><option>" + Brand + "</option></select><span class='none' id='SPBrand'>" + Brand + "</span>";  //onkeypress='return isCharacter(event)'
-            document.getElementById('Area' + Id).childNodes[0].innerHTML = "<select id='InArea" + Id + "'  class='form-control' ><option>" + Area + "</option></select><span class='none' id='SPArea'>" + Area + "</span>";  //onkeypress='return isCharacter(event)'
+           // document.getElementById('Area' + Id).childNodes[0].innerHTML = "<select id='InArea" + Id + "'  class='form-control' ><option>" + Area + "</option></select><span class='none' id='SPArea'>" + Area + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Name' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InName" + Id + "'   value='" + Name + "' /><span class='none' id='SPName'>" + Name + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('Address' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InAddress" + Id + "'   value='" + Address + "' /><span class='none' id='SPAddress'>" + Address + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('ContactNo' + Id).childNodes[0].innerHTML = "<input type='text' class='form-control' id='InContactNo" + Id + "'   value='" + ContactNo + "' /><span class='none' id='SPContactNo'>" + ContactNo + "</span>";  //onkeypress='return isCharacter(event)'
@@ -358,14 +349,14 @@
                     break;
                 }
             }
-            var ddlsub = document.getElementById('InArea' + Id);
-            for (var j = 0; j < ddlsub.length; j++) {
-                var strUser = ddlsub.options[j].innerHTML;
-                if (strUser.trim() == Area.trim()) {
-                    ddlsub.options[j].selected = true;
-                    break;
-                }   
-            }
+            //var ddlsub = document.getElementById('InArea' + Id);
+            //for (var j = 0; j < ddlsub.length; j++) {
+            //    var strUser = ddlsub.options[j].innerHTML;
+            //    if (strUser.trim() == Area.trim()) {
+            //        ddlsub.options[j].selected = true;
+            //        break;
+            //    }   
+            //}
            
             PervID = Id;
         }
@@ -385,7 +376,7 @@
             var Address = $("#InAddress" + Id).val();
             var Contact = $("#InContactNo" + Id).val();
             var Email = $("#InEmail" + Id).val();
-            var Area = $("#InArea" + Id).val();
+           // var Area = $("#InArea" + Id).val();
             var Brand = $("#InBrand" + Id).val();
             var Remarks = $("#InRemarks" + Id).val();
             var EmpId = '<%= Session["EmpId"] %>';
@@ -408,9 +399,9 @@
             else {
                 error += "Please Enter Valid EmailId.</br>";
             }
-            if (Area == "") {
-                error += "Please Enter Area.</br>";
-            }
+            //if (Area == "") {
+            //    error += "Please Enter Area.</br>";
+            //}
 
             if (Brand == "") {
                 error += "Please Enter Brand.</br>";
@@ -427,7 +418,7 @@
                 $.ajax({
                     type: "POST",
                     url: "Service.aspx/UpdateRecord",
-                    data: "{Id:'" + Id + "',Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Area:'" + Area + "',Brand:'" + Brand + "',ModifiedBy:'" + EmpId + "',Remarks:'" + Remarks +"'}",
+                    data: "{Id:'" + Id + "',Name:'" + Name + "',Address:'" + Address + "',ContactNo:'" + Contact + "',Email:'" + Email + "',Brand:'" + Brand + "',ModifiedBy:'" + EmpId + "',Remarks:'" + Remarks +"'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,
@@ -627,11 +618,11 @@
                                 <select class="form-control" name="" id="BName">
 									</select>
 							</div>
-                                <div class="col-lg-2 col-md-6 col-sm-3 col-xs-12 mrgt7">
+                                <%--<div class="col-lg-2 col-md-6 col-sm-3 col-xs-12 mrgt7 hidden" >
                                 <label>Area : </label>
                                 <select class="form-control" name="AreaName" id="AreaName">
 									</select>
-							</div>
+							</div>--%>
 							 <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Name</label>
 								<input type="text" id="name" name="name"  placeholder="NAME" class=" form-control"  />

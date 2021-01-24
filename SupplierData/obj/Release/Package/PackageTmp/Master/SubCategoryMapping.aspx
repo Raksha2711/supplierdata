@@ -176,8 +176,7 @@
                     //$('#BName').multiselect('rebuild');
                 }
             });
-        }
-       
+        } 
         function GetItem() {
         var html = "";
        
@@ -205,6 +204,7 @@
                     '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Desg</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Contact</a></th>' +
                     '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Email</a></th>' +
+                    '<th><a class="white" data-toggle="tooltip" title="Visible">Visible Person</a></th>' +
                     '<th class="hidden"><a class="white" data-toggle="tooltip" title="Status">Status</a></th>' +
                     '<th data-orderable="false" ><a class="white" data-toggle="tooltip" title="Action">Action</a></th>' +
                     '</tr>');
@@ -219,6 +219,7 @@
                         "<td id='VisibleD" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleD + "'>" + ItemList[i].VisibleD + "</a></td>" +
                         "<td id='VisibleN" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleN + "'>" + ItemList[i].VisibleN + "</a></td>" +
                         "<td id='VisibleE" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleE + "'>" + ItemList[i].VisibleE + "</a></td>" +
+                        "<td id='VisibleP" + ItemList[i].Id + "'><a data-toggle='tooltip' title='" + ItemList[i].VisibleP + "'>" + ItemList[i].VisibleP + "</a></td>" +
                         "<td class='hidden'  id='Status" + ItemList[i].Id + "'><a  data-toggle='tooltip' title='" + ItemList[i].Status + "'>" + ItemList[i].Status + "</a></td><td   id='button" + ItemList[i].Id + "'><a href='javascript:EditRecord(&apos;" + ItemList[i].Id + "&apos;)' data-toggle='tooltip' title='Edit'><img src='../images/edit.png'  /></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + ItemList[i].Id + "' href='javascript:Delete(&apos;" + ItemList[i].Id + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a></td></td></tr>");
                     //}
                     //else {
@@ -257,12 +258,13 @@
         var VisibleD = $("#visibleD").val();
         var VisibleN = $("#visibleN").val();
         var VisibleE = $("#visibleE").val();
+        var VisibleP = $("#visibleP").val();
         var EmpId = '<%= Session["EmpId"] %>';
-        if (ItemName != "" && Brand != "Select" && Brand != "" && AreaName != "" && AreaName != "Select" && ContactPerson != "" && Designation != "" && VisibleD != "" && VisibleD != "Select" && VisibleE != "" && VisibleE != "Select" && VisibleN != "" && VisibleN != "Select") {
+        if (ItemName != "" && Brand != "Select" && Brand != "" && AreaName != "" && AreaName != "Select" && ContactPerson != "" && Designation != "" && VisibleD != "" && VisibleD != "Select" && VisibleE != "" && VisibleE != "Select" && VisibleN != "" && VisibleN != "Select" && VisibleP != "" && VisibleP !="Select") {
             $.ajax({
                 type: "POST",
                 url: "SubCategoryMapping.aspx/ItemInsert",
-                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',VisibleD:'" + VisibleD + "',VisibleN:'" + VisibleN + "',VisibleE:'" + VisibleE + "',CreatedBy:'" + EmpId + "'}",
+                data: "{ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',VisibleD:'" + VisibleD + "',VisibleN:'" + VisibleN + "',VisibleE:'" + VisibleE + "',VisibleP:'" + VisibleP + "',CreatedBy:'" + EmpId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -302,6 +304,7 @@
                     $("#visibleD").val('');
                     $("#visibleN").val('');
                     $("#visibleE").val('');
+                    $("#visibleP").val('');
                 }
             });
 
@@ -323,6 +326,7 @@
                     var VisibleD = document.getElementById('SPVisibleD').innerHTML;
                     var VisibleN = document.getElementById('SPVisibleN').innerHTML;
                     var VisibleE = document.getElementById('SPVisibleE').innerHTML;
+                    var VisibleP = document.getElementById('SPVisibleP').innerHTML;
                   //  var Status = document.getElementById('SPStatus').innerHTML;
                 }
                 catch (ex) {
@@ -335,6 +339,7 @@
                     var VisibleD = document.getElementById('VisibleD' + PervID).childNodes[0].innerHTML;
                     var VisibleN = document.getElementById('VisibleN' + PervID).childNodes[0].innerHTML;
                     var VisibleE = document.getElementById('VisibleE' + PervID).childNodes[0].innerHTML;
+                    var VisibleP = document.getElementById('VisibleP' + PervID).childNodes[0].innerHTML;
                 }
                 document.getElementById('Brand' + PervID).childNodes[0].innerHTML = Brand;
                 document.getElementById('Name' + PervID).childNodes[0].innerHTML = Name;
@@ -345,6 +350,7 @@
                 document.getElementById('VisibleD' + PervID).childNodes[0].innerHTML = VisibleD;
                 document.getElementById('VisibleN' + PervID).childNodes[0].innerHTML = VisibleN;
                 document.getElementById('VisibleE' + PervID).childNodes[0].innerHTML = VisibleE;
+                document.getElementById('VisibleP' + PervID).childNodes[0].innerHTML = VisibleP;
                 document.getElementById('button' + PervID).innerHTML = "<a href='javascript:EditRecord(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Edit' ><img src='../images/edit.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + PervID + "' href='javascript:Delete(&apos;" + PervID + "&apos;)' data-toggle='tooltip' title='Delete'><img src='../images/close.png' />&nbsp;</a>";
             }
             var html = "";
@@ -357,6 +363,7 @@
             var VisibleD = document.getElementById('VisibleD' + Id).childNodes[0].innerHTML;
             var VisibleN = document.getElementById('VisibleN' + Id).childNodes[0].innerHTML;
             var VisibleE = document.getElementById('VisibleE' + Id).childNodes[0].innerHTML;
+            var VisibleP = document.getElementById('VisibleP' + Id).childNodes[0].innerHTML;
 
             var SubCategoryId = $("#SID" + Id)[0].innerText;
             document.getElementById('Brand' + Id).childNodes[0].innerHTML = "<select id='InBrand" + Id + "'  class='form-control' onclick='BindItemName(null," + Id + ")'><option>" + Brand + "</option></select><span class='none' id='SPBrand'>" + Brand + "</span>";  //onkeypress='return isCharacter(event)'
@@ -368,6 +375,7 @@
             document.getElementById('VisibleD' + Id).childNodes[0].innerHTML = "<select id='InVisibleD" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleD'>" + VisibleD + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('VisibleN' + Id).childNodes[0].innerHTML = "<select id='InVisibleN" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleN'>" + VisibleN + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('VisibleE' + Id).childNodes[0].innerHTML = "<select id='InVisibleE" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleE'>" + VisibleE + "</span>";  //onkeypress='return isCharacter(event)'
+            document.getElementById('VisibleP' + Id).childNodes[0].innerHTML = "<select id='InVisibleP" + Id + "'  class='form-control' ><option value= ''>Select</option><option value= 'Y'>YES</option><option value= 'N'>NO</option></select><span class='none' id='SPVisibleP'>" + VisibleP + "</span>";  //onkeypress='return isCharacter(event)'
             document.getElementById('button' + Id).innerHTML = "<a href='javascript:UpdateRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Update' ><img src='../images/right.png'/></a>&nbsp;&nbsp;&nbsp;<a id='deleteanchor" + Id + "' href='javascript:CancelRecord(&apos;" + Id + "&apos;)' data-toggle='tooltip' title='Cancel'><img src='../images/cancel.png' class='CancelClick'/>&nbsp;</a>";
             
             
@@ -416,6 +424,15 @@
                     break;
                 }
             }
+            var ddlvisibleP = document.getElementById('InVisibleP' + Id);
+            for (var j = 0; j < ddlvisibleP.length; j++) {
+                var strUser = ddlvisibleP.options[j].innerHTML;
+                if (strUser.trim() == VisibleE.trim()) {
+                    ddlvisibleP.options[j].selected = true;
+                    break;
+                }
+            }
+
             BindItemName(null, Id);
             var ddlarea = document.getElementById('InAreaName' + Id);
             for (var j = 0; j < ddlarea.length; j++) {
@@ -489,8 +506,9 @@
             var VisibleD = $("#InVisibleD" + Id).val();
             var VisibleN = $("#InVisibleN" + Id).val();
             var VisibleE = $("#InVisibleE" + Id).val();
+            var VisibleP = $("#InVisibleP" + Id).val();
             var EmpId = '<%= Session["EmpId"] %>';
-            if (VisibleD == "" || VisibleD == "Select" || VisibleN == "" || VisibleN == "Select" || VisibleE == "" || VisibleE =="Select") {
+            if (VisibleD == "" || VisibleD == "Select" || VisibleN == "" || VisibleN == "Select" || VisibleE == "" || VisibleE == "Select" || VisibleP == "" || VisibleP == "Select") {
                 error += "Please select.</br>";
             }
             if (ItemName == "" ) {
@@ -525,7 +543,7 @@
                 $.ajax({
                     type: "POST",
                     url: "SubCategoryMapping.aspx/UpdateRecord",
-                    data: "{Id: '" + Id + "',ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',VisibleD:'" + VisibleD + "',VisibleN:'" + VisibleN + "',VisibleE:'" + VisibleE + "',ModifiedBy:'" + EmpId + "'}",
+                    data: "{Id: '" + Id + "',ItemName:'" + ItemName + "',Brand:'" + Brand + "',AreaName:'" + AreaName + "',ContactPerson:'" + ContactPerson + "',ContactNo:'" + ContactNo + "',Designation:'" + Designation + "',VisibleD:'" + VisibleD + "',VisibleN:'" + VisibleN + "',VisibleE:'" + VisibleE + "',VisibleP:'" + VisibleP + "',ModifiedBy:'" + EmpId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     global: false,
@@ -703,6 +721,14 @@
                             	<div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
 								<label>Visible Email</label>
                                   <select class="form-control" name="visibleE" id="visibleE">
+                                      <option value="">Select</option>
+                                      <option value="Y">YES</option>
+                                      <option value="N">NO</option>
+									</select>
+							</div>
+                            <div class="col-lg-2 col-md-4 col-sm-3 col-xs-6 mrgt7">
+								<label>Visible Person</label>
+                                  <select class="form-control" name="visibleP" id="visibleP">
                                       <option value="">Select</option>
                                       <option value="Y">YES</option>
                                       <option value="N">NO</option>
